@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!-- Coding by CodingLab | www.codinglabweb.com-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Login and Signup Form </title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/login-style.css">
+  <!-- Boxicons CSS -->
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+  <section class="container forms">
+    <div class="form login">
+      <div class="form-content">
+        <header>Kirish</header>
+        <form action="#">
+          <div class="field input-field">
+            <input type="text" placeholder="Telefon raqam yoki Email" class="input">
+          </div>
+          <div class="field input-field">
+            <input type="password" placeholder="Parol" class="password">
+            <i class='bx bx-hide eye-icon'></i>
+          </div>
+          <div class="form-link">
+            <a href="#" class="forgot-pass">Parolni unutdingizmi?</a>
+          </div>
+          <div class="field button-field">
+            <button>Kirish</button>
+          </div>
+        </form>
+        <div class="form-link">
+          <span>Hisobingiz yo'qmi? <a href="#" class="link signup-link">Ro'yxatdan o'tish</a></span>
+        </div>
+      </div>
+    </div>
+<!-- Signup Form -->
+<div class="form signup">
+  <div class="form-content">
+    <header>Ro'yxatdan O'tish</header>
+    <form action="#">
+      <!-- Role tanlash -->
+      <div class="field input-field">
+        <label>Rolingiz:</label>
+        <select id="role" name="role" required>
+          <option value="talaba">Talaba</option>
+          <option value="oqituvchi">O‘qituvchi</option>
+        </select>
+      </div>
+
+      <!-- Umumiy maydonlar -->
+      <div class="field input-field">
+        <input type="text" placeholder="Ism" required>
+      </div>
+      <div class="field input-field">
+        <input type="text" placeholder="Familiya" required>
+      </div>
+      <div class="field input-field">
+        <input type="tel" placeholder="Telefon raqam" required>
+      </div>
+      <div class="field input-field">
+        <input type="password" placeholder="Parol" required>
+        <i class='bx bx-hide eye-icon'></i>
+      </div>
+
+      <!-- Faqat talaba uchun -->
+      <div id="talaba-fields">
+        <div class="field input-field">
+          <select required>
+            <option value="">Viloyatni tanlang</option>
+            <option value="toshkent">Toshkent</option>
+            <option value="samarqand">Samarqand</option>
+            <!-- Boshqa viloyatlar qo‘shish mumkin -->
+          </select>
+        </div>
+        <div class="field input-field">
+          <input type="text" placeholder="Maktab" required>
+        </div>
+        <div class="field input-field">
+          <select required>
+            <option value="">Sinfni tanlang</option>
+            <option value="9">9-sinf</option>
+            <option value="10">10-sinf</option>
+            <option value="11">11-sinf</option>
+          </select>
+        </div>
+        <div class="field input-field gender-field">
+          <label>Jins:</label>
+          <div class="gender-options">
+            <label><input type="radio" name="gender" value="erkak" required> Erkak</label>
+            <label><input type="radio" name="gender" value="ayol" required> Ayol</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Faqat o‘qituvchi uchun -->
+      <div id="oqituvchi-fields">
+        <div class="field input-field">
+          <input type="text" placeholder="Fan yo‘nalishi (masalan: Matematika)" required>
+        </div>
+      </div>
+
+      <!-- Ro‘yxatdan o‘tish tugmasi -->
+      <div class="field button-field">
+        <button class="button" onclick="window.location.href='index.html'"> Ro'yxatdan o'tish</button>
+      </div>
+    </form>
+
+    <div class="form-link">
+      <span>Allaqachon hisobingiz bormi? <a href="#" class="link login-link">Kirish</a></span>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </section>
+  <!-- JavaScript -->
+  <script src="js/login.js"></script>
+</body>
+</html>

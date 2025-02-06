@@ -631,7 +631,7 @@ $.fn.ajaxSubmit = function(options) {
                         xhr.statusText = ta.getAttribute('statusText') || xhr.statusText;
                     }
                     else if (scr) {
-                        // account for browsers injecting pre around json response
+                        // accounts for browsers injecting pre around json response
                         var pre = doc.getElementsByTagName('pre')[0];
                         var b = doc.getElementsByTagName('body')[0];
                         if (pre) {

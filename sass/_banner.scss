@@ -3,7 +3,7 @@
     height: 880px;
     position: relative;
     overflow: hidden;
-    background-image: url(../img/banner_bg.png);
+    background-image: url(/static/img/banner_bg.png);
     background-repeat: no-repeat;
     background-size: 68%;
     background-position: top right;
@@ -167,7 +167,7 @@
         width: 41%;
         height: 69%;
         content: "";
-        background-image: url(../img/banner_img.png);
+        background-image: url(/static/img/banner_img.png);
         background-size: 100% 100%;
         right: 9%;
         @media #{$small_mobile}{
@@ -176,7 +176,7 @@
             max-width: 100%;
             max-height: 100%;
             content: "";
-            background-image: url(../img/banner_img.png);
+            background-image: url(/static/img/banner_img.png);
             background-size: contain;
             right: 0;
             left: 0;
@@ -190,7 +190,7 @@
             max-width: 100%;
             max-height: 100%;
             content: "";
-            background-image: url(../img/banner_img.png);
+            background-image: url(/static/img/banner_img.png);
             background-size: contain;
             right: 0;
             left: 0;
@@ -204,7 +204,7 @@
             max-width: 100%;
             max-height: 100%;
             content: "";
-            background-image: url(../img/banner_img.png);
+            background-image: url(/static/img/banner_img.png);
             background-size: contain;
             right: 0;
             left: 0;
@@ -217,7 +217,7 @@
             max-width: 100%;
             max-height: 100%;
             content: "";
-            background-image: url(../img/banner_img.png);
+            background-image: url(/static/img/banner_img.png);
             background-size: contain;
             right: 5%;
             bottom: 0;
