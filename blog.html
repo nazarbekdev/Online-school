@@ -3,8 +3,8 @@
 
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etrain</title>
     <link rel="icon" href="img/favicon.png">
     <!-- Bootstrap CSS -->
@@ -23,9 +23,10 @@
     <link rel="stylesheet" href="css/slick.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- news style CSS -->
+    <link rel="stylesheet" href="css/news.css">
     <!-- find icon awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 </head>
 
 <body>
@@ -60,11 +61,10 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.html">Aloqa</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#">
-                                        <i class="fa-solid fa-right-to-bracket"></i> Kirish
-                                    </a>
-                                </li>
+                                
+                                <button class="button_login" onclick="window.location.href='login.html'">
+                                    <i class="fa-solid fa-right-to-bracket"></i> Kirish
+                                </button>                                     
                             </ul>
                         </div>
                     </nav>
@@ -74,149 +74,78 @@
     </header>
     <!-- Header part end-->
 
+    <!-- News page start-->
+    <section class="container mx-auto p-4">
+        <!-- Hero Section -->
+        <br>
+        <br>
+        <br>
+        <div class="hero mb-8">
+            <h2 class="text-3xl font-bold mt-4">Eng so‘nggi yangilik</h2>
+        </div>
 
-    <!--================Blog Area =================-->
-    <section class="blog_area section_padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mb-5 mb-lg-0">
-                    <div class="blog_left_sidebar">
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="img/blog/single_blog_1.png" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
+        <!-- Filtrlash va Qidiruv -->
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <button class="px-4 py-2 bg-gray-200 rounded">Texnologiya</button>
+                <button class="px-4 py-2 bg-gray-200 rounded">Dasturlash</button>
+                <button class="px-4 py-2 bg-gray-200 rounded">Tadbirlar</button>
+            </div>
+            <input type="text" placeholder="Yangilik qidirish..." class="border px-4 py-2 rounded">
+        </div>
 
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
+        <!-- Yangiliklar Ro‘yxati -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="news-card border p-4 rounded-lg">
+                <img src="img/blog/Unknown.jpeg" alt="Yangilik 1" class="w-full h-48 object-cover rounded">
+                <h3 class="text-xl font-bold mt-2">AI dasturlashni o‘zgartirmoqda: Kelajak qanday bo‘ladi?</h3>
+                <p class="text-gray-600 mt-1">Sun’iy intellekt (AI) dasturchilar ishini osonlashtirmoqda. AI vositalarida ...</p>
+                <span class="text-gray-500 text-sm">01 Fevral, Muallif</span>
+                <a href="#" class="text-blue-500 mt-2 block">Batafsil o‘qish</a>
+            </div>
 
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="img/blog/single_blog_2.png" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="img/blog/single_blog_3.png" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="img/blog/single_blog_4.png" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="img/blog/single_blog_5.png" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <nav class="blog-pagination justify-content-center d-flex">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Previous">
-                                        <i class="ti-angle-left"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link">1</a>
-                                </li>
-                                <li class="page-item active">
-                                    <a href="#" class="page-link">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Next">
-                                        <i class="ti-angle-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+            <div class="news-card border p-4 rounded-lg">
+                <img src="img/blog/blog_1.png" alt="Yangilik 1" class="w-full h-48 object-cover rounded">
+                <h3 class="text-xl font-bold mt-2">Yangilik 1 sarlavhasi</h3>
+                <p class="text-gray-600 mt-1">2-3 qatorli qisqacha tavsif...</p>
+                <span class="text-gray-500 text-sm">01 Fevral, Muallif</span>
+                <a href="#" class="text-blue-500 mt-2 block">Batafsil o‘qish</a>
+            </div>
+            
+            <div class="news-card border p-4 rounded-lg">
+                <img src="img/blog/blog_2.png" alt="Yangilik 2" class="w-full h-48 object-cover rounded">
+                <h3 class="text-xl font-bold mt-2">Yangilik 2 sarlavhasi</h3>
+                <p class="text-gray-600 mt-1">2-3 qatorli qisqacha tavsif...</p>
+                <span class="text-gray-500 text-sm">01 Fevral, Muallif</span>
+                <a href="#" class="text-blue-500 mt-2 block">Batafsil o‘qish</a>
+            </div>
+            
+            <div class="news-card border p-4 rounded-lg">
+                <img src="img/blog/blog_3.png" alt="Yangilik 3" class="w-full h-48 object-cover rounded">
+                <h3 class="text-xl font-bold mt-2">Yangilik 3 sarlavhasi</h3>
+                <p class="text-gray-600 mt-1">2-3 qatorli qisqacha tavsif...</p>
+                <span class="text-gray-500 text-sm">01 Fevral, Muallif</span>
+                <a href="#" class="text-blue-500 mt-2 block">Batafsil o‘qish</a>
             </div>
         </div>
+
+        <!-- Yon Panel (Sidebar) -->
+        <div class="mt-8 border p-4 rounded-lg">
+            <h3 class="text-2xl font-bold">Mashhur yangiliklar</h3>
+            <ul class="mt-2">
+                <li><a href="#" class="text-blue-500">Mashhur yangilik 1</a></li>
+                <li><a href="#" class="text-blue-500">Mashhur yangilik 2</a></li>
+                <li><a href="#" class="text-blue-500">Mashhur yangilik 3</a></li>
+            </ul>
+        </div>
+
+        <!-- <div class="mt-4 border p-4 rounded-lg">
+            <h3 class="text-2xl font-bold">Obuna bo‘lish</h3>
+            <input type="email" placeholder="Emailingizni kiriting..." class="border px-4 py-2 w-full rounded mt-2">
+            <button class="bg-blue-500 text-white px-4 py-2 rounded mt-2 w-full">Obuna bo‘lish</button>
+        </div> -->
     </section>
-    <!--================Blog Area =================-->
+    <!-- News page end-->
 
     <!-- footer part start-->
     <footer class="footer-area">
@@ -286,6 +215,22 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </footer>
     <!-- footer part end-->
 
+    <script>
+        document.getElementById('search').addEventListener('input', function() {
+            let query = this.value.toLowerCase();
+            document.querySelectorAll('.news-card').forEach(card => {
+                let title = card.querySelector('h2').textContent.toLowerCase();
+                card.style.display = title.includes(query) ? 'block' : 'none';
+            });
+        });
+
+        document.getElementById('category').addEventListener('change', function() {
+            let category = this.value;
+            document.querySelectorAll('.news-card').forEach(card => {
+                card.style.display = category === '' || card.dataset.category === category ? 'block' : 'none';
+            });
+        });
+    </script>
     <!-- jquery plugins here-->
     <!-- jquery -->
     <script src="js/jquery-1.12.1.min.js"></script>
