@@ -1,0 +1,24 @@
+/* login button */
+.button_login {
+    background-color: #ff8c00; /* Ko'k rang */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Icon va matn orasidagi masofa */
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.button_login i {
+    font-size: 18px;
+}
+
+.button_login:hover {
+    background-color: #b30000; /* Qoramtir ko‘k rang */
+    transform: scale(1.05); /* Biroz kattalashadi */
+}
