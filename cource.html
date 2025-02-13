@@ -23,9 +23,14 @@
     <link rel="stylesheet" href="css/slick.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- course style CSS -->
+    <link rel="stylesheet" href="css/course.css">    
+    <!-- login button style CSS -->
+    <link rel="stylesheet" href="css/login-button.css">
     <!-- find icon awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+    <!-- Unicons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
 </head>
 
 <body>
@@ -60,11 +65,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.html">Aloqa</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#">
-                                        <i class="fa-solid fa-right-to-bracket"></i> Kirish
-                                    </a>
-                                </li>
+                                <button class="button_login" onclick="window.location.href='login.html'">
+                                    <i class="fa-solid fa-right-to-bracket"></i> Kirish
+                                </button>      
                             </ul>
                         </div>
                     </nav>
@@ -74,257 +77,52 @@
     </header>
     <!-- Header part end-->
 
-    <!-- breadcrumb start-->
-    <section class="breadcrumb breadcrumb_bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb_iner text-center">
-                        <div class="breadcrumb_iner_item">
-                            <h2>Our Courses</h2>
-                            <p>Home<span>/</span>Courses</p>
-                        </div>
-                    </div>
+    <!-- Course part start-->
+    <div class="container-course">
+        <!-- Fanlar va sinflar -->
+         <br>
+         <br>
+         <br>
+        <div class="filters">
+            <div class="subjects">
+                <h2>Fanlar</h2>
+                <div class="buttons-row">
+                    <button class="subject-btn" data-subject="math">Matematika</button>
+                    <button class="subject-btn" data-subject="physics">Fizika</button>
+                    <button class="subject-btn" data-subject="informatics">Informatika</button>
+                    <button class="subject-btn" data-subject="programming">Dasturlash tillari</button>
+                </div>
+            </div>
+
+            <div class="grades">
+                <h2>Sinflar</h2>
+                <div class="buttons-row">
+                    <button class="grade-btn" data-grade="5">5-sinf</button>
+                    <button class="grade-btn" data-grade="6">6-sinf</button>
+                    <button class="grade-btn" data-grade="7">7-sinf</button>
+                    <button class="grade-btn" data-grade="8">8-sinf</button>
+                    <button class="grade-btn" data-grade="9">9-sinf</button>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- breadcrumb start-->
 
-    <!--::review_part start::-->
-    <section class="special_cource padding_top">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-5">
-                    <div class="section_tittle text-center">
-                        <p>popular courses</p>
-                        <h2>Special Courses</h2>
-                    </div>
-                </div>
+        <!-- Mavzular ro'yxati va kontent -->
+        <div class="content-container">
+            <!-- Chap tomon: Mavzular ro'yxati -->
+            <div class="topics-list">
+                <h2>Mavzular ro'yxati</h2>
+                <ul id="topics"></ul>
             </div>
-            <div class="row">
-                <div class="col-sm-6 col-lg-4">
-                    <div class="single_special_cource">
-                        <img src="img/special_cource_1.png" class="special_img" alt="">
-                        <div class="special_cource_text">
-                            <a href="course-details.html" class="btn_4">Web Development</a>
-                            <h4>$130.00</h4>
-                            <a href="course-details.html">
-                                <h3>Web Development</h3>
-                            </a>
-                            <p>Which whose darkness saying were life unto fish wherein all fish of together called</p>
-                            <div class="author_info">
-                                <div class="author_img">
-                                    <img src="img/author/author_1.png" alt="">
-                                    <div class="author_info_text">
-                                        <p>Conduct by:</p>
-                                        <h5><a href="#">James Well</a></h5>
-                                    </div>
-                                </div>
-                                <div class="author_rating">
-                                    <div class="rating">
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/star.svg" alt=""></a>
-                                    </div>
-                                    <p>3.8 Ratings</p>
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="single_special_cource">
-                        <img src="img/special_cource_2.png" class="special_img" alt="">
-                        <div class="special_cource_text">
-                            <a href="course-details.html" class="btn_4">design</a>
-                            <h4>$160.00</h4>
-                            <a href="course-details.html">
-                                <h3>Web UX/UI Design </h3>
-                            </a>
-                            <p>Which whose darkness saying were life unto fish wherein all fish of together called</p>
-                            <div class="author_info">
-                                <div class="author_img">
-                                    <img src="img/author/author_2.png" alt="">
-                                    <div class="author_info_text">
-                                        <p>Conduct by:</p>
-                                        <h5><a href="#">James Well</a></h5>
-                                    </div>
-                                </div>
-                                <div class="author_rating">
-                                    <div class="rating">
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/star.svg" alt=""></a>
-                                    </div>
-                                    <p>3.8 Ratings</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="single_special_cource">
-                        <img src="img/special_cource_3.png" class="special_img" alt="">
-                        <div class="special_cource_text">
-                            <a href="course-details.html" class="btn_4">Wordpress</a>
-                            <h4>$140.00</h4>
-                            <a href="course-details.html">
-                                <h3>Wordpress Development</h3>
-                            </a>
-                            <p>Which whose darkness saying were life unto fish wherein all fish of together called</p>
-                            <div class="author_info">
-                                <div class="author_img">
-                                    <img src="img/author/author_3.png" alt="">
-                                    <div class="author_info_text">
-                                        <p>Conduct by:</p>
-                                        <h5><a href="#">James Well</a></h5>
-                                    </div>
-                                </div>
-                                <div class="author_rating">
-                                    <div class="rating">
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/star.svg" alt=""></a>
-                                    </div>
-                                    <p>3.8 Ratings</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+            <!-- O'ng tomon: Mavzu kontenti -->
+            <div class="content-area">
+                <h2 id="topic-title">Mavzu tanlang...</h2>
+                <div id="video-container"></div>
+                <div id="description"></div>
+                <button id="quiz-button" style="display: none;">Test yechish</button>
             </div>
         </div>
-    </section>
-    <!--::blog_part end::-->
-
-    <!--::review_part start::-->
-    <section class="testimonial_part section_padding">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-xl-5">
-                    <div class="section_tittle text-center">
-                        <p>tesimonials</p>
-                        <h2>Happy Students</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="textimonial_iner owl-carousel">
-                        <div class="testimonial_slider">
-                            <div class="row">
-                                <div class="col-lg-8 col-xl-4 col-sm-8 align-self-center">
-                                    <div class="testimonial_slider_text">
-                                        <p>Behold place was a multiply creeping creature his domin to thiren open void
-                                            hath herb divided divide creepeth living shall i call beginning
-                                            third sea itself set</p>
-                                        <h4>Michel Hashale</h4>
-                                        <h5> Sr. Web designer</h5>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-2 col-sm-4">
-                                    <div class="testimonial_slider_img">
-                                        <img src="img/testimonial_img_1.png" alt="#">
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 d-none d-xl-block">
-                                    <div class="testimonial_slider_text">
-                                        <p>Behold place was a multiply creeping creature his domin to thiren open void
-                                            hath herb divided divide creepeth living shall i call beginning
-                                            third sea itself set</p>
-                                        <h4>Michel Hashale</h4>
-                                        <h5> Sr. Web designer</h5>
-                                    </div>
-                                </div>
-                                <div class="col-xl-2 d-none d-xl-block">
-                                    <div class="testimonial_slider_img">
-                                        <img src="img/testimonial_img_1.png" alt="#">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial_slider">
-                            <div class="row">
-                                <div class="col-lg-8 col-xl-4 col-sm-8 align-self-center">
-                                    <div class="testimonial_slider_text">
-                                        <p>Behold place was a multiply creeping creature his domin to thiren open void
-                                            hath herb divided divide creepeth living shall i call beginning
-                                            third sea itself set</p>
-                                        <h4>Michel Hashale</h4>
-                                        <h5> Sr. Web designer</h5>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-2 col-sm-4">
-                                    <div class="testimonial_slider_img">
-                                        <img src="img/testimonial_img_1.png" alt="#">
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 d-none d-xl-block">
-                                    <div class="testimonial_slider_text">
-                                        <p>Behold place was a multiply creeping creature his domin to thiren open void
-                                            hath herb divided divide creepeth living shall i call beginning
-                                            third sea itself set</p>
-                                        <h4>Michel Hashale</h4>
-                                        <h5> Sr. Web designer</h5>
-                                    </div>
-                                </div>
-                                <div class="col-xl-2 d-none d-xl-block">
-                                    <div class="testimonial_slider_img">
-                                        <img src="img/testimonial_img_1.png" alt="#">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial_slider">
-                            <div class="row">
-                                <div class="col-lg-8 col-xl-4 col-sm-8 align-self-center">
-                                    <div class="testimonial_slider_text">
-                                        <p>Behold place was a multiply creeping creature his domin to thiren open void
-                                            hath herb divided divide creepeth living shall i call beginning
-                                            third sea itself set</p>
-                                        <h4>Michel Hashale</h4>
-                                        <h5> Sr. Web designer</h5>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-2 col-sm-4">
-                                    <div class="testimonial_slider_img">
-                                        <img src="img/testimonial_img_1.png" alt="#">
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 d-none d-xl-block">
-                                    <div class="testimonial_slider_text">
-                                        <p>Behold place was a multiply creeping creature his domin to thiren open void
-                                            hath herb divided divide creepeth living shall i call beginning
-                                            third sea itself set</p>
-                                        <h4>Michel Hashale</h4>
-                                        <h5> Sr. Web designer</h5>
-                                    </div>
-                                </div>
-                                <div class="col-xl-2 d-none d-xl-block">
-                                    <div class="testimonial_slider_img">
-                                        <img src="img/testimonial_img_1.png" alt="#">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-    <!--::blog_part end::-->
-
+    </div>
     <!-- footer part start-->
     <footer class="footer-area">
         <div class="container">
@@ -392,7 +190,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </div>
     </footer>
     <!-- footer part end-->
-
+     
+    <script>
+        console.log("course.js yuklandi!");
+    </script>
+    <!-- course js -->
+    <script src="js/course.js"></script>
     <!-- jquery plugins here-->
     <!-- jquery -->
     <script src="js/jquery-1.12.1.min.js"></script>

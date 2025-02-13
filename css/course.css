@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.container-course {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.filters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.subjects, .grades {
+    text-align: center;
+}
+
+.buttons-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.subject-btn, .grade-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.subject-btn:hover, .grade-btn:hover {
+    background-color: #0056b3;
+}
+
+.subject-btn.selected, .grade-btn.selected {
+    background-color: #28a745;
+}
+
+.content-container {
+    display: flex;
+    gap: 20px;
+}
+
+.topics-list {
+    width: 30%;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.topics-list ul {
+    list-style-type: none;
+}
+
+.topics-list ul li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+
+.topics-list ul li:hover {
+    background-color: #f0f0f0;
+}
+
+.content-area {
+    width: 70%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#video-container iframe {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+#quiz-button {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#quiz-button:hover {
+    background-color: #218838;
+}

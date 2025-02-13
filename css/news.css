@@ -1,0 +1,143 @@
+/* Qahramon bo‘limi (Hero Section) */
+.hero {
+    text-align: center;
+    padding: 20px 0;
+}
+.hero h2 {
+    font-size: 24px;
+    color: #333;
+    background-color: #d0cfcf;
+}
+
+/* Filtrlash va Qidiruv */
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    background: #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: background 0.3s;
+}
+button:hover {
+    background: #bbb;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Yangilik kartalari */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.news-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+.news-card:hover {
+    transform: translateY(-5px);
+}
+
+.news-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.news-card h3 {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.news-card p {
+    color: #666;
+}
+
+.news-card span {
+    display: block;
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.news-card a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+.news-card a:hover {
+    text-decoration: underline;
+}
+
+/* Yon Panel (Sidebar) */
+.mt-8, .mt-4 {
+    margin-top: 20px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.mt-8 h3, .mt-4 h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin: 5px 0;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Obuna bo‘lish qismi */
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+button.bg-blue-500 {
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+button.bg-blue-500:hover {
+    background: #0056b3;
+}
