@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student profile</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-sidebar">
+            <div class="profile-image">
+                <img id="profile-pic" src="images.jpeg">
+                <input type="file" id="upload-photo" accept="image/*">
+            </div>
+            <div class="profile-info">
+                <p><strong>Class</strong></p>
+                <div class="profile-class">10A - Overall Rank: 3rd</div>
+            </div>
+            <div class="profile-subjects">
+                <p><strong>Selected Subjects</strong></p>
+                <ul>
+                    <li>Mathematics (Rank: 2nd)</li>
+                    <li>Physics (Rank: 5th)</li>
+                    <li>Chemistry (Rank: 4th)</li>
+                </ul>
+            </div>
+
+        </div>
+        
+        <div class="profile-main">
+            <h2>Student Profile</h2>
+            <form id="profile-form">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" id="first-name" placeholder="first name">
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" id="last-name" placeholder="last name">
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <div class="gender-options">
+                        <input type="radio" id="male" name="gender" value="male">
+                        <label for="male">Male</label>
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female">Female</label>
+                    </div>
+                </div>                
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" id="phone" placeholder="enter phone">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="you@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Region</label>
+                    <input type="text" id="region" placeholder="enter your region">
+                </div>
+                <div class="form-group">
+                    <label>School</label>
+                    <input type="text" id="school" placeholder="enter your school">
+                </div>
+                <div class="form-group">
+                    <label for="class">Class</label>
+                    <select id="class" class="user-role">
+                        <option value="5">5-sinf</option>
+                        <option value="6">6-sinf</option>
+                        <option value="7">7-sinf</option>
+                        <option value="8">8-sinf</option>
+                        <option value="9">9-sinf</option>
+                        <option value="10">10-sinf</option>
+                        <option value="11">11-sinf</option>
+                    </select>
+                </div>                
+                <div class="form-actions">
+                    <button type="button" class="save-btn">Save</button>
+                    <button type="reset" class="reset-btn">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
