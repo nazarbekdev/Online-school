@@ -7,6 +7,7 @@ body {
 
 .profile-container {
     display: flex;
+    flex-direction: row; /* Katta ekranda yonma-yon */
     width: 80%;
     margin: 30px auto;
     background: white;
@@ -14,33 +15,19 @@ body {
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
-
+/* Sidebar va asosiy qismning kengligini belgilaymiz */
 .profile-sidebar {
+    width: 30%;
     background: white;
     border-radius: 15px;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
     padding: 30px;
-    width: 350px;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.profile-main {
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    width: 70%;
     text-align: center;
     transition: all 0.3s ease;
 }
 
 .profile-sidebar:hover {
     box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.15);
-}
-
-.profile-main:hover {
-    box-shadow: 10px 15px 80px rgba(0, 0, 0, 0.15);
 }
 
 .profile-image img {
@@ -59,6 +46,50 @@ body {
 
 .profile-info {
     margin-top: 15px;
+    text-align: center;
+}
+
+.profile-class {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ecf0f1;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.08);
+    position: relative;
+    gap: 15px;
+    max-width: 250px;
+    margin: auto;
+}
+
+/* Sinf nomi */
+.class-name {
+    color: #2c3e50;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Reyting badge */
+.class-rating {
+    background: #e74c3c;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 20px;
+    text-align: center;
+    min-width: 80px;
+    box-shadow: 0px 3px 10px rgba(231, 76, 60, 0.5);
+    transition: all 0.3s ease-in-out;
+    margin-left: auto; /* Reytingni o‘ngga surish */
+}
+
+.class-rating:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 5px 15px rgba(231, 76, 60, 0.7);
 }
 
 .profile-class {
@@ -76,6 +107,7 @@ body {
     border-radius: 10px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.08);
     margin-top: 15px;
+    text-align: center;
 }
 
 .profile-subjects ul {
@@ -84,10 +116,13 @@ body {
 }
 
 .profile-subjects li {
-    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
     background: #ecf0f1;
-    border-radius: 5px;
-    margin: 5px 0;
+    border-radius: 8px;
+    margin: 8px 0;
     font-size: 14px;
     font-weight: 500;
     transition: background 0.3s;
@@ -97,9 +132,29 @@ body {
     background: #d5dbdb;
 }
 
+/* Fan nomi */
+.subject-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2c3e50;
+}
 
+/* Reyting badge */
+.subject-rating {
+    background: #3498db;
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 20px;
+    text-align: center;
+    min-width: 60px;
+}
+
+/* Main Content */
 .profile-main {
-    width: 70%;
+    width: 100%;
+    max-width: 70%;
     padding: 20px;
 }
 
@@ -124,8 +179,6 @@ body {
     border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
-}
-.student {
     background-color: #25b320;
     color: rgb(0, 0, 0);
 }
@@ -172,19 +225,104 @@ body {
 
 .gender-options {
     display: flex;
-    gap: 10px; /* Elementlar orasidagi masofa */
+    gap: 10px;
     align-items: center;
-    flex-wrap: wrap; /* Kichik ekranlarda chiroyli joylashish uchun */
+    flex-wrap: wrap;
 }
 
 .gender-options label {
-    margin-right: 15px; /* Label bilan radio button orasidagi masofa */
+    margin-right: 15px;
     cursor: pointer;
     font-size: 13px;
 }
 
 .gender-options input {
-    margin: 0; /* Default marginlarni olib tashlash */
+    margin: 0;
     width: 15px;
     height: 15px;
+}
+
+/* Responsiv dizayn */
+@media screen and (max-width: 992px) {
+    .profile-container {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .profile-sidebar {
+        width: 70%;
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .profile-main {
+        width: 100%;
+        max-width: 100%;
+        padding: 15px;
+    }
+}
+
+/* Kichik ekranlar uchun ustma-ust joylashtiramiz */
+@media screen and (max-width: 768px) {
+    .profile-container {
+        flex-direction: column; /* Kichik ekranda ustma-ust */
+        width: 90%;
+        padding: 15px;
+    }
+
+    .profile-sidebar {
+        width: 85%;
+    }
+
+    .profile-main {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .profile-container {
+        width: 100%;
+        padding: 5px;
+    }
+
+    .profile-sidebar {
+        padding: 10px;
+    }
+
+    .profile-image img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .profile-class {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .profile-subjects li {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .student {
+        font-size: 12px;
+        padding: 5px 15px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+    }
+
+    .form-group input {
+        font-size: 14px;
+        padding: 5px;
+    }
+
+    .save-btn, .reset-btn {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
 }
