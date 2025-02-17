@@ -1,0 +1,114 @@
+/* Asosiy dizayn */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Dark Mode */
+.dark-mode {
+    background-color: #222;
+    color: white;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s;
+}
+
+.dark-mode .container {
+    background: #333;
+}
+
+/* Sarlavha va tugma */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Dark Mode tugmasi */
+#toggle-dark-mode {
+    background: #222;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dark-mode #toggle-dark-mode {
+    background: white;
+    color: black;
+}
+
+/* Jadval */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #f4f4f4;
+}
+
+/* Dark Mode jadvali */
+.dark-mode th {
+    background: #444;
+}
+
+/* Progress bar */
+.progress-bar {
+    width: 100px;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: #4CAF50;
+    transition: width 0.5s ease-in-out;
+}
+
+/* Baho qo‘yish */
+select {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* Hisobot yuklab olish tugmasi */
+#download-report {
+    margin-top: 20px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#download-report:hover {
+    background: #0056b3;
+}

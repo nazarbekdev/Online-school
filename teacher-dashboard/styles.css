@@ -69,15 +69,40 @@ body {
 }
 
 /* Sinflarni boshqarish */
-.class-management, .material-upload {
+.class-management {
     background: white;
     padding: 20px;
     margin: 20px auto;
     width: 80%;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    /* background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+    width: 350px;*/
+    text-align: center; 
 }
 
+.class-management h3 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.class-item {
+    background: linear-gradient(45deg, #3498db, #6c5ce7);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.class-item:hover {
+    background: linear-gradient(45deg, #2980b9, #8e44ad);
+    transform: scale(1.05);
+}
 .modal {
     display: none;
     position: fixed;
@@ -126,6 +151,7 @@ button:hover {
     width: 80%;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center; 
 }
 
 .material-management label {

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinf o'quvchilari</title>
+    <link rel="stylesheet" href="class-styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h2 id="class-title"></h2>
+            <button id="toggle-dark-mode">🌙 Dark Mode</button>
+        </header>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Ism</th>
+                    <th>Reyting</th>
+                    <th>Vazifa (%)</th>
+                    <th>Davomat</th>
+                    <th>Baho</th>
+                </tr>
+            </thead>
+            <tbody id="student-list"></tbody>
+        </table>
+
+        <button id="download-report">📄 Hisobotni yuklab olish</button>
+    </div>
+
+    <script>
+        // URL'dan sinf nomini olish
+        const urlParams = new URLSearchParams(window.location.search);
+        const className = urlParams.get('class') || "Mening sinfim";
+        document.getElementById('class-title').textContent = `${className} o'quvchilari`;
+
+        // O‘quvchilar ma’lumoti
+        const students = [
+            { name: "Ali", rank: 2, progress: 80 },
+            { name: "Sami", rank: 1, progress: 95 },
+            { name: "Zarina", rank: 3, progress: 70 },
+        ];
+
+        const studentList = document.getElementById('student-list');
+        students.forEach((student, index) => {
+            studentList.innerHTML += `
+                <tr>
+                    <td>${student.name}</td>
+                    <td>${student.rank}-o'rin</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div style="width: ${student.progress}%" class="progress"></div>
+                        </div>
+                    </td>
+                    <td><input type="checkbox" class="attendance"></td>
+                    <td>
+                        <select class="grade">
+                            <option value="0">-</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                        </select>
+                    </td>
+                </tr>
+            `;
+        });
+
+        // Dark Mode
+        document.getElementById("toggle-dark-mode").addEventListener("click", function () {
+            document.body.classList.toggle("dark-mode");
+        });
+
+        // Hisobot yuklab olish
+        document.getElementById("download-report").addEventListener("click", function () {
+            alert("Hisobot tayyor! Yuklab olish funksiyasi hali ishlab chiqilmoqda.");
+        });
+    </script>
+
+</body>
+</html>

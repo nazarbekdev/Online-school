@@ -30,6 +30,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+document.querySelectorAll('.class-item').forEach(item => {
+    item.addEventListener('click', () => {
+        const className = item.dataset.class;
+        window.location.href = `class.html?class=${className}`;
+    });
+});
+
 // Material yuklash
 function toggleMaterialForm() {
     document.getElementById("material-form").classList.toggle("hidden");
