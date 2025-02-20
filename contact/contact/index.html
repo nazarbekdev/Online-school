@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bog'lanish</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h3>BOG'LANISH</h3>
+        
+        <!-- Contact Info Container -->
+        <div class="contact-info">
+            <!-- 1-ustun: Ish vaqti -->
+            <div class="info-column">
+                <div class="work-time">
+                    <h3>Ish vaqti</h3>
+                    <div class="days">
+                        <span>Du</span>
+                        <span>Se</span>
+                        <span>Cho</span>
+                        <span>Pa</span>
+                        <span>Ju</span>
+                        <span class="inactive">Sha</span>
+                        <span class="inactive">Ya</span>
+                    </div>
+                    <p><b>9:00 dan 18:00 gacha</b></p>
+                    <p>Tushlik: 13:00 dan 14:00 gacha</p>
+                </div>
+            </div>
+
+            <!-- 2-ustun: Manzil va Telefon -->
+            <div class="info-column">
+                <p><i class="fa fa-map-marker"></i> 100084, Toshkent shahri, Bog'ishamol ko'chasi, 12</p>
+                <p><i class="fa fa-phone"></i> (+998 50) 123 45 67</p>
+                <p><i class="fa fa-phone"></i> (+998 97) 609 11 19</p>
+            </div>
+
+            <!-- 3-ustun: Email va Transport -->
+            <div class="info-column">
+                <p><i class="fa fa-envelope"></i> info@ixtisoslashganmaktab.uz</p>
+                <p><i class="fa fa-bus"></i> 19, 50, 63, 115 / Bodomzor bekati</p>
+            </div>
+        </div><br>
+
+        <div class="form-map">
+            <!-- <br> -->
+            <form id="contactForm">
+                <h3>Saytga so'rov yuborish</h3>
+                <input type="text" id="name" placeholder="Ism" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="text" id="subject" placeholder="Mavzu" required>
+                <textarea id="message" placeholder="Xabar" required></textarea>
+                <button type="submit">Yuborish</button>
+            </form>
+
+            <div class="map-container">
+                <iframe src="https://yandex.uz/map-widget/v1/-/CHuqvF82" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
