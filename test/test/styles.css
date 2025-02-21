@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #f4f4f9;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.questions {
+    flex: 2;
+    background-color: #fff;
+    padding: 20px;
+    margin-right: 20px;
+    border-radius: 8px;
+}
+
+.navigation {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.questions h2, .navigation h2 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+#question-area {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.question {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.question img {
+    width: 300px; /* Rasm eni */
+    height: 200px; /* Rasm balandligi */
+    object-fit: cover; /* Rasmni to'g'ri proportsiyada chiqarish */
+    border-radius: 8px; /* Rasm chegarasini yumshoq qilish */
+    margin-bottom: 10px; /* Rasm va matn orasidagi masofa */
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.option:hover {
+    background-color: #f0f8ff;
+}
+
+.option.selected {
+    background-color: #007bff;
+    color: white;
+}
+
+#navigation-panel {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+}
+
+#navigation-panel div {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#navigation-panel div.answered {
+    background-color: #28a745;
+    color: white;
+}
+.finish-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #dc3545; /* Qizil rang */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.finish-btn:hover {
+    background-color: #c82333; /* Yorqinroq qizil */
+}
