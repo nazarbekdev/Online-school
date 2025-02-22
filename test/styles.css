@@ -1,0 +1,390 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #f4f4f9;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.questions {
+    flex: 2;
+    background-color: #fff;
+    padding: 20px;
+    margin-right: 20px;
+    border-radius: 8px;
+}
+
+.navigation {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.questions h2, .navigation h2 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+#question-area {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.question {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.question img {
+    width: 300px; /* Rasm eni */
+    height: 200px; /* Rasm balandligi */
+    object-fit: cover; /* Rasmni to'g'ri proportsiyada chiqarish */
+    border-radius: 8px; /* Rasm chegarasini yumshoq qilish */
+    margin-bottom: 10px; /* Rasm va matn orasidagi masofa */
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.option:hover {
+    background-color: #f0f8ff;
+}
+
+.option.selected {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Navigatsiya paneli */
+#navigation-panel {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* Katta ekranlar uchun */
+    gap: 3px; /* Elementlar orasidagi masofa */
+}
+
+/* Tartib raqamlari */
+#navigation-panel div {
+    width: 30px; /* Raqam eni */
+    height: 30px; /* Raqam balandligi */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0e0e0;
+    border-radius: 30%; /* Yumaloq shakl */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.8em; /* Matn o'lchami */
+}
+
+/* Javob berilgan savollar uchun rang */
+#navigation-panel div.answered {
+    background-color: #28a745;
+    color: white;
+}
+.finish-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #dc3545; /* Qizil rang */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.finish-btn:hover {
+    background-color: #c82333; /* Yorqinroq qizil */
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.nav-btn {
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#prev-button {
+    background-color: #6c757d; /* Kulrang rang */
+    color: white;
+}
+
+#prev-button:hover {
+    background-color: #5a6268; /* Yorqinroq kulrang */
+}
+
+#next-button {
+    background-color: #007bff; /* Ko'k rang */
+    color: white;
+}
+
+#next-button:hover {
+    background-color: #0056b3; /* Yorqinroq ko'k */
+}
+
+/* Responsive disign  */
+
+/* Umumiy konteyner */
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* Markazga joylash */
+    gap: 20px; /* Elementlar orasidagi masofa */
+}
+
+/* Kichik ekranlar uchun (masalan, mobil) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Elementlarni ustun ko'rinishida joylash */
+    }
+
+    .questions {
+        margin-right: 0; /* Chap tomonni tozalash */
+        margin-bottom: 20px; /* Pastki masofa */
+    }
+
+    .navigation {
+        flex: none; /* O'ng tomonni uzunligini avtomatik qilish */
+    }
+}
+
+/* O'rta ekranlar uchun (masalan, planshet) */
+@media (max-width: 768px) {
+    #navigation-panel {
+        grid-template-columns: repeat(8, 1fr); /* Har bir qatorda 8 ta raqam */
+        gap: 2px; /* Masofani yanada kamaytirish */
+    }
+
+    #navigation-panel div {
+        width: 30px; /* Raqam enini kamaytirish */
+        height: 30px; /* Raqam balandligini kamaytirish */
+        font-size: 0.7em; /* Matn o'lchamini kamaytirish */
+    }
+}
+
+/* Kichik ekranlar uchun (masalan, mobil) */
+@media (max-width: 480px) {
+    #navigation-panel {
+        grid-template-columns: repeat(6, 1fr); /* Har bir qatorda 6 ta raqam */
+        gap: 1px; /* Masofani eng kam miqdorga kamaytirish */
+    }
+
+    #navigation-panel div {
+        width: 25px; /* Raqam enini yanada kamaytirish */
+        height: 25px; /* Raqam balandligini yanada kamaytirish */
+        font-size: 0.6em; /* Matn o'lchamini yanada kamaytirish */
+    }
+}
+
+/* O'rta ekranlar uchun (masalan, planshet) */
+@media (max-width: 768px) {
+    .question img {
+        max-height: 200px; /* Balandlikni kamaytirish */
+    }
+}
+
+/* Kichik ekranlar uchun (masalan, mobil) */
+@media (max-width: 480px) {
+    .question img {
+        max-height: 150px; /* Balandlikni yanada kamaytirish */
+    }
+}
+
+/* Tugmalar */
+.nav-btn, .finish-btn {
+    font-size: 0.9em; /* Font o'lchamini kamaytirish */
+    padding: 8px 16px; /* Paddingni kamaytirish */
+}
+
+/* Juda kichik ekranlar uchun */
+@media (max-width: 480px) {
+    .nav-btn, .finish-btn {
+        font-size: 0.8em; /* Yana kamaytirish */
+        padding: 6px 12px;
+    }
+
+    h2 {
+        font-size: 1.2em; /* Sarlavha o'lchamini kamaytirish */
+    }
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Kichik ekranlar uchun */
+@media (max-width: 480px) {
+    .navigation-buttons {
+        flex-direction: column; /* Tugmalarni ustun ko'rinishida joylash */
+        gap: 10px; /* Tugmalar orasidagi masofa */
+    }
+}
+
+
+/* --------------------------------------------------- */
+
+/* Modal oyna */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Shaffof fon */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none; /* Modalni yashirish */
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Yopish tugmasi */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+/* Doiraviy diagramma */
+.circle-diagram {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 20px;
+}
+
+.circle-diagram svg {
+    transform: rotate(-90deg);
+    transform-origin: center;
+}
+
+.circle-bg {
+    fill: none;
+    stroke: #e0e0e0;
+    stroke-width: 10;
+    cx: 80;
+    cy: 80;
+    r: 70;
+}
+
+.circle-progress {
+    fill: none;
+    stroke: #28a745; /* Progress rangi */
+    stroke-width: 10;
+    stroke-dasharray: 440; /* Aylana uzunligi */
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.5s ease;
+}
+
+.diagram-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+#percentage {
+    display: block;
+    font-size: 0.8em;
+    color: #6c757d;
+}
+
+/* Tugmalar */
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.modal-btn {
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#restart-button {
+    background-color: #007bff;
+    color: white;
+}
+
+#restart-button:hover {
+    background-color: #0056b3;
+}
+
+#home-button {
+    background-color: #6c757d;
+    color: white;
+}
+
+#home-button:hover {
+    background-color: #5a6268;
+}

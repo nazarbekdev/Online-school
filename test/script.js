@@ -272,28 +272,90 @@ window.onload = () => {
     renderQuestions();
 };
 
-// Tugatish tugmasini tanlash
+// Modal elementlari
+const resultModal = document.getElementById('result-modal');
+const closeModalBtn = document.querySelector('.close-btn');
+const restartButton = document.getElementById('restart-button');
+const homeButton = document.getElementById('home-button');
 const finishButton = document.getElementById('finish-button');
 
-// Tugatish funksiyasi
+// Doiraviy diagramma elementlari
+const circleProgress = document.querySelector('.circle-progress');
+const scoreText = document.getElementById('score');
+const percentageText = document.getElementById('percentage');
+
+
+// Tugatish tugmasi bosilganda natijani ko'rsatish
 finishButton.addEventListener('click', () => {
-    // Javoblarni tekshirish
     const totalQuestions = questions.length;
     const answeredQuestions = Object.keys(selectedAnswers).length;
+    const score = answeredQuestions * 2; // Har bir javob uchun 2 ball
+    const totalScore = totalQuestions * 2; // Umumiy maksimal ball
+    const percentage = Math.round((score / totalScore) * 100);
 
-    // Natijalar oynasini yaratish
-    const resultDiv = document.createElement('div');
-    resultDiv.classList.add('result');
+    // Diagramma uchun foizni yangilash
+    scoreText.textContent = `${answeredQuestions} / ${totalQuestions}`
+    percentageText.textContent = `${percentage}%`;
 
-    // Natijalar matni
-    resultDiv.innerHTML = `
-        <h2>Test Yakunlandi!</h2>
-        <p>Jami savollar: ${totalQuestions}</p>
-        <p>Javob berilgan savollar: ${answeredQuestions}</p>
-        <p>Javob berilmagan savollar: ${totalQuestions - answeredQuestions}</p>
-    `;
+    // Umumiy ballni chiqarish
+    const totalScoreText = document.getElementById('total-score');
+    totalScoreText.textContent = `Umumiy ball: ${score}`;
 
-    // Sahifani tozalash va natijani ko'rsatish
-    questionArea.innerHTML = '';
-    questionArea.appendChild(resultDiv);
+    // Doiraviy diagrammani yangilash
+    const offset = 440 - (score / totalScore) * 440;
+    circleProgress.style.strokeDashoffset = offset;
+
+    // Modalni ko'rsatish
+    resultModal.classList.remove('hidden');
 });
+
+
+
+// Modalni yopish
+closeModalBtn.addEventListener('click', () => {
+    resultModal.classList.add('hidden');
+});
+
+// Qayta boshlash tugmasi
+restartButton.addEventListener('click', () => {
+    currentQuestionIndex = 0;
+    selectedAnswers = {};
+    resultModal.classList.add('hidden');
+});
+
+// Bosh sahifa tugmasi
+homeButton.addEventListener('click', () => {
+    window.location.href = '/';
+});
+
+
+
+// ---- Savollarni oldinga va ortga o'tkazish tugmalari ----
+// Joriy savol indeksi
+let currentQuestionIndex = 0;
+
+// DOM elementlari
+const prevButton = document.getElementById('prev-button');
+const nextButton = document.getElementById('next-button');
+
+// Oldingisi tugmasi
+prevButton.addEventListener('click', () => {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        showQuestion(questions[currentQuestionIndex].id);
+    }
+});
+
+// Keyingisi tugmasi
+nextButton.addEventListener('click', () => {
+    if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        showQuestion(questions[currentQuestionIndex].id);
+    }
+});
+
+// Dastlabki savolni ko'rsatish
+window.onload = () => {
+    renderQuestions();
+    showQuestion(questions[currentQuestionIndex].id);
+};
