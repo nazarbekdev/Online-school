@@ -102,7 +102,7 @@ body {
     border-radius: 30%; /* Yumaloq shakl */
     cursor: pointer;
     transition: background-color 0.3s ease;
-    font-size: 0.8em; /* Matn o'lchami */
+    font-size: 0.6em; 
 }
 
 /* Javob berilgan savollar uchun rang */
