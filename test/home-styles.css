@@ -1,0 +1,158 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  h1 {
+    color: #333;
+    font-size: 3em;
+    margin-bottom: 20px;
+  }
+  
+/* Banner umumiy uslubi */
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vh; /* Banner balandligi */
+    background: linear-gradient(120deg, #50df18, #198c03);
+    color: white; /* Matn rangi */
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* Chiqib ketishni oldini oladi */
+  }
+
+.typing-text {
+    font-size: 2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid white; /* Kursorni ko'rsatish */
+}
+  
+  @media (max-width: 768px) {
+    .banner {
+      height: 10vh; /* Kichik ekranlar uchun balandlikni kamaytirish */
+      padding: 10px;
+    }
+    .typing-text {
+      font-size: 1.5rem; /* Kichik ekranlar uchun moslashtirish */
+      max-width: 90%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .banner {
+      height: 25vh;
+    }
+    .typing-text {
+      font-size: 1.2rem;
+      max-width: 100%;
+    }
+  }
+  
+  .subjects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+  }
+  
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .card h2 {
+    color: #333;
+    margin: 15px 0 10px;
+  }
+  
+  .card p {
+    color: #777;
+    margin: 0 15px 15px;
+  }
+  
+  .card button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+  
+  .card button:hover {
+    background-color: #218838;
+  }
+  
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    text-align: left;
+  }
+  
+  .button-start {
+    background-color: #50df18;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 111, 97, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .button-close {
+    background-color: #68666c;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .button-start:hover,
+  .button-close:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }

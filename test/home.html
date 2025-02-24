@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Platformasi</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="home-styles.css">
+</head>
+<body>
+  <!-- Banner -->
+  <div class="banner">
+    <h1 class="typing-text"></h1>
+  </div>
+
+  <!-- Subjects -->
+  <div class="subjects">
+    <div class="card">
+      <img src="/Users/uzmacbook/Downloads/etrain-master/test/img/832__85_2300034836.jpg" alt="Matematika">
+      <h2>Matematika</h2>
+      <p>Matematikani sinab ko‘ring!</p>
+      <button onclick="showModal('Matematika')">Boshlash</button>
+    </div>
+    <div class="card">
+      <img src="/Users/uzmacbook/Downloads/etrain-master/test/img/9515a0d2f79705098d32c475702d3a99.jpg" alt="Fizika">
+      <h2>Fizika</h2>
+      <p>Fizikadan bilimlaringizni sinab ko‘ring!</p>
+      <button onclick="showModal('Fizika')">Boshlash</button>
+    </div>
+    <div class="card">
+      <img src="/Users/uzmacbook/Downloads/etrain-master/test/img/Unknown.jpeg" alt="Kimyo">
+      <h2>Informatika</h2>
+      <p>Informatika fanidan testlar.</p>
+      <button onclick="showModal('Kimyo')">Boshlash</button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2 id="modal-title"></h2>
+      <p>Test qoidalari va davomiyligi haqida ma'lumot:</p>
+      <ul>
+        <li>Test yechish uchun 1 soat vaqt beriladi.</li>
+        <li>To'g'ri javoblar uchun savol darajasiga qarab ball to'planadi.</li>
+        <li>Test yakunida natijalar ko'rsatiladi.</li>
+      </ul>     
+      <button class="button-start" onclick="window.location.href='index.html'">Boshlash</button>
+      <button class="button-close" onclick="closeModal()">Yopish</button>
+    </div>
+  </div>
+
+  <script src="home-script.js"></script>
+</body>
+</html>

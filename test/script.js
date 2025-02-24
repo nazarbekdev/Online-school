@@ -318,14 +318,12 @@ closeModalBtn.addEventListener('click', () => {
 
 // Qayta boshlash tugmasi
 restartButton.addEventListener('click', () => {
-    currentQuestionIndex = 0;
-    selectedAnswers = {};
-    resultModal.classList.add('hidden');
+    window.location.href = '/Users/uzmacbook/Downloads/etrain-master/test/index.html';
 });
 
 // Bosh sahifa tugmasi
 homeButton.addEventListener('click', () => {
-    window.location.href = '/';
+    window.location.href = '/Users/uzmacbook/Downloads/etrain-master/test/home.html';
 });
 
 
