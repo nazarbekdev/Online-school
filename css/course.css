@@ -31,6 +31,7 @@ body {
     display: flex;
     gap: 10px;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .subject-btn, .grade-btn {
@@ -68,7 +69,7 @@ body {
 }
 
 .topics-list ul li {
-    padding: 10px;
+    padding: 5px;
     cursor: pointer;
     border-bottom: 1px solid #ddd;
 }
