@@ -1,0 +1,62 @@
+ .main-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+  }
+  
+  .main-page h1 {
+    font-size: 3em;
+    color: #333;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  
+.options {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.option {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+    flex: 1 1 calc(33.33% - 40px); /* Har biri 3ta ustunda joylashadi */
+    max-width: calc(33.33% - 40px);
+    box-sizing: border-box;
+}
+
+.option:hover {
+    transform: scale(1.05);
+}
+
+.option h2 {
+    font-size: 2em;
+    color: #007bff;
+}
+
+/* --- Media Queries --- */
+@media (max-width: 1024px) {
+    .option {
+        flex: 1 1 calc(50% - 40px); /* 2ta ustunda joylashadi */
+        max-width: calc(50% - 40px);
+    }
+}
+
+@media (max-width: 600px) {
+    .option {
+        flex: 1 1 100%; /* 1ta ustun qilib chiqaradi */
+        max-width: 100%;
+    }
+
+    .option h2 {
+        font-size: 1.5em;
+    }
+}

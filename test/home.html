@@ -6,34 +6,55 @@
   <title>Test Platformasi</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="home-styles.css">
+  <link rel="stylesheet" href="main-styles.css">
 </head>
 <body>
-  <!-- Banner -->
-  <div class="banner">
-    <h1 class="typing-text"></h1>
+  <!-- Birinchi sahifa (Test turlari) -->
+  <div class="main-page" id="main-page">
+    <h1>Test Yechish</h1>
+    <div class="options">
+      <div class="option" onclick="selectTest('Moc Test')">
+        <h2>Moc Test</h2>
+      </div>
+      <div class="option" onclick="selectTest('DTM Test')">
+        <h2>DTM Test</h2>
+      </div>
+      <div class="option" onclick="selectTest('Fanlar Test')">
+        <h2>Fanlar Test</h2>
+      </div>
+    </div>
   </div>
 
-  <!-- Subjects -->
-  <div class="subjects">
-    <div class="card">
-      <img src="/Users/uzmacbook/Downloads/etrain-master/test/img/832__85_2300034836.jpg" alt="Matematika">
-      <h2>Matematika</h2>
-      <p>Matematikani sinab ko‘ring!</p>
-      <button onclick="showModal('Matematika')">Boshlash</button>
+  <!-- Ikkinchi sahifa (Fanlar bo'yicha testlar) -->
+  <div id="second-page" style="display: none;">
+    <!-- Banner alohida chiqarildi -->
+    <div class="banner">
+      <h1 class="typing-text">Testlarni tanlang</h1>
     </div>
-    <div class="card">
-      <img src="/Users/uzmacbook/Downloads/etrain-master/test/img/9515a0d2f79705098d32c475702d3a99.jpg" alt="Fizika">
-      <h2>Fizika</h2>
-      <p>Fizikadan bilimlaringizni sinab ko‘ring!</p>
-      <button onclick="showModal('Fizika')">Boshlash</button>
-    </div>
-    <div class="card">
-      <img src="/Users/uzmacbook/Downloads/etrain-master/test/img/Unknown.jpeg" alt="Kimyo">
-      <h2>Informatika</h2>
-      <p>Informatika fanidan testlar.</p>
-      <button onclick="showModal('Kimyo')">Boshlash</button>
+
+    <!-- Cardlar subjects ichiga joylandi -->
+    <div class="subjects">
+      <div class="card">
+        <img src="img/832__85_2300034836.jpg" alt="Matematika">
+        <h2>Matematika</h2>
+        <p>Matematikani sinab ko‘ring!</p>
+        <button onclick="showModal('Matematika')">Boshlash</button>
+      </div>
+      <div class="card">
+        <img src="img/9515a0d2f79705098d32c475702d3a99.jpg" alt="Fizika">
+        <h2>Fizika</h2>
+        <p>Fizikadan bilimlaringizni sinab ko‘ring!</p>
+        <button onclick="showModal('Fizika')">Boshlash</button>
+      </div>
+      <div class="card">
+        <img src="img/Unknown.jpeg" alt="Informatika">
+        <h2>Informatika</h2>
+        <p>Informatika fanidan testlar.</p>
+        <button onclick="showModal('Informatika')">Boshlash</button>
+      </div>
     </div>
   </div>
+
 
   <!-- Modal -->
   <div class="modal" id="modal">
@@ -50,6 +71,7 @@
     </div>
   </div>
 
+  <script src="main-script.js"></script>
   <script src="home-script.js"></script>
 </body>
 </html>
