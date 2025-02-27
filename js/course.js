@@ -80,5 +80,7 @@ function showTopicContent(topic) {
 
     // Test tugmasini ko'rsatish
     quizButton.style.display = 'block';
-    quizButton.onclick = () => alert("Test savollari: " + topic.quiz.join("\n"));
+    quizButton.onclick = () => {
+        window.location.href = 'test/test-solution.html';
+    };
 }

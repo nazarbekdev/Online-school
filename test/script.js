@@ -255,10 +255,10 @@ closeModalBtn.addEventListener('click', () => {
 
 // Qayta boshlash tugmasi
 restartButton.addEventListener('click', () => {
-    window.location.href = '/Users/uzmacbook/Downloads/etrain-master/test/index.html';
+    window.location.href = 'test-solution.html';
 });
 
 // Bosh sahifa tugmasi
 homeButton.addEventListener('click', () => {
-    window.location.href = '/Users/uzmacbook/Downloads/etrain-master/test/home.html';
+    window.location.href = '/Users/uzmacbook/Downloads/etrain-master/test-home.html';
 });
