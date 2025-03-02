@@ -76,32 +76,40 @@ body {
     width: 80%;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    /* background: white;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
-    width: 350px;*/
-    text-align: center; 
+    text-align: center; /* H3 va boshqa matnlar uchun */
 }
 
-.class-management h3 {
-    color: #333;
-    margin-bottom: 15px;
+/* Sinflar ro‘yxatini o‘rtaga joylashtirish */
+#class-list {
+    list-style: none; /* Punktlarni olib tashlash */
+    padding: 0; /* Ichki padding’ni olib tashlash */
+    display: flex; /* Flexbox ishlatish */
+    justify-content: center; /* Gorizontal o‘rtaga joylashtirish */
+    flex-wrap: wrap; /* Ko‘p element bo‘lsa, qatorlarga bo‘ladi */
+    gap: 10px; /* Elementlar orasidagi masofa */
 }
 
+/* Har bir sinf elementini o‘rtada ko‘rsatish */
 .class-item {
     background: linear-gradient(45deg, #3498db, #6c5ce7);
     color: white;
     padding: 10px;
     border-radius: 5px;
-    margin: 5px 0;
+    width: 60%; /* Yoki kerakli kenglik */
     cursor: pointer;
     transition: all 0.3s ease;
+    margin: 0 auto; /* Vertikal o‘lchovda o‘rtada, lekin flex tufayli kerak emas */
 }
 
+/* Hover effekti (o‘zgartirishsiz qoladi) */
 .class-item:hover {
     background: linear-gradient(45deg, #2980b9, #8e44ad);
     transform: scale(1.05);
+}
+
+.class-management h3 {
+    color: #333;
+    margin-bottom: 15px;
 }
 .modal {
     display: none;
@@ -162,7 +170,7 @@ button:hover {
 
 .material-management input,
 .material-management select {
-    width: 100%;
+    width: 50%;
     padding: 8px;
     margin-top: 5px;
     border: 1px solid #ccc;
