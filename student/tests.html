@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testlar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h2>Student Dashboard</h2>
+        <button class="menu-toggle">☰</button>
+        <ul class="nav-menu">
+            <li><a href="profile.html">Profil</a></li>
+            <li><a href="assignments.html">Vazifalarim</a></li>
+            <li><a href="tests.html">Test Natijalarim</a></li>
+            <li><a class="logout-btn" href="#" onclick="window.utils.logout()">Chiqish</a></li>
+        </ul>
+    </nav>
+
+    <!-- Tests sektsiyasi -->
+    <section class="tests-section">
+        <h3>Test Natijalari</h3>
+        <div class="tests-grid" id="tests-results">
+            <!-- Natijalar bu yerda dinamik ravishda yuklanadi -->
+            <div class="test-category" id="moc-tests">
+                <h4>Moc Testlar</h4>
+                <div class="tests-grid" id="moc-results"></div>
+            </div>
+            <div class="test-category" id="dtm-tests">
+                <h4>DTM Testlar</h4>
+                <div class="tests-grid" id="dtm-results"></div>
+            </div>
+            <div class="test-category" id="subject-tests">
+                <h4>Fanga oid Testlar</h4>
+                <div class="tests-grid" id="subject-results"></div>
+            </div>
+        </div>
+        <!-- Test yechish tugmasi -->
+        <div class="test-section">
+            <button class="take-test-btn" onclick="goToTest()">Test yechish</button>
+        </div>
+    </section>
+
+    <script src="js/utils.js"></script>
+    <script src="js/tests.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profil</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h2>Student Dashboard</h2>
+        <button class="menu-toggle">☰</button>
+        <ul class="nav-menu">
+            <li><a href="profile.html">Profil</a></li>
+            <li><a href="assignments.html">Vazifalarim</a></li>
+            <li><a href="tests.html">Test Natijalarim</a></li>
+            <li><a class="logout-btn" href="#" onclick="window.utils.logout()">Chiqish</a></li>
+        </ul>
+    </nav>
+
+    <!-- Profil sektsiyasi -->
+    <section class="profile-section">
+        <h3>Shaxsiy Profil</h3>
+        <div class="profile-grid">
+            <div class="profile-card">
+                <h4>Rasm</h4>
+                <img id="student-image" src="" alt="Student Image" class="profile-image">
+                <button onclick="toggleEdit('image')"><i class="fa-solid fa-pen"></i></button>
+                <div id="image-edit" class="edit-form hidden">
+                    <input type="file" id="new-image" accept="image/*">
+                    <button onclick="saveImage()">Saqlash</button>
+                    <button onclick="cancelEdit('image')">Bekor qilish</button>
+                </div>
+            </div>
+            <div class="profile-card">
+                <h4>Ism va Familiya</h4>
+                <p id="student-fullname"></p>
+                <button onclick="toggleEdit('fullname')"><i class="fa-solid fa-pen"></i></button>
+                <div id="fullname-edit" class="edit-form hidden">
+                    <input type="text" id="new-fullname">
+                    <button onclick="saveFullname()">Saqlash</button>
+                    <button onclick="cancelEdit('fullname')">Bekor qilish</button>
+                </div>
+            </div>
+            <div class="profile-card">
+                <h4>Jinsi</h4>
+                <p id="student-gender"></p>
+            </div>
+            <div class="profile-card">
+                <h4>Telefon Raqam</h4>
+                <p id="student-phone"></p>
+                <button onclick="toggleEdit('phone')"><i class="fa-solid fa-pen"></i></button>
+                <div id="phone-edit" class="edit-form hidden">
+                    <input type="text" id="new-phone">
+                    <button onclick="savePhone()">Saqlash</button>
+                    <button onclick="cancelEdit('phone')">Bekor qilish</button>
+                </div>
+            </div>
+            <div class="profile-card">
+                <h4>Email</h4>
+                <p id="student-email"></p>
+                <button onclick="toggleEdit('email')"><i class="fa-solid fa-pen"></i></button>
+                <div id="email-edit" class="edit-form hidden">
+                    <input type="email" id="new-email">
+                    <button onclick="saveEmail()">Saqlash</button>
+                    <button onclick="cancelEdit('email')">Bekor qilish</button>
+                </div>
+            </div>
+            <div class="profile-card">
+                <span>Viloyat</span>
+                <p id="student-region">Noma’lum</p>
+                <button onclick="toggleEdit('region')"><i class="fa-solid fa-pen"></i></button>
+                <div id="region-edit" class="edit-form hidden">
+                    <input type="text" id="new-region" placeholder="Yangi viloyat">
+                    <button onclick="saveRegion()">Saqlash</button>
+                    <button onclick="cancelEdit('region')">Bekor qilish</button>
+                </div>
+            </div>
+            <div class="profile-card">
+                <span>Tuman</span>
+                <p id="student-district">Noma’lum</p>
+                <button onclick="toggleEdit('district')"><i class="fa-solid fa-pen"></i></button>
+                <div id="district-edit" class="edit-form hidden">
+                    <input type="text" id="new-district" placeholder="Yangi tuman">
+                    <button onclick="saveDistrict()">Saqlash</button>
+                    <button onclick="cancelEdit('district')">Bekor qilish</button>
+                </div>
+            </div>
+            <div class="profile-card">
+                <h4>Maktab</h4>
+                <p id="student-school"></p>
+                <button onclick="toggleEdit('school')"><i class="fa-solid fa-pen"></i></button>
+                <div id="school-edit" class="edit-form hidden">
+                    <input type="text" id="new-school">
+                    <button onclick="saveSchool()">Saqlash</button>
+                    <button onclick="cancelEdit('school')">Bekor qilish</button>
+                </div>
+            </div>
+            <div class="profile-card">
+                <h4>Sinf</h4>
+                <p id="student-class"></p>
+            </div>
+            <div class="profile-card">
+                <h4>Tanlagan Fanlar</h4>
+                <ul id="student-subjects"></ul>
+                <button onclick="toggleEdit('subjects')"><i class="fa-solid fa-pen"></i></button>
+                <div id="subjects-edit" class="edit-form hidden">
+                    <button onclick="showAddSubjectForm()">+Fan qo'shish</button>
+                    <div id="add-subject-form" class="edit-form hidden">
+                        <select id="new-subject">
+                            <option value="">Fan tanlang</option>
+                            <!-- Dinamik ravishda fanlar qo'shiladi -->
+                        </select>
+                        <button onclick="saveSubject()">Saqlash</button>
+                        <button onclick="cancelAddSubject()">Bekor qilish</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/utils.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

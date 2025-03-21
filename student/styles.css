@@ -1,0 +1,700 @@
+/* Umumiy uslub */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f5f5f5;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(45deg, #007bff, #6c5ce7);
+    color: white;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar h2 {
+    margin: 0;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+}
+
+.nav-menu li a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.nav-menu li a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.logout-btn {
+    background: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #c82333;
+}
+
+/* Dashboard sektsiyasi */
+.dashboard-section {
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.dashboard-card {
+    background: linear-gradient(45deg, #3498db, #6c5ce7);
+    color: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-card h4 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.dashboard-card p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* Responsiv dizayn */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .menu-toggle {
+        display: block;
+        position: relative;
+        right: 10px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #0077ff;
+        padding: 10px 0;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 2000;
+        opacity: 1;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu li {
+        margin: 10px 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .dashboard-section {
+        width: 90%;
+        padding: 15px;
+        margin: 15px auto;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    .dashboard-card {
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-section {
+        width: 95%;
+        padding: 10px;
+        margin: 10px auto;
+    }
+
+    .dashboard-card {
+        padding: 12px;
+    }
+
+    .dashboard-card h4 {
+        font-size: 14px;
+    }
+
+    .dashboard-card p {
+        font-size: 12px;
+    }
+}
+
+/* Profile html  styles */
+/* Profil sektsiyasi */
+.profile-section {
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.profile-card {
+    background: linear-gradient(45deg, #3498db, #6c5ce7);
+    color: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.profile-card h4 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.profile-card p, .profile-card ul {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.profile-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.profile-card ul li {
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Qalamcha icon’li tugma uchun uslub */
+.profile-card button {
+    background: none;
+    border: none;
+    color: white; /* Icon rangini oq qilib ko‘rsatish */
+    cursor: pointer;
+    padding: 5px 10px; /* Icon atrofida biroz joy qoldirish */
+    transition: transform 0.3s ease, color 0.3s ease;
+    display: flex; /* Flex bilan icon’ni markazlash */
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px; /* Kartochka ichida pastga joylashtirish */
+    width: 100%; /* Tugmani kartochka kengligiga moslash */
+}
+
+.profile-card button:hover {
+    transform: scale(1.2);
+    color: #ffd700; /* Qalamcha rangini o‘zgartirish uchun */
+}
+
+.profile-card button i {
+    font-size: 16px; /* Icon o‘lchamini sozlash */
+    display: inline-block; /* Icon’ni majburan ko‘rsatish */
+}
+
+/* Responsiv dizayn uchun qalamcha tugmasi */
+@media (max-width: 768px) {
+    .profile-card button i {
+        font-size: 14px; /* Planshet’da kichikroq */
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-card button i {
+        font-size: 12px; /* Mobil’da yanada kichikroq */
+    }
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.edit-form input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.edit-form button {
+    background: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-form button:hover {
+    background: #218838;
+}
+
+.edit-form.hidden {
+    display: none;
+}
+
+/* Responsiv dizayn */
+@media (max-width: 768px) {
+    .profile-section {
+        width: 90%;
+        padding: 15px;
+        margin: 15px auto;
+    }
+
+    .profile-grid {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    .profile-card {
+        margin: 10px 0;
+    }
+
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-section {
+        width: 95%;
+        padding: 10px;
+        margin: 10px auto;
+    }
+
+    .profile-card {
+        padding: 12px;
+    }
+
+    .profile-card h4 {
+        font-size: 14px;
+    }
+
+    .profile-card p, .profile-card ul li {
+        font-size: 12px;
+    }
+
+    .profile-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .edit-form button {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+}
+
+/* Assignments html style  */
+
+/* Assignments sektsiyasi */
+.assignments-section {
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.assignments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.assignment-card {
+    background: linear-gradient(45deg, #3498db, #6c5ce7);
+    color: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.assignment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.assignment-card h4 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.assignment-card p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.assignment-card button {
+    background: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.assignment-card button:hover {
+    background: #218838;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 400px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.send-hidden {
+    display: none;
+    opacity: 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 5px;
+}
+
+/* Responsiv dizayn */
+@media (max-width: 768px) {
+    .assignments-section {
+        width: 90%;
+        padding: 15px;
+        margin: 15px auto;
+    }
+
+    .assignments-grid {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .assignments-section {
+        width: 95%;
+        padding: 10px;
+        margin: 10px auto;
+    }
+
+    .assignment-card {
+        padding: 12px;
+    }
+
+    .assignment-card h4 {
+        font-size: 14px;
+    }
+
+    .assignment-card p {
+        font-size: 12px;
+    }
+
+    .assignment-card button {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+}
+
+
+
+/* Tests page styles */
+
+/* Tests sektsiyasi */
+.tests-section {
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.tests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.test-category {
+    margin-bottom: 20px;
+}
+
+.test-category h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.test-card {
+    background: linear-gradient(45deg, #3498db, #6c5ce7);
+    color: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.test-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.test-card h4 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.test-card p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.test-card button {
+    background: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.test-card button:hover {
+    background: #0056b3;
+}
+
+/* Test yechish tugmasi */
+.take-test-btn {
+    background: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.take-test-btn:hover {
+    background: #218838;
+}
+
+/* Test yechish sektsiyasi */
+.test-section {
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Responsiv dizayn */
+@media (max-width: 768px) {
+    .tests-section, .test-section {
+        width: 90%;
+        padding: 15px;
+        margin: 15px auto;
+    }
+
+    .tests-grid {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tests-section, .test-section {
+        width: 95%;
+        padding: 10px;
+        margin: 10px auto;
+    }
+
+    .test-card {
+        padding: 12px;
+    }
+
+    .test-card h4 {
+        font-size: 14px;
+    }
+
+    .test-card p {
+        font-size: 12px;
+    }
+
+    .test-card button {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+
+    .take-test-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+.assignments-grid {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+}
+
+.assignment-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    width: 70%;
+    border-radius: 5px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.close-modal {
+    float: right;
+    cursor: pointer;
+}

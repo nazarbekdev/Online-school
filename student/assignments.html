@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vazifalar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h2>Student Dashboard</h2>
+        <button class="menu-toggle">☰</button>
+        <ul class="nav-menu">
+            <li><a href="profile.html">Profil</a></li>
+            <li><a href="assignments.html">Vazifalarim</a></li>
+            <li><a href="tests.html">Test Natijalarim</a></li>
+            <li><a class="logout-btn" href="#" onclick="window.utils.logout()">Chiqish</a></li>
+        </ul>
+    </nav>
+
+    <!-- Assignments sektsiyasi -->
+    <section class="assignments-section">
+        <h3>Vazifalar Ro‘yxati</h3>
+        <div class="assignments-grid" id="assignments-grid">
+            <!-- Vazifalar bu yerda dinamik ravishda yuklanadi -->
+        </div>
+    </section>
+
+    <!-- Modal: Vazifa jo‘natish -->
+    <div id="submit-assignment-modal" class="modal send-hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">×</span>
+            <h3>Vazifa Jo‘natish</h3>
+            <form id="submit-assignment-form">
+                <div class="form-group">
+                    <label for="assignment-file">Fayl tanlash:</label>
+                    <input type="file" id="assignment-file" accept=".pdf,.doc,.docx" required>
+                </div>
+                <button type="submit">Jo‘natish</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/assignments.js"></script>
+</body>
+</html>
