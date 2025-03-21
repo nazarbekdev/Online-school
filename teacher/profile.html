@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h2>Teacher Dashboard</h2>
+        <button class="menu-toggle">☰</button>
+        <ul class="nav-menu">
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="classes.html">Mening sinflarim</a></li>
+            <li><a href="materials.html">Dars materiallari</a></li>
+            <li><a href="assignments.html">O‘quvchilarning topshiriqlari</a></li>
+            <li><a class="logout-btn" href="#" onclick="window.utils.logout()">Chiqish</a></li>
+        </ul>
+    </nav>
+
+    <!-- Profil -->
+    <section class="profile-section">
+        <div class="profile-card" id="profile-card">
+            <img id="teacher-image" src="Unknown.jpeg" alt="Teacher" class="profile-image">
+            <h3>O'qituvchi: <span id="teacher-fullname">Jasur</span></h3>
+            <p>Mutaxassislik: <span id="teacher-specialty">Matematika</span></p>
+            <p>Telefon: <span id="teacher-phone">+998 90 123 45 67</span></p>
+            <div class="edit-buttons">
+                <button onclick="toggleEdit('fullname')">Ismni tahrirlash</button>
+                <button onclick="toggleEdit('phone')">Telefonni tahrirlash</button>
+                <button onclick="toggleEdit('image')">Rasmni o‘zgartirish</button>
+            </div>
+        </div>
+
+        <!-- Tahrirlash formasi -->
+        <div id="fullname-edit" class="edit-form hidden">
+            <input type="text" id="new-fullname" value="">
+            <button onclick="saveFullname()" class="save-btn">Saqlash</button>
+            <button onclick="cancelEdit('fullname')" class="cancel-btn">Bekor qilish</button>
+        </div>
+        <div id="phone-edit" class="edit-form hidden">
+            <input type="text" id="new-phone" value="">
+            <button onclick="savePhone()" class="save-btn">Saqlash</button>
+            <button onclick="cancelEdit('phone')" class="cancel-btn">Bekor qilish</button>
+        </div>
+        <div id="image-edit" class="edit-form hidden">
+            <input type="file" id="new-image">
+            <button onclick="saveImage()" class="save-btn">Saqlash</button>
+            <button onclick="cancelEdit('image')" class="cancel-btn">Bekor qilish</button>
+        </div>
+    </section>
+
+    <script src="js/utils.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

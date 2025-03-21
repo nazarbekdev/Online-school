@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dars materiallari</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h2>Teacher Dashboard</h2>
+        <button class="menu-toggle">☰</button>
+        <ul class="nav-menu">
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="classes.html">Mening sinflarim</a></li>
+            <li><a href="materials.html">Dars materiallari</a></li>
+            <li><a href="assignments.html">O‘quvchilarning topshiriqlari</a></li>
+            <li><a class="logout-btn" href="#" onclick="window.utils.logout()">Chiqish</a></li>
+        </ul>
+    </nav>
+
+    <!-- Dars materiallari -->
+    <section class="material-management">
+        <h3>Dars materiallari</h3>
+        <div class="action-buttons">
+            <button class="add-btn" onclick="toggleMaterialForm()">+ Material qo‘shish</button>
+            <button class="add-btn" onclick="toggleTestForm()">+ Test qo‘shish</button>
+        </div>
+
+        <!-- Material qo‘shish formasi -->
+        <div id="material-form" class="modal-form hidden">
+            <div class="modal-form-content">
+                <span class="close-btn" onclick="toggleMaterialForm()">×</span>
+                <h3>Material qo‘shish</h3>
+                <label for="classSelect">Sinfni tanlang:</label>
+                <select id="classSelect" required>
+                    <option value="">Sinf tanlang</option>
+                    <!-- Dinamik tarzda to‘ldiriladi -->
+                </select>
+                <label for="subjectSelect">Fan tanlang:</label>
+                <select id="subjectSelect" required>
+                    <option value="">Fan tanlang</option>
+                    <!-- Dinamik tarzda to‘ldiriladi -->
+                </select>
+                <label for="taskSelect">Vazifa tanlovi:</label>
+                <select id="taskSelect" onchange="toggleDeadlineField()" required>
+                    <option value="">Vazifa tanlang</option>
+                    <option value="Sinf">Sinf</option>
+                    <option value="Kurs">Kurs</option>
+                </select>
+                <label for="topicInput">Mavzu:</label>
+                <input type="text" id="topicInput" placeholder="Mavzuni kiriting" required>
+                <label for="lectureFile">Ma’ruza fayli:</label>
+                <input type="file" id="lectureFile" required>
+                <label for="presentationFile">Taqdimot fayli (ixtiyoriy):</label>
+                <input type="file" id="presentationFile">
+                <label for="videoLink">Video havolasi (ixtiyoriy):</label>
+                <input type="url" id="videoLink" placeholder="YouTube havolasi">
+                <label for="deadlineInput" id="deadlineLabel" class="hidden">Muddat belgilash (ixtiyoriy):</label>
+                <input type="text" id="deadlineInput" placeholder="YYYY-MM-DD (masalan, 2025-01-29)" class="hidden">
+                <button class="submit-btn" onclick="uploadMaterial()">Yuklash</button>
+            </div>
+        </div>
+
+        <!-- Test qo‘shish formasi -->
+        <div id="test-form" class="modal-form hidden">
+            <div class="modal-form-content">
+                <span class="close-btn" onclick="toggleTestForm()">×</span>
+                <h3>Test qo‘shish</h3>
+                <label for="testClassSelect">Sinfni tanlang:</label>
+                <select id="testClassSelect" required>
+                    <option value="">Sinf tanlang</option>
+                    <!-- Dinamik tarzda to‘ldiriladi -->
+                </select>
+                <label for="testSubjectSelect">Fan tanlang:</label>
+                <select id="testSubjectSelect" required>
+                    <option value="">Fan tanlang</option>
+                    <!-- Dinamik tarzda to‘ldiriladi -->
+                </select>
+                <label for="testTopicInput">Mavzu:</label>
+                <input type="text" id="testTopicInput" placeholder="Mavzuni kiriting" required>
+                <label for="quarterSelect">Chorakni tanlang:</label>
+                <select id="quarterSelect" required>
+                    <option value="">Chorak tanlang</option>
+                    <option value="I chorak">I chorak</option>
+                    <option value="II chorak">II chorak</option>
+                    <option value="III chorak">III chorak</option>
+                    <option value="IV chorak">IV chorak</option>
+                </select>
+                <label for="testFile">Test fayli yuklash (Word, Excel yoki PDF):</label>
+                <input type="file" id="testFile" accept=".doc,.docx,.xls,.xlsx,.pdf" required>
+                <button class="submit-btn" onclick="uploadTest()">Yuklash</button>
+            </div>
+        </div>
+
+        <!-- Yuklangan materiallar -->
+        <h4>Yuklangan materiallar:</h4>
+        <div class="material-list" id="material-list">
+            <!-- Dinamik tarzda to‘ldiriladi -->
+        </div>
+
+        <!-- Yuklangan testlar -->
+        <h4>Yuklangan testlar:</h4>
+        <div class="test-list" id="test-list">
+            <!-- Dinamik tarzda to‘ldiriladi -->
+        </div>
+    </section>
+
+    <script src="js/utils.js"></script>
+    <script src="js/materials.js"></script>
+</body>
+</html>

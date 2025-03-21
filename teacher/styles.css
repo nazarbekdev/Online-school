@@ -1,0 +1,1486 @@
+/* Umumiy sozlamalar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Arial', sans-serif; /* Zamonaviy font */
+    line-height: 1.6;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(90deg, #1e3a8a, #3b82f6); /* Gradientli fon */
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar h2 {
+    font-size: clamp(1.5rem, 3vw, 1.8rem); /* Dinamik font o‘lchami */
+    color: #fff;
+    font-weight: 600;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+}
+
+.nav-menu li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-menu li a:hover {
+    color: #dbeafe;
+    transform: scale(1.05);
+}
+
+.logout-btn {
+    background: #ef4444;
+    padding: 0.5rem 1rem;
+    border-radius: 1.5rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #dc2626;
+    transform: scale(1.05);
+}
+
+/* Sinflarni boshqarish bo'limi */
+.class-management {
+    padding: 2rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e2e8f0 100%);
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.class-management h3 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.class-buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+}
+
+.class-item {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 2rem;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.class-item:hover {
+    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* O‘quvchilar ro‘yxati (jadval) */
+.students-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.students-section:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+}
+
+.students-modal {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.students-section:not(.hidden) .students-modal {
+    transform: scale(1);
+}
+
+#student-class-title {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    color: #1e293b;
+    margin-bottom: 1rem;
+    text-align: center;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.students-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.students-table th,
+.students-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.students-table th {
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.students-table td {
+    font-size: 0.9rem;
+    color: #4b5563;
+}
+
+.students-table tr {
+    transition: background 0.3s ease;
+}
+
+.students-table tr:hover {
+    background: #f1f5f9;
+}
+
+.student-name {
+    color: #3b82f6;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.student-name:hover {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+/* O‘quvchining to‘liq ma’lumotlari (modal) */
+.student-detail-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.student-detail-section:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+}
+
+.student-detail-modal {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.student-detail-section:not(.hidden) .student-detail-modal {
+    transform: scale(1);
+}
+
+#student-detail-title {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: #1e293b;
+    margin-bottom: 1rem;
+    text-align: center;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Modal ichidagi ma'lumotlar */
+.student-detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    /*line-height: 1.4;*/
+}
+
+.student-detail-content p {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin: 0;
+    line-height: 1.4;
+    background: #f9fafb;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+/* Test natijalari */
+.test-results {
+    margin-top: 1rem;
+}
+
+.test-result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0;
+}
+
+.test-result-item span {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.test-result-bar {
+    width: 100%;
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 0.3rem;
+}
+
+.test-result-bar div {
+    height: 100%;
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+    transition: width 0.5s ease;
+}
+
+/* Fayllar ro‘yxati */
+.files-list {
+    margin-top: 1rem;
+}
+
+.files-list h4 {
+    font-size: 1rem;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.files-list .file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: #f9fafb;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: background 0.3s ease;
+}
+
+.files-list .file-item:hover {
+    background: #f1f5f9;
+}
+
+.files-list .file-item a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.files-list .file-item a:hover {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+.files-list .file-item span {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+/* Yopish tugmasi */
+.close-btn {
+    display: block;
+    margin: 1rem auto 0;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 1.5rem;
+    background: #ef4444;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.close-btn:hover {
+    background: #dc2626;
+    transform: scale(1.05);
+}
+
+/* Profil kartasi */
+.profile-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 30vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e2e8f0 100%);
+    padding: 2rem;
+}
+
+.profile-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    transition: transform 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+.profile-card h3 {
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin: 0.5rem 0;
+}
+
+.profile-card p {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin: 0.3rem 0;
+}
+
+.edit-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.edit-buttons button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 1.5rem;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.edit-buttons button:hover {
+    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+    transform: scale(1.05);
+}
+
+.edit-form {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.edit-form.hidden {
+    display: none;
+}
+
+.edit-form input,
+.edit-form button {
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.edit-form input[type="text"] {
+    width: 100%;
+    background: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.edit-form input[type="text"]:focus {
+    border-color: #3b82f6;
+    outline: none;
+}
+
+.edit-form input[type="file"] {
+    width: 100%;
+}
+
+.edit-form button {
+    background: #22c55e;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.edit-form button:hover {
+    background: #16a34a;
+}
+
+.edit-form .cancel-btn {
+    background: #ef4444;
+}
+
+.edit-form .cancel-btn:hover {
+    background: #dc2626;
+}
+
+/* Topshiriqlar jadvali */
+#assignment-table {
+    width: 100%;
+    max-width: 1200px;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+#assignment-table th,
+#assignment-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+#assignment-table th {
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+#assignment-table td {
+    font-size: 0.9rem;
+    color: #4b5563;
+}
+
+#assignment-table tr {
+    transition: background 0.3s ease;
+}
+
+#assignment-table tr:hover {
+    background: #f1f5f9;
+}
+
+#assignment-table td button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#assignment-table td button:first-of-type {
+    background: #22c55e;
+    color: #fff;
+}
+
+#assignment-table td button:first-of-type:hover {
+    background: #16a34a;
+    transform: scale(1.05);
+}
+
+#assignment-table td button:last-of-type {
+    background: #3b82f6;
+    color: #fff;
+}
+
+#assignment-table td button:last-of-type:hover {
+    background: #2563eb;
+    transform: scale(1.05);
+}
+
+/* Modal oyna (baholash uchun) */
+.mark-modal-form {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mark-modal-form:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mark-modal-form-content {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 90%;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.mark-modal-form:not(.hidden) .mark-modal-form-content {
+    transform: scale(1);
+}
+
+.mark-modal-form-content h4 {
+    font-size: 1.2rem;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.mark-modal-form-content label {
+    display: block;
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+}
+
+.mark-modal-form-content input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.mark-modal-form-content button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 1.5rem;
+    background: #22c55e;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.mark-modal-form-content button:hover {
+    background: #16a34a;
+    transform: scale(1.05);
+}
+
+/* Material Management Section */
+.material-management {
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e2e8f0 100%);
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.material-management h3 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    color: #1e293b;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.material-management h4 {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    color: #1e293b;
+    margin: 2rem 0 1rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.add-btn {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    color: #fff;
+    border: none;
+    border-radius: 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.add-btn:hover {
+    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+    transform: scale(1.05);
+}
+
+/* Modal Form */
+.modal-form {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-form:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-form-content {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-form:not(.hidden) .modal-form-content {
+    transform: scale(1);
+}
+
+.modal-form-content h3 {
+    font-size: 1.2rem;
+    color: #1e293b;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.modal-form-content label {
+    font-size: 0.9rem;
+    color: #4b5563;
+    margin-bottom: 0.3rem;
+    display: block;
+}
+
+.modal-form-content select,
+.modal-form-content input[type="text"],
+.modal-form-content input[type="url"],
+.modal-form-content input[type="file"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    transition: border-color 0.3s ease;
+}
+
+.modal-form-content select:focus,
+.modal-form-content input:focus {
+    border-color: #3b82f6;
+    outline: none;
+}
+
+.modal-form-content .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #ef4444;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+.modal-form-content .close-btn:hover {
+    background: #dc2626;
+}
+
+.modal-form-content .submit-btn {
+    padding: 0.75rem;
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+    color: #fff;
+    border: none;
+    border-radius: 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.modal-form-content .submit-btn:hover {
+    background: linear-gradient(90deg, #16a34a, #15803d);
+    transform: scale(1.05);
+}
+
+/* Material va Test List */
+.material-list,
+.test-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 0;
+}
+
+.material-card,
+.test-card {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.material-card:hover,
+.test-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.material-card h5,
+.test-card h5 {
+    font-size: 1.1rem;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.material-card p,
+.test-card p {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin: 0.3rem 0;
+}
+
+.material-card .file-links,
+.test-card .file-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.material-card .file-links a,
+.test-card .file-links a {
+    padding: 0.5rem 1rem;
+    background: #3b82f6;
+    color: #fff;
+    border-radius: 1rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.material-card .file-links a:hover,
+.test-card .file-links a:hover {
+    background: #2563eb;
+}
+
+/* Responsivlik */
+@media (max-width: 1024px) {
+    .class-buttons-container {
+        max-width: 700px;
+    }
+
+    .material-list,
+    .test-list {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    /* Navbar */
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: #1e3a8a;
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0.75rem;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu li a {
+        font-size: 1rem;
+    }
+
+    /* Class Management */
+    .class-management {
+        padding: 1.5rem;
+    }
+
+    .class-buttons-container {
+        gap: 0.75rem;
+    }
+
+    .class-item {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    /* Modallar */
+    .students-modal,
+    .student-detail-modal,
+    .modal-form-content,
+    .mark-modal-form-content {
+        max-width: 90%;
+        width: 95%;
+        padding: 1rem;
+        max-height: 85vh;
+    }
+
+    #student-class-title,
+    #student-detail-title {
+        font-size: 1.2rem;
+    }
+
+    .student-detail-content p {
+        font-size: 0.85rem;
+    }
+
+    .close-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    /* Jadval */
+    .students-table th,
+    .students-table td {
+        padding: 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    .students-table th {
+        font-size: 0.9rem;
+    }
+
+    /* Topshiriqlar jadvali */
+    #assignment-table th,
+    #assignment-table td {
+        padding: 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    #assignment-table th {
+        font-size: 0.9rem;
+    }
+
+    #assignment-table td button {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+    }
+
+    /* Material Management */
+    .material-management {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .add-btn {
+        width: 100%;
+        padding: 0.75rem;
+    }
+
+    .material-list,
+    .test-list {
+        grid-template-columns: 1fr;
+    }
+
+    /* Profil */
+    .profile-card {
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .edit-buttons button {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* 480px dan kichik ekranlar uchun */
+@media (max-width: 480px) {
+    /* Class Management */
+    .class-management h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .class-buttons-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .class-item {
+        width: 100%;
+        max-width: 280px;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+        border-radius: 0.5rem;
+    }
+
+    /* Modallar */
+    .students-modal,
+    .student-detail-modal,
+    .modal-form-content,
+    .mark-modal-form-content {
+        width: 96%;
+        padding: 0.5rem;
+        max-height: 88vh;
+        border-radius: 0.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #student-class-title,
+    #student-detail-title {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+    }
+
+    .student-detail-content {
+        gap: 0.4rem;
+    }
+
+    .student-detail-content p {
+        font-size: 0.75rem;
+        line-height: 1.3;
+        padding: 0.3rem;
+        background: #f9fafb;
+        border-radius: 0.3rem;
+    }
+
+    .close-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+        border-radius: 0.8rem;
+        margin: 0.5rem auto;
+    }
+
+    /* Jadval */
+    .students-table {
+        display: block;
+        width: 100%;
+    }
+
+    .students-table thead {
+        display: none; /* Sarlavhalarni yashiramiz */
+    }
+
+    .students-table tbody,
+    .students-table tr {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .students-table tr {
+        border-bottom: 1px solid #e5e7eb;
+        padding: 0.4rem 0;
+        background: #f9fafb;
+        border-radius: 0.3rem;
+    }
+
+    .students-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: right;
+        padding: 0.3rem 0.5rem;
+        font-size: 0.75rem;
+        border-bottom: none;
+    }
+
+    .students-table td:before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #1e293b;
+        text-align: left;
+        flex: 1;
+        font-size: 0.75rem;
+    }
+
+    .students-table td:last-child {
+        border-bottom: none;
+    }
+
+    .student-name {
+        font-size: 0.75rem;
+    }
+
+    /* Topshiriqlar jadvali */
+    #assignment-table {
+        display: block;
+        overflow-x: auto;
+        width: 100%;
+    }
+
+    #assignment-table th,
+    #assignment-table td {
+        font-size: 0.75rem;
+        padding: 0.4rem;
+        text-align: center;
+    }
+
+    #assignment-table td button {
+        display: block;
+        margin: 0.2rem 0;
+        width: 100%;
+        padding: 0.3rem;
+        font-size: 0.75rem;
+    }
+
+    /* Material Management */
+    .material-management h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .material-management h4 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .material-card h5,
+    .test-card h5 {
+        font-size: 0.9rem;
+    }
+
+    .material-card p,
+    .test-card p {
+        font-size: 0.75rem;
+        line-height: 1.3;
+    }
+
+    .material-card .file-links,
+    .test-card .file-links {
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    .material-card .file-links a,
+    .test-card .file-links a {
+        font-size: 0.75rem;
+    }
+
+    /* Profil */
+    .profile-card h3 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .profile-card p {
+        font-size: 0.75rem;
+        line-height: 1.3;
+    }
+}
+
+/* 430px dan kichik ekranlar uchun */
+@media (max-width: 430px) {
+    /* Modallar */
+    .students-modal,
+    .student-detail-modal,
+    .modal-form-content,
+    .mark-modal-form-content {
+        width: 98%;
+        padding: 0.4rem;
+        max-height: 90vh;
+        border-radius: 0.4rem;
+    }
+
+    #student-class-title,
+    #student-detail-title {
+        font-size: 0.9rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .student-detail-content {
+        gap: 0.3rem;
+    }
+
+    .student-detail-content p {
+        font-size: 0.7rem;
+        line-height: 1.2;
+        padding: 0.25rem;
+    }
+
+    .students-table td {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.4rem;
+    }
+
+    .students-table td:before {
+        font-size: 0.7rem;
+    }
+
+    .student-name {
+        font-size: 0.7rem;
+    }
+
+    .close-btn {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.7rem;
+        border-radius: 0.7rem;
+    }
+
+    /* Topshiriqlar jadvali */
+    #assignment-table th,
+    #assignment-table td {
+        font-size: 0.7rem;
+        padding: 0.3rem;
+    }
+
+    #assignment-table td button {
+        font-size: 0.7rem;
+        padding: 0.25rem;
+    }
+}
+
+/* 412px dan kichik ekranlar uchun (Samsung Galaxy A51/71) */
+@media (max-width: 412px) {
+    .students-modal,
+    .student-detail-modal,
+    .modal-form-content,
+    .mark-modal-form-content {
+        width: 100%;
+        padding: 0.4rem;
+        max-height: 92vh;
+        border-radius: 0.4rem;
+    }
+
+    #student-class-title,
+    #student-detail-title {
+        font-size: 0.85rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .student-detail-content {
+        gap: 0.3rem;
+    }
+
+    .student-detail-content p {
+        font-size: 0.65rem;
+        line-height: 1.2;
+        padding: 0.2rem;
+    }
+
+    .students-table td {
+        font-size: 0.65rem;
+        padding: 0.2rem 0.4rem;
+    }
+
+    .students-table td:before {
+        font-size: 0.65rem;
+    }
+
+    .student-name {
+        font-size: 0.65rem;
+    }
+
+    .close-btn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.65rem;
+        border-radius: 0.6rem;
+    }
+
+    /* Topshiriqlar jadvali */
+    #assignment-table th,
+    #assignment-table td {
+        font-size: 0.65rem;
+        padding: 0.25rem;
+    }
+
+    #assignment-table td button {
+        font-size: 0.65rem;
+        padding: 0.2rem;
+    }
+}
+
+/* 375px dan kichik ekranlar uchun (iPhone SE) */
+@media (max-width: 375px) {
+    .students-modal,
+    .student-detail-modal,
+    .modal-form-content,
+    .mark-modal-form-content {
+        width: 100%;
+        padding: 0.35rem;
+        max-height: 94vh;
+        border-radius: 0.3rem;
+    }
+
+    #student-class-title,
+    #student-detail-title {
+        font-size: 0.8rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .student-detail-content {
+        gap: 0.25rem;
+    }
+
+    .student-detail-content p {
+        font-size: 0.6rem;
+        line-height: 1.1;
+        padding: 0.2rem;
+    }
+
+    .students-table td {
+        font-size: 0.6rem;
+        padding: 0.2rem 0.35rem;
+    }
+
+    .students-table td:before {
+        font-size: 0.6rem;
+    }
+
+    .student-name {
+        font-size: 0.6rem;
+    }
+
+    .close-btn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.6rem;
+        border-radius: 0.6rem;
+    }
+
+    /* Topshiriqlar jadvali */
+    #assignment-table th,
+    #assignment-table td {
+        font-size: 0.6rem;
+        padding: 0.2rem;
+    }
+
+    #assignment-table td button {
+        font-size: 0.6rem;
+        padding: 0.2rem;
+    }
+
+    /* Class Management */
+    .class-management h3 {
+        font-size: 1.1rem;
+    }
+
+    .class-item {
+        max-width: 260px;
+        font-size: 0.75rem;
+        padding: 0.4rem 0.6rem;
+    }
+}
+
+/* 344px dan kichik ekranlar uchun (Galaxy Z Fold 5) */
+@media (max-width: 344px) {
+    .students-modal,
+    .student-detail-modal,
+    .modal-form-content,
+    .mark-modal-form-content {
+        width: 100%;
+        padding: 0.3rem;
+        max-height: 96vh;
+        border-radius: 0.3rem;
+    }
+
+    #student-class-title,
+    #student-detail-title {
+        font-size: 0.75rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .student-detail-content {
+        gap: 0.2rem;
+    }
+
+    .student-detail-content p {
+        font-size: 0.55rem;
+        line-height: 1.1;
+        padding: 0.15rem;
+    }
+
+    .students-table td {
+        font-size: 0.55rem;
+        padding: 0.15rem 0.3rem;
+    }
+
+    .students-table td:before {
+        font-size: 0.55rem;
+    }
+
+    .student-name {
+        font-size: 0.55rem;
+    }
+
+    .close-btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.55rem;
+        border-radius: 0.5rem;
+    }
+
+    /* Topshiriqlar jadvali */
+    #assignment-table th,
+    #assignment-table td {
+        font-size: 0.55rem;
+        padding: 0.15rem;
+    }
+
+    #assignment-table td button {
+        font-size: 0.55rem;
+        padding: 0.15rem;
+    }
+
+    /* Class Management */
+    .class-management h3 {
+        font-size: 1rem;
+    }
+
+    .class-item {
+        max-width: 240px;
+        font-size: 0.7rem;
+        padding: 0.3rem 0.5rem;
+    }
+
+    /* Material Management */
+    .material-management h3 {
+        font-size: 1rem;
+    }
+
+    .material-management h4 {
+        font-size: 0.9rem;
+    }
+
+    .material-card h5,
+    .test-card h5 {
+        font-size: 0.8rem;
+    }
+
+    .material-card p,
+    .test-card p {
+        font-size: 0.65rem;
+    }
+}

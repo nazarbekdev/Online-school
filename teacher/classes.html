@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mening sinflarim</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h2>Teacher Dashboard</h2>
+        <button class="menu-toggle">☰</button>
+        <ul class="nav-menu">
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="classes.html">Mening sinflarim</a></li>
+            <li><a href="materials.html">Dars materiallari</a></li>
+            <li><a href="assignments.html">O‘quvchilarning topshiriqlari</a></li>
+            <li><a class="logout-btn" href="#" onclick="window.utils.logout()">Chiqish</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sinflarni boshqarish -->
+    <section class="class-management">
+        <h3>Mening sinflarim</h3>
+        <div class="class-buttons-container" id="class-list">
+            <!-- Dinamik tarzda to‘ldiriladi -->
+        </div>
+
+        <!-- O‘quvchilar ro‘yxati (jadval) -->
+        <div class="students-section hidden" id="students-section">
+            <div class="students-modal">
+                <h3 id="student-class-title"></h3>
+                <table class="students-table">
+                    <thead>
+                        <tr>
+                            <th>F.I.Sh</th>
+                            <th>Reyting</th>
+                            <th>Test natijalari</th>
+                        </tr>
+                    </thead>
+                    <tbody id="students-table-body">
+                        <!-- Dinamik tarzda to‘ldiriladi -->
+                    </tbody>
+                </table>
+                <button class="close-btn" onclick="closeStudentsSection()">Yopish</button>
+            </div>
+        </div>
+
+        <!-- O‘quvchining to‘liq ma’lumotlari (modal) -->
+        <div class="student-detail-section hidden" id="student-detail-section">
+            <div class="student-detail-modal">
+                <h3 id="student-detail-title"></h3>
+                <div class="student-detail-content" id="student-detail-content">
+                    <!-- Dinamik tarzda to‘ldiriladi -->
+                </div>
+                <button class="close-btn" onclick="closeStudentDetailSection()">Yopish</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/utils.js"></script>
+    <script src="js/classes.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O‘quvchilarning topshiriqlari</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h2>Teacher Dashboard</h2>
+        <button class="menu-toggle">☰</button>
+        <ul class="nav-menu">
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="classes.html">Mening sinflarim</a></li>
+            <li><a href="materials.html">Dars materiallari</a></li>
+            <li><a href="assignments.html">O‘quvchilarning topshiriqlari</a></li>
+            <li><a class="logout-btn" href="#" onclick="window.utils.logout()">Chiqish</a></li>
+        </ul>
+    </nav>
+
+    <!-- O‘quvchilarning topshiriqlari -->
+    <section class="material-management">
+        <h3>O‘quvchilarning topshiriqlari</h3>
+        <table id="assignment-table">
+            <thead>
+                <tr>
+                    <th>Sinf</th>
+                    <th>F.I.Sh</th>
+                    <th>Fan nomi</th>
+                    <th>Material nomi</th>
+                    <th>Baho</th>
+                    <th>Fayl</th>
+                    <th>Bajargan vaqti</th>
+                    <th>Vazifa muddati</th>
+                    <th>Baho berish</th>
+                    <th>Fayl yuklab olish</th>
+                </tr>
+            </thead>
+            <tbody id="assignment-table-body">
+                <!-- Dinamik tarzda to‘ldiriladi -->
+            </tbody>
+        </table>
+
+        <!-- Baho berish modal oynasi -->
+        <div id="grade-modal" class="mark-modal-form hidden">
+            <div class="mark-modal-form-content">
+                <span class="close-btn" onclick="hideGradeModal()">×</span>
+                <h4>Baho berish</h4>
+                <label for="gradeInput">Baho kiriting (1-5):</label>
+                <input type="number" id="gradeInput" min="1" max="5" step="1">
+                <button onclick="submitGrade()">Tasdiqlash</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/utils.js"></script>
+    <script src="js/assignments.js"></script>
+</body>
+</html>
