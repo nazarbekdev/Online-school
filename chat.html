@@ -7,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Etrain</title>
     <link rel="icon" href="img/favicon.png">
-        <!-- chat style CSS -->
-        <link rel="stylesheet" href="css/chat.css">    
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- animate CSS -->
@@ -25,7 +23,8 @@
     <link rel="stylesheet" href="css/slick.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="css/style.css">
-
+    <!-- chat style CSS -->
+    <link rel="stylesheet" href="css/chat.css">
     <!-- login button style CSS -->
     <link rel="stylesheet" href="css/login-button.css">
     <!-- find icon awesome -->
@@ -35,59 +34,64 @@
 </head>
 
 <body>
-    <!--::header part start::-->
-    <header class="main_menu home_menu">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-12">
-                    <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html"> <img src="img/logo.png" alt="logo"> </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+<!--::header part start::-->
+<header class="main_menu home_menu">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="index.html"> <img src="img/logo.png" alt="logo"> </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                        <div class="collapse navbar-collapse main-menu-item justify-content-end"
-                            id="navbarSupportedContent">
-                            <ul class="navbar-nav align-items-center">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="index.html">Bosh sahifa</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="cource.html">Kurslar</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="test-home.html">Testlar</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="blog.html">Yangiliklar</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Aloqa</a>
-                                </li>
-                                <!-- Dinamik element -->
-                                <div id="auth-section">
-                                    <button class="button_login" onclick="window.location.href='login.html'">
-                                        <i class="fa-solid fa-right-to-bracket"></i> Kirish
-                                    </button>
-                                </div>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
+                    <div class="collapse navbar-collapse main-menu-item justify-content-end"
+                         id="navbarSupportedContent">
+                        <ul class="navbar-nav align-items-center">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index.html">Bosh sahifa</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="cource.html">Kurslar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="test-home.html">Testlar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="blog.html">Yangiliklar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact.html">Aloqa</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="chat.html">Chat</a>
+                            </li>
+                            <!-- Dinamik element -->
+                            <div id="auth-section">
+                                <button class="button_login" onclick="window.location.href='login.html'">
+                                    <i class="fa-solid fa-right-to-bracket"></i> Kirish
+                                </button>
+                            </div>
+                        </ul>
+                    </div>
+                </nav>
             </div>
         </div>
-    </header>
-    <!-- Header part end-->
+    </div>
+</header>
+<!-- Header part end-->
     <br><br><br><br><br>
     <!-- Chat oynasi start -->
     <div class="chat-container">
         <div class="chat-header">
             <div class="chat-header-content">
-                <h2>Etrain Chatbot</h2>
+                <h2>Yordam xizmati</h2>
                 <span class="status-indicator"></span>
             </div>
+            <!-- Sana uchun element -->
+            <div><ul>Online</ul></div>
         </div>
         <div class="chat-body" id="chat-body">
             <!-- Chat tarixi bu yerda ko‘rsatiladi -->
@@ -96,7 +100,7 @@
             <input type="text" id="user-input" placeholder="Savolingizni kiriting...">
             <button id="send-btn">
                 <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
                 </svg>
             </button>
         </div>
@@ -172,6 +176,8 @@
 
     <!-- course js -->
     <script src="js/chat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
     <!-- jquery plugins here-->
     <!-- jquery -->
     <script src="js/jquery-1.12.1.min.js"></script>
