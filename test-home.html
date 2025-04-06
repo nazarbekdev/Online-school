@@ -5,8 +5,8 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Test Platformasi</title>
-  <link rel="icon" href="img/favicon.png">
+  <title>AIEdu</title>
+  <link rel="icon" href="img/favicon-aiedu.png">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <!-- animate CSS -->
@@ -36,179 +36,185 @@
 </head>
 
 <body>
-    <!--::header part start::-->
-    <header class="main_menu home_menu">
-      <div class="container">
-          <div class="row align-items-center">
-              <div class="col-lg-12">
-                  <nav class="navbar navbar-expand-lg navbar-light">
-                      <a class="navbar-brand" href="index.html"> <img src="img/logo.png" alt="logo"> </a>
-                      <button class="navbar-toggler" type="button" data-toggle="collapse"
-                          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                          aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="navbar-toggler-icon"></span>
-                      </button>
+<!--::header part start::-->
+<header class="main_menu home_menu">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="index.html"> <img src="img/logo-ai.png" alt="logo"> </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                      <div class="collapse navbar-collapse main-menu-item justify-content-end"
-                          id="navbarSupportedContent">
-                          <ul class="navbar-nav align-items-center">
-                              <li class="nav-item active">
-                                  <a class="nav-link" href="index.html">Bosh sahifa</a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="nav-link" href="cource.html">Kurslar</a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="nav-link" href="home.html">Testlar</a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="nav-link" href="blog.html">Yangiliklar</a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="nav-link" href="contact.html">Aloqa</a>
-                              </li>
-                              <button class="button_login" onclick="window.location.href='login.html'">
-                                  <i class="fa-solid fa-right-to-bracket"></i> Kirish
-                              </button>      
-                          </ul>
-                      </div>
-                  </nav>
-              </div>
-          </div>
-      </div>
-  </header>
-  <!-- Header part end-->
-
-  <!-- Birinchi sahifa (Test turlari) -->
-  <div class="main-page" id="main-page">
-    <h1>Test Yechish</h1>
-    <div class="options">
-      <div class="option" onclick="selectTest('Moc Test')">
-        <h2>Moc Test</h2>
-      </div>
-      <div class="option" onclick="selectTest('DTM Test')">
-        <h2>DTM Test</h2>
-      </div>
-      <div class="option" onclick="selectTest('Fanlar Test')">
-        <h2>Fanlar Test</h2>
-      </div>
+                    <div class="collapse navbar-collapse main-menu-item justify-content-end"
+                         id="navbarSupportedContent">
+                        <ul class="navbar-nav align-items-center">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index.html">Bosh sahifa</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="cource.html">Kurslar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="test-home.html">Testlar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="blog.html">Yangiliklar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact.html">Aloqa</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="chat.html">Chat</a>
+                            </li>
+                            <!-- Dinamik element -->
+                            <div id="auth-section">
+                                <button class="button_login" onclick="window.location.href='login.html'">
+                                    <i class="fa-solid fa-right-to-bracket"></i> Kirish
+                                </button>
+                            </div>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
     </div>
-  </div>
+</header>
+<!-- Header part end-->
+    <p><br></p>
+    <p><br></p>
+    <p><br></p>
+    <p><br></p>
+    <main>
+        <div class="container-test">
+            <h1 class="title-test">Test Yechish</h1>
+            <div class="test-form">
+                <!-- Test turi -->
+                <div class="form-group">
+                    <label for="test-type">Test turi</label>
+                    <div class="dropdown">
+                        <button class="dropdown-btn" id="test-type-btn">Test turini tanlang</button>
+                        <div class="dropdown-content" id="test-type-options">
+                            <div class="option" data-value="MOCK">MOCK</div>
+                            <div class="option" data-value="DTM">DTM</div>
+                            <div class="option" data-value="Fanga oid">Fanga oid</div>
+                        </div>
+                    </div>
+                </div>
 
-  <!-- Ikkinchi sahifa (Fanlar bo'yicha testlar) -->
-  <br><br><br><br><br>
-  <div id="second-page" style="display: none;">
-    <!-- Banner alohida chiqarildi -->
-    <div class="banner">
-      <h1 class="typing-text">Testlarni tanlang</h1>
+                <!-- Sinf (Fanga oid uchun) -->
+                <div class="form-group hidden" id="class-group">
+                    <label for="class-select">Sinf</label>
+                    <div class="dropdown">
+                        <button class="dropdown-btn" id="class-btn">Sinf tanlang</button>
+                        <div class="dropdown-content" id="class-options">
+                            <!-- Sinflar dinamik tarzda qo‘shiladi -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fan -->
+                <div class="form-group hidden" id="subject-group">
+                    <label for="subject-select">Fan</label>
+                    <div class="dropdown">
+                        <button class="dropdown-btn" id="subject-btn">Fan tanlang</button>
+                        <div class="dropdown-content" id="subject-options">
+                            <!-- Fanlar dinamik tarzda qo‘shiladi -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variant -->
+                <div class="form-group hidden" id="variant-group">
+                    <label for="variant-select">Variant</label>
+                    <div class="dropdown">
+                        <button class="dropdown-btn" id="variant-btn">Variant tanlang</button>
+                        <div class="dropdown-content" id="variant-options">
+                            <!-- Variantlar dinamik tarzda qo‘shiladi -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chorak (Fanga oid uchun) -->
+                <div class="form-group hidden" id="quarter-group">
+                    <label for="quarter-select">Chorak</label>
+                    <div class="dropdown">
+                        <button class="dropdown-btn" id="quarter-btn">Chorak tanlang</button>
+                        <div class="dropdown-content" id="quarter-options">
+                            <div class="option" data-value="I chorak">I chorak</div>
+                            <div class="option" data-value="II chorak">II chorak</div>
+                            <div class="option" data-value="III chorak">III chorak</div>
+                            <div class="option" data-value="IV chorak">IV chorak</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Boshlash tugmasi -->
+                <button class="start-btn hidden" id="start-btn" onclick="startTest()">Boshlash</button>
+            </div>
+        </div>
+    </main>
+
+<!-- footer part start-->
+<footer class="footer-area">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-sm-6 col-md-4 col-xl-3">
+                <div class="single-footer-widget footer_1">
+                    <a href="index.html"> <img src="img/logo-ai.png" alt="Ixtisoslashgan Maktab Logotipi"> </a>
+                    <p>Ixtisoslashgan maktab – zamonaviy ta’lim va sun’iy intellekt texnologiyalari asosida kelajak
+                        avlodni tayyorlaydi.</p>
+                    <p>Biz bilan birga o‘quvchilaringizning muvaffaqiyatli kelajagini quring!</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-xl-4">
+                <div class="single-footer-widget footer_2">
+                    <h4>Yangiliklarga Obuna Bo‘ling</h4>
+                    <p>Maktabimizdagi so‘nggi yangiliklar va tadbirlardan xabardor bo‘ling. Bizning jamoamizga qo‘shiling!</p>
+                    <div class="social_icon">
+                        <a href="#"> <i class="fab fa-facebook-f"></i> </a>
+                        <a href="#"> <i class="fab fa-twitter"></i> </a>
+                        <a href="#"> <i class="fab fa-instagram"></i> </a>
+                        <a href="#"> <i class="fab fa-telegram-plane"></i> </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-md-4">
+                <div class="single-footer-widget footer_2">
+                    <h4>Biz bilan Bog‘laning</h4>
+                    <div class="contact_info">
+                        <p><span> Manzil: </span> Toshkent viloyati, Chinoz tumani, Beshkapa MFY</p>
+                        <p><span> Telefon: </span> +998 97 195 31 31</p>
+                        <p><span> Email: </span> muhriddin.maktab@gmail.com </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Cardlar subjects ichiga joylandi -->
-    <div class="subjects">
-      <div class="card">
-        <img src="test/img/832__85_2300034836.jpg" alt="Matematika">
-        <h2>Matematika</h2>
-        <p>Matematikani sinab ko‘ring!</p>
-        <button onclick="showModal('Matematika')">Boshlash</button>
-      </div>
-      <div class="card">
-        <img src="test/img/9515a0d2f79705098d32c475702d3a99.jpg" alt="Fizika">
-        <h2>Fizika</h2>
-        <p>Fizikadan bilimlaringizni sinab ko‘ring!</p>
-        <button onclick="showModal('Fizika')">Boshlash</button>
-      </div>
-      <div class="card">
-        <img src="test/img/Unknown.jpeg" alt="Informatika">
-        <h2>Informatika</h2>
-        <p>Informatika fanidan testlar.</p>
-        <button onclick="showModal('Informatika')">Boshlash</button>
-      </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="copyright_part_text text-center">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p class="footer-text m-0">
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                © <script>document.write(new Date().getFullYear());</script>
+                                Barcha huquqlar himoyalangan | Shablon <a href="https://colorlib.com" target="_blank" class="colorlib-link">Colorlib</a>
+                                tomonidan <i class="ti-heart text-danger" aria-hidden="true"></i> bilan ishlab chiqilgan
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-
-
-  <!-- Modal -->
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <h2 id="modal-title"></h2>
-      <p>Test qoidalari va davomiyligi haqida ma'lumot:</p>
-      <ul>
-        <li>Test yechish uchun 1 soat vaqt beriladi.</li>
-        <li>To'g'ri javoblar uchun savol darajasiga qarab ball to'planadi.</li>
-        <li>Test yakunida natijalar ko'rsatiladi.</li>
-      </ul>     
-      <button class="button-start" onclick="window.location.href='test/test-solution.html'">Boshlash</button>
-      <button class="button-close" onclick="closeModal()">Yopish</button>
-    </div>
-  </div>
-
-    <!-- footer part start-->
-    <footer class="footer-area">
-      <div class="container">
-          <div class="row justify-content-between">
-              <div class="col-sm-6 col-md-4 col-xl-3">
-                  <div class="single-footer-widget footer_1">
-                      <a href="index.html"> <img src="img/logo.png" alt=""> </a>
-                      <p>But when shot real her. Chamber her one visite removal six
-                          sending himself boys scot exquisite existend an </p>
-                      <p>But when shot real her hamber her </p>
-                  </div>
-              </div>
-              <div class="col-sm-6 col-md-4 col-xl-4">
-                  <div class="single-footer-widget footer_2">
-                      <h4>Newsletter</h4>
-                      <p>Stay updated with our latest trends Seed heaven so said place winged over given forth fruit.
-                      </p>
-                      <form action="#">
-                          <div class="form-group">
-                              <div class="input-group mb-3">
-                                  <input type="text" class="form-control" placeholder='Enter email address'
-                                      onfocus="this.placeholder = ''"
-                                      onblur="this.placeholder = 'Enter email address'">
-                                  <div class="input-group-append">
-                                      <button class="btn btn_1" type="button"><i class="ti-angle-right"></i></button>
-                                  </div>
-                              </div>
-                          </div>
-                      </form>
-                      <div class="social_icon">
-                          <a href="#"> <i class="ti-facebook"></i> </a>
-                          <a href="#"> <i class="ti-twitter-alt"></i> </a>
-                          <a href="#"> <i class="ti-instagram"></i> </a>
-                          <a href="#"> <i class="ti-skype"></i> </a>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-xl-3 col-sm-6 col-md-4">
-                  <div class="single-footer-widget footer_2">
-                      <h4>Contact us</h4>
-                      <div class="contact_info">
-                          <p><span> Address :</span> Hath of it fly signs bear be one blessed after </p>
-                          <p><span> Phone :</span> +2 36 265 (8060)</p>
-                          <p><span> Email : </span>info@colorlib.com </p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-
-      </div>
-      <div class="container-fluid">
-          <div class="row">
-              <div class="col-lg-12">
-                  <div class="copyright_part_text text-center">
-                      <div class="row">
-                          <div class="col-lg-12">
-                              <p class="footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </footer>
-  <!-- footer part end-->
+</footer>
+<!-- footer part end-->
    
   <!-- jquery plugins here-->
   <!-- jquery -->
@@ -232,6 +238,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   <script src="js/waypoints.min.js"></script>
   <!-- custom js -->
   <script src="js/custom.js"></script>
+  <script src="js/check-login.js"></script>
 
   <script src="test/main-script.js"></script>
   <script src="test/home-script.js"></script>
