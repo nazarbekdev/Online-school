@@ -1,122 +1,152 @@
 <!DOCTYPE html>
-<!-- Coding by CodingLab | www.codinglabweb.com-->
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Login and Signup Form </title>
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/login-style.css">
-  <!-- Boxicons CSS -->
-  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login va Ro'yxatdan O'tish</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/login-style.css">
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-  <section class="container forms">
+<section class="container forms">
+    <!-- Login Form -->
     <div class="form login">
-      <div class="form-content">
-        <header>Kirish</header>
-        <form action="#">
-          <div class="field input-field">
-            <input type="text" placeholder="Telefon raqam yoki Email" class="input">
-          </div>
-          <div class="field input-field">
-            <input type="password" placeholder="Parol" class="password">
-            <i class='bx bx-hide eye-icon'></i>
-          </div>
-          <div class="form-link">
-            <a href="#" class="forgot-pass">Parolni unutdingizmi?</a>
-          </div>
-          <div class="field button-field">
-            <button>Kirish</button>
-          </div>
-        </form>
-        <div class="form-link">
-          <span><a href="#" class="link signup-link">Ro'yxatdan o'tish</a></span>
+        <div class="form-content">
+            <header>Kirish</header>
+            <form id="login-form">
+                <div class="field input-field">
+                    <input type="text" id="login-username" placeholder="Telefon raqam yoki Email" class="input" required>
+                </div>
+                <div class="field input-field">
+                    <input type="password" id="login-password" placeholder="Parol" class="password" required>
+                    <i class='bx bx-hide eye-icon'></i>
+                </div>
+                <div class="form-link">
+                    <a href="#" class="forgot-pass">Parolni unutdingizmi?</a>
+                </div>
+                <div class="field button-field">
+                    <button type="submit">Kirish</button>
+                </div>
+            </form>
+            <div class="form-link">
+                <span>Hisobingiz yo‘qmi? <a href="#" class="link signup-link">Ro'yxatdan o'tish</a></span>
+            </div>
         </div>
-      </div>
     </div>
-<!-- Signup Form -->
-<div class="form signup">
-  <div class="form-content">
-    <header>Ro'yxatdan O'tish</header>
-    <form action="#">
-      <!-- Role tanlash -->
-      <div class="field input-field">
-        <label>Rolingiz:</label>
-        <select id="role" name="role" required>
-          <option value="talaba">Talaba</option>
-          <option value="oqituvchi">O‘qituvchi</option>
-        </select>
-      </div>
 
-      <!-- Umumiy maydonlar -->
-      <div class="field input-field">
-        <input type="text" placeholder="Ism" required>
-      </div>
-      <div class="field input-field">
-        <input type="text" placeholder="Familiya" required>
-      </div>
-      <div class="field input-field">
-        <input type="tel" placeholder="Telefon raqam" required>
-      </div>
-      <div class="field input-field">
-        <input type="password" placeholder="Parol" required>
-        <i class='bx bx-hide eye-icon'></i>
-      </div>
-
-      <!-- Faqat talaba uchun -->
-      <div id="talaba-fields">
-        <div class="field input-field">
-          <select required>
-            <option value="">Viloyatni tanlang</option>
-            <option value="toshkent">Toshkent</option>
-            <option value="samarqand">Samarqand</option>
-            <!-- Boshqa viloyatlar qo‘shish mumkin -->
-          </select>
+    <!-- Password Reset Form -->
+    <div class="form password-reset">
+        <div class="form-content">
+            <header>Parolni Tiklash</header>
+            <form id="password-reset-form">
+                <div class="field input-field">
+                    <input type="tel" id="reset-phone-number" placeholder="Telefon raqam (+998901234567)" required>
+                </div>
+                <div class="field button-field">
+                    <button type="submit">Keyingi</button>
+                </div>
+            </form>
+            <div id="telegram-step" style="display: none;">
+                <p>Telegram bot orqali parolni tiklash uchun quyidagi linkka o‘ting:</p>
+                <a id="telegram-link" href="#" target="_blank">Telegram Botga O‘tish</a>
+                <p>Botda jarayonni davom ettiring.</p>
+                <div class="form-link">
+                    <a href="#" class="back-to-login">Orqaga qaytish</a>
+                </div>
+            </div>
         </div>
-        <div class="field input-field">
-          <input type="text" placeholder="Maktab" required>
-        </div>
-        <div class="field input-field">
-          <select required>
-            <option value="">Sinfni tanlang</option>
-            <option value="9">9-sinf</option>
-            <option value="10">10-sinf</option>
-            <option value="11">11-sinf</option>
-          </select>
-        </div>
-        <div class="field input-field gender-field">
-          <label>Jins:</label>
-          <div class="gender-options">
-            <label><input type="radio" name="gender" value="erkak" required> Erkak</label>
-            <label><input type="radio" name="gender" value="ayol" required> Ayol</label>
-          </div>
-        </div>
-      </div>
-
-      <!-- Faqat o‘qituvchi uchun -->
-      <div id="oqituvchi-fields">
-        <div class="field input-field">
-          <input type="text" placeholder="Fan yo‘nalishi (masalan: Matematika)" required>
-        </div>
-      </div>
-
-      <!-- Ro‘yxatdan o‘tish tugmasi -->
-      <div class="field button-field">
-        <button class="button" onclick="window.location.href='index.html'"> Ro'yxatdan o'tish</button>
-      </div>
-    </form>
-
-    <div class="form-link">
-      <span><a href="#" class="link login-link">Tizimga kirish</a></span>
     </div>
-  </div>
-</div>
 
+    <!-- Signup Form -->
+    <div class="form signup">
+        <div class="form-content">
+            <header>Ro'yxatdan O'tish</header>
+            <form id="register-form">
+                <!-- Role tanlash -->
+                <div class="field input-field">
+                    <label>Rolingiz:</label>
+                    <select id="role" name="role" required>
+                        <option value="student">Talaba</option>
+                        <option value="teacher">O‘qituvchi</option>
+                    </select>
+                </div>
+
+                <!-- Umumiy maydonlar -->
+                <div class="field input-field">
+                    <input type="text" id="first_name" placeholder="Ism" required>
+                </div>
+                <div class="field input-field">
+                    <input type="text" id="last_name" placeholder="Familiya" required>
+                </div>
+                <div class="field input-field">
+                    <input type="tel" id="phone_number" placeholder="Telefon raqam" required>
+                </div>
+                <div class="field input-field">
+                    <input type="password" id="password" placeholder="Parol" class="password" required>
+                    <i class='bx bx-hide eye-icon'></i>
+                </div>
+
+                <!-- Faqat talaba uchun -->
+                <div id="talaba-fields">
+                    <div class="field input-field">
+                        <select id="region" required>
+                            <option value="">Viloyatni tanlang</option>
+                            <option value="toshkent">Toshkent</option>
+                            <option value="samarqand">Samarqand</option>
+                            <option value="buxoro">Buxoro</option>
+                            <option value="andijon">Andijon</option>
+                            <!-- Boshqa viloyatlar qo‘shish mumkin -->
+                        </select>
+                    </div>
+                    <div class="field input-field">
+                        <input type="text" id="school" placeholder="Maktab" required>
+                    </div>
+                    <div class="field input-field">
+                        <select id="class_id" required>
+                            <option value="">Sinf tanlang...</option>
+                            <!-- Sinflar API’dan yuklanadi -->
+                        </select>
+                    </div>
+                    <div class="field input-field gender-field">
+                        <label>Jins:</label>
+                        <div class="gender-options">
+                            <label><input type="radio" name="gender" value="Erkak" required> Erkak</label>
+                            <label><input type="radio" name="gender" value="Ayol" required> Ayol</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Faqat o‘qituvchi uchun -->
+                <div id="oqituvchi-fields">
+                    <div class="field input-field">
+                        <select id="subject">
+                            <option value="">Fan yo‘nalishini tanlang</option>
+                            <option value="matematika">Matematika</option>
+                            <option value="fizika">Fizika</option>
+                            <option value="ona_tili">Ona tili</option>
+                            <option value="ingliz_tili">Ingliz tili</option>
+                            <!-- Boshqa fanlar qo‘shish mumkin -->
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Ro‘yxatdan o‘tish tugmasi -->
+                <div class="field button-field">
+                    <button type="submit">Ro'yxatdan o'tish</button>
+                </div>
+            </form>
+
+            <div class="form-link">
+                <span>Hisobingiz bormi? <a href="#" class="link login-link">Tizimga kirish</a></span>
+            </div>
+        </div>
     </div>
-  </section>
-  <!-- JavaScript -->
-  <script src="js/login.js"></script>
+</section>
+
+<!-- JavaScript -->
+<script src="js/login.js"></script>
 </body>
 </html>
