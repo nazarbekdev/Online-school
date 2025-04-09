@@ -82,7 +82,7 @@
                     <input type="text" id="last_name" placeholder="Familiya" required>
                 </div>
                 <div class="field input-field">
-                    <input type="tel" id="phone_number" placeholder="Telefon raqam" required>
+                    <input type="tel" id="phone_number" placeholder="Telefon raqam +998901234567" required>
                 </div>
                 <div class="field input-field">
                     <input type="password" id="password" placeholder="Parol" class="password" required>
@@ -92,20 +92,30 @@
                 <!-- Faqat talaba uchun -->
                 <div id="talaba-fields">
                     <div class="field input-field">
-                        <select id="region" required>
+                        <select id="region">
                             <option value="">Viloyatni tanlang</option>
-                            <option value="toshkent">Toshkent</option>
-                            <option value="samarqand">Samarqand</option>
-                            <option value="buxoro">Buxoro</option>
-                            <option value="andijon">Andijon</option>
+                            <option value="Toshkent shahri">Toshkent shahri</option>
+                            <option value="Toshkent viloyati">Toshkent viloyati</option>
+                            <option value="Andijon">Andijon</option>
+                            <option value="Buxoro">Buxoro</option>
+                            <option value="Farg‘ona">Farg‘ona</option>
+                            <option value="Jizzax">Jizzax</option>
+                            <option value="Qashqadaryo">Qashqadaryo</option>
+                            <option value="Navoiy">Navoiy</option>
+                            <option value="Namangan">Namangan</option>
+                            <option value="Samarqand">Samarqand</option>
+                            <option value="Sirdaryo">Sirdaryo</option>
+                            <option value="Surxondaryo">Surxondaryo</option>
+                            <option value="Xorazm">Xorazm</option>
+                            <option value="Qoraqalpog‘iston Respublikasi">Qoraqalpog‘iston Respublikasi</option>
                             <!-- Boshqa viloyatlar qo‘shish mumkin -->
                         </select>
                     </div>
                     <div class="field input-field">
-                        <input type="text" id="school" placeholder="Maktab" required>
+                        <input type="text" id="school" placeholder="Maktab">
                     </div>
                     <div class="field input-field">
-                        <select id="class_id" required>
+                        <select id="class_id">
                             <option value="">Sinf tanlang...</option>
                             <!-- Sinflar API’dan yuklanadi -->
                         </select>
@@ -113,8 +123,8 @@
                     <div class="field input-field gender-field">
                         <label>Jins:</label>
                         <div class="gender-options">
-                            <label><input type="radio" name="gender" value="Erkak" required> Erkak</label>
-                            <label><input type="radio" name="gender" value="Ayol" required> Ayol</label>
+                            <label><input type="radio" name="gender" value="Erkak"> Erkak</label>
+                            <label><input type="radio" name="gender" value="Ayol"> Ayol</label>
                         </div>
                     </div>
                 </div>
@@ -124,11 +134,7 @@
                     <div class="field input-field">
                         <select id="subject">
                             <option value="">Fan yo‘nalishini tanlang</option>
-                            <option value="matematika">Matematika</option>
-                            <option value="fizika">Fizika</option>
-                            <option value="ona_tili">Ona tili</option>
-                            <option value="ingliz_tili">Ingliz tili</option>
-                            <!-- Boshqa fanlar qo‘shish mumkin -->
+                            <!-- Fanlar API’dan yuklanadi -->
                         </select>
                     </div>
                 </div>
