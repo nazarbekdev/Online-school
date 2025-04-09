@@ -3,65 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Savollari</title>
+    <title>Test Yechish</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Chap tomon: Savollar -->
-        <div class="questions">
-            <h2>Savollar</h2>
-            <div id="question-area">
-                <!-- Savol va javoblar bu yerda dinamik ravishda chiqariladi -->
-            </div>
-            <!-- Oldingisi va Keyingisi tugmalari -->
-            <div class="navigation-buttons">
-                <button id="prev-button" class="nav-btn">Oldingisi</button>
-                <button id="next-button" class="nav-btn">Keyingisi</button>
-            </div>
-        </div>
-    
-        <!-- O'ng tomon: Navigatsiya -->
-        <div class="navigation">
-            <h2>Javoblarni belgilash</h2>
-            <div id="navigation-panel"></div><br>
-            <!-- Tugatish tugmasi -->
-            <button id="finish-button" class="finish-btn">Testni tugatish</button>
-        </div>
-    </div>
-
-    <!-- Modal Oyna -->
-    <div id="result-modal" class="modal hidden">
-        <div class="modal-content">
-            <!-- Yopish tugmasi -->
-            <span class="close-btn">&times;</span>
-            
-            <!-- Doiraviy diagramma -->
-            <div class="circle-diagram">
-                <svg width="160" height="160" viewBox="0 0 160 160">
-                    <circle class="circle-bg" cx="80" cy="80" r="70" />
-                    <circle class="circle-progress" cx="80" cy="80" r="70" />
-                </svg>
-                <div class="diagram-text">
-                    <span id="score">17/30</span>
-                    <span id="percentage">57%</span>
+    <main>
+        <div class="container">
+            <!-- Chap tomon: Savollar -->
+            <div class="questions">
+                <h2>Savollar</h2>
+                <!-- Taymer -->
+                <div class="timer">
+                    <span id="timer">60:00</span>
+                </div>
+                <div id="question-area">
+                    <!-- Savol va javoblar bu yerda dinamik ravishda chiqariladi -->
+                </div>
+                <!-- Oldingisi va Keyingisi tugmalari -->
+                <div class="navigation-buttons">
+                    <button id="prev-button" class="nav-btn">Oldingisi</button>
+                    <button id="next-button" class="nav-btn">Keyingisi</button>
                 </div>
             </div>
-            
-            <!-- Umumiy ball -->
-            <div class="total-score" id="total-score"></div>
 
-            <!-- result-modal ichida, modal-content ichiga qo'shish -->
-            <div id="results-table" class="results-table"></div>
-            
-            <!-- Tugmalar -->
-            <div class="modal-buttons">
-                <button id="restart-button" class="modal-btn">Qayta boshlash</button>
-                <button id="home-button" class="modal-btn">Bosh sahifa</button>
+            <!-- O'ng tomon: Navigatsiya -->
+            <div class="navigation">
+                <h2>Javoblarni belgilash</h2>
+                <div id="navigation-panel"></div><br>
+                <!-- Tugatish tugmasi -->
+                <button id="finish-button" class="finish-btn">Testni tugatish</button>
             </div>
         </div>
-    </div>
 
+        <!-- Modal Oyna -->
+        <div id="result-modal" class="modal hidden">
+            <div class="modal-content">
+                <!-- Yopish tugmasi -->
+                <span class="close-btn">×</span>
+
+                <!-- Doiraviy diagramma -->
+                <div class="circle-diagram">
+                    <svg width="160" height="160" viewBox="0 0 160 160">
+                        <circle class="circle-bg" cx="80" cy="80" r="70"></circle>
+                        <circle class="circle-progress" cx="80" cy="80" r="70"></circle>
+                    </svg>
+                    <div class="diagram-text">
+                        <span id="score">0/0</span>
+                        <span id="percentage">0%</span>
+                    </div>
+                </div>
+
+                <!-- Umumiy ball -->
+                <div class="total-score" id="total-score"></div>
+
+                <!-- Natijalar jadvali -->
+                <div id="results-table" class="results-table"></div>
+
+                <!-- Tugmalar -->
+                <div class="modal-buttons">
+                    <button id="feedback-button" class="modal-btn">Feedbackni ko‘rish</button>
+                    <button id="home-button" class="modal-btn">Bosh sahifa</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            chtml: {
+                scale: 1.0
+            }
+        };
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

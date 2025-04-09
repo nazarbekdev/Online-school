@@ -1,30 +1,25 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
+/* Main */
+main {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    background-color: #f4f4f9;
-    padding: 20px;
+    min-height: calc(100vh - 200px);
+    padding: 50px 20px;
 }
 
 .container {
     display: flex;
     width: 100%;
     max-width: 1200px;
+    gap: 20px;
 }
 
 .questions {
     flex: 2;
     background-color: #fff;
     padding: 20px;
-    margin-right: 20px;
     border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .navigation {
@@ -32,12 +27,13 @@ body {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .questions h2, .navigation h2 {
     margin-bottom: 20px;
     font-size: 1.5em;
-    color: #333;
+    color: #1e3c72;
 }
 
 #question-area {
@@ -53,12 +49,86 @@ body {
     background-color: #f9f9f9;
 }
 
-.question img {
-    width: 300px; /* Rasm eni */
-    height: 200px; /* Rasm balandligi */
-    object-fit: cover; /* Rasmni to'g'ri proportsiyada chiqarish */
-    border-radius: 8px; /* Rasm chegarasini yumshoq qilish */
-    margin-bottom: 10px; /* Rasm va matn orasidagi masofa */
+.question h3 {
+    font-size: 1.3rem;
+    color: #1e3c72;
+    margin-bottom: 15px;
+}
+
+/* Dastlabki rasm o‘lchamlari */
+.image-container {
+    cursor: pointer;
+    text-align: center; /* Rasmni markazga joylashtirish */
+}
+
+.zoomable-image {
+    max-width: 300px; /* Dastlabki kenglik */
+    max-height: 200px; /* Dastlabki balandlik */
+    width: auto;
+    height: auto;
+    object-fit: contain; /* Rasm kesilmaydi */
+    border-radius: 8px;
+    margin: 10px 0;
+    display: block;
+    transition: transform 0.2s ease; /* Zoom effekt uchun animatsiya */
+}
+
+.zoomable-image:hover {
+    transform: scale(1.05); /* Hover’da biroz kattalashadi */
+}
+
+/* Rasm Zoom Modali */
+.image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: auto; /* Katta rasmlar uchun scroll */
+}
+
+/* Rasm Zoom Modal ichidagi rasm konteyneri */
+.image-modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90vh;
+    text-align: center;
+}
+
+.image-modal-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain; /* To‘liq rasm ko‘rinadi */
+    border-radius: 8px;
+}
+
+/* Rasm Zoom Modal yopish tugmasi */
+.image-modal-close {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.2s ease;
+}
+
+.image-modal-close:hover {
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .options {
@@ -87,33 +157,32 @@ body {
 /* Navigatsiya paneli */
 #navigation-panel {
     display: grid;
-    grid-template-columns: repeat(12, 1fr); /* Katta ekranlar uchun */
-    gap: 3px; /* Elementlar orasidagi masofa */
+    grid-template-columns: repeat(12, 1fr);
+    gap: 3px;
 }
 
-/* Tartib raqamlari */
 #navigation-panel div {
-    width: 30px; /* Raqam eni */
-    height: 30px; /* Raqam balandligi */
+    width: 30px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #e0e0e0;
-    border-radius: 30%; /* Yumaloq shakl */
+    border-radius: 30%;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    font-size: 0.6em; 
+    font-size: 0.6em;
 }
 
-/* Javob berilgan savollar uchun rang */
 #navigation-panel div.answered {
     background-color: #28a745;
     color: white;
 }
+
 .finish-btn {
     width: 100%;
     padding: 10px;
-    background-color: #dc3545; /* Qizil rang */
+    background-color: #dc3545;
     color: white;
     border: none;
     border-radius: 8px;
@@ -123,7 +192,7 @@ body {
 }
 
 .finish-btn:hover {
-    background-color: #c82333; /* Yorqinroq qizil */
+    background-color: #c82333;
 }
 
 .navigation-buttons {
@@ -141,136 +210,37 @@ body {
     transition: background-color 0.3s ease;
 }
 
+.nav-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
 #prev-button {
-    background-color: #6c757d; /* Kulrang rang */
+    background-color: #6c757d;
     color: white;
 }
 
-#prev-button:hover {
-    background-color: #5a6268; /* Yorqinroq kulrang */
+#prev-button:hover:not(:disabled) {
+    background-color: #5a6268;
 }
 
 #next-button {
-    background-color: #007bff; /* Ko'k rang */
+    background-color: #007bff;
     color: white;
 }
 
-#next-button:hover {
-    background-color: #0056b3; /* Yorqinroq ko'k */
+#next-button:hover:not(:disabled) {
+    background-color: #0056b3;
 }
 
-/* Responsive disign  */
-
-/* Umumiy konteyner */
-.container {
-    display: flex;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto; /* Markazga joylash */
-    gap: 20px; /* Elementlar orasidagi masofa */
-}
-
-/* Kichik ekranlar uchun (masalan, mobil) */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column; /* Elementlarni ustun ko'rinishida joylash */
-    }
-
-    .questions {
-        margin-right: 0; /* Chap tomonni tozalash */
-        margin-bottom: 20px; /* Pastki masofa */
-    }
-
-    .navigation {
-        flex: none; /* O'ng tomonni uzunligini avtomatik qilish */
-    }
-}
-
-/* O'rta ekranlar uchun (masalan, planshet) */
-@media (max-width: 768px) {
-    #navigation-panel {
-        grid-template-columns: repeat(8, 1fr); /* Har bir qatorda 8 ta raqam */
-        gap: 2px; /* Masofani yanada kamaytirish */
-    }
-
-    #navigation-panel div {
-        width: 30px; /* Raqam enini kamaytirish */
-        height: 30px; /* Raqam balandligini kamaytirish */
-        font-size: 0.7em; /* Matn o'lchamini kamaytirish */
-    }
-}
-
-/* Kichik ekranlar uchun (masalan, mobil) */
-@media (max-width: 480px) {
-    #navigation-panel {
-        grid-template-columns: repeat(6, 1fr); /* Har bir qatorda 6 ta raqam */
-        gap: 1px; /* Masofani eng kam miqdorga kamaytirish */
-    }
-
-    #navigation-panel div {
-        width: 25px; /* Raqam enini yanada kamaytirish */
-        height: 25px; /* Raqam balandligini yanada kamaytirish */
-        font-size: 0.6em; /* Matn o'lchamini yanada kamaytirish */
-    }
-}
-
-/* O'rta ekranlar uchun (masalan, planshet) */
-@media (max-width: 768px) {
-    .question img {
-        max-height: 200px; /* Balandlikni kamaytirish */
-    }
-}
-
-/* Kichik ekranlar uchun (masalan, mobil) */
-@media (max-width: 480px) {
-    .question img {
-        max-height: 150px; /* Balandlikni yanada kamaytirish */
-    }
-}
-
-/* Tugmalar */
-.nav-btn, .finish-btn {
-    font-size: 0.9em; /* Font o'lchamini kamaytirish */
-    padding: 8px 16px; /* Paddingni kamaytirish */
-}
-
-/* Juda kichik ekranlar uchun */
-@media (max-width: 480px) {
-    .nav-btn, .finish-btn {
-        font-size: 0.8em; /* Yana kamaytirish */
-        padding: 6px 12px;
-    }
-
-    h2 {
-        font-size: 1.2em; /* Sarlavha o'lchamini kamaytirish */
-    }
-}
-
-.navigation-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-
-/* Kichik ekranlar uchun */
-@media (max-width: 480px) {
-    .navigation-buttons {
-        flex-direction: column; /* Tugmalarni ustun ko'rinishida joylash */
-        gap: 10px; /* Tugmalar orasidagi masofa */
-    }
-}
-
-
-/* --------------------------------------------------- */
-
-/* Modal oyna */
+/* Natijalar Modal Oynasi */
 .modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Shaffof fon */
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -278,21 +248,22 @@ body {
 }
 
 .modal.hidden {
-    display: none; /* Modalni yashirish */
+    display: none;
 }
 
-.modal-content {
+.result-modal-content {
     background-color: #fff;
     padding: 30px;
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     position: relative;
-    max-width: 400px;
+    max-width: 600px;
     width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
-/* Yopish tugmasi */
 .close-btn {
     position: absolute;
     top: 10px;
@@ -307,7 +278,6 @@ body {
     color: #333;
 }
 
-/* Doiraviy diagramma */
 .circle-diagram {
     position: relative;
     width: 160px;
@@ -324,16 +294,13 @@ body {
     fill: none;
     stroke: #e0e0e0;
     stroke-width: 10;
-    cx: 80;
-    cy: 80;
-    r: 70;
 }
 
 .circle-progress {
     fill: none;
-    stroke: #28a745; /* Progress rangi */
+    stroke: #28a745;
     stroke-width: 10;
-    stroke-dasharray: 440; /* Aylana uzunligi */
+    stroke-dasharray: 440;
     stroke-dashoffset: 0;
     transition: stroke-dashoffset 0.5s ease;
 }
@@ -354,7 +321,57 @@ body {
     color: #6c757d;
 }
 
-/* Tugmalar */
+.total-score {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Natijalar Jadvali */
+.results-table {
+    margin: 20px 0;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: auto;
+    background-color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.results-table table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    background-color: #fff;
+    table-layout: auto; /* Jadval kengligini moslashtirish uchun */
+    overflow-x: auto;
+}
+
+.results-table th, .results-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    font-size: 14px; /* Matn o‘lchamini kichik ekranlar uchun moslashtirish */
+    white-space: normal; /* Matnni o‘rashga ruxsat berish */
+    word-wrap: break-word; /* Uzun so‘zlarni o‘rash */
+}
+
+.results-table th {
+    background-color: #007bff;
+    color: white;
+    position: sticky; /* Sarlavhalarni joyida ushlab turish */
+    top: 0;
+    z-index: 10;
+}
+
+.results-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.results-table tr:nth-child(odd) {
+    background-color: #fff;
+}
+
 .modal-buttons {
     display: flex;
     gap: 10px;
@@ -389,29 +406,364 @@ body {
     background-color: #5a6268;
 }
 
+/* Responsive dizayn */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
 
-/* styles.css */
-.results-table {
-    margin: 20px 0;
-    overflow-x: auto;
+    .questions {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .navigation {
+        flex: none;
+    }
+
+    #navigation-panel {
+        grid-template-columns: repeat(8, 1fr);
+        gap: 2px;
+    }
+
+    #navigation-panel div {
+        width: 30px;
+        height: 30px;
+        font-size: 0.7em;
+    }
+
+    .zoomable-image {
+        max-width: 100%;
+        max-height: 150px;
+    }
+
+    .image-modal-content {
+        max-width: 95%;
+        max-height: 85vh;
+    }
+
+    .image-modal-content img {
+        max-height: 85vh;
+    }
+
+    .image-modal-close {
+        top: -15px;
+        right: -15px;
+        font-size: 24px;
+        width: 30px;
+        height: 30px;
+    }
 }
 
-.results-table table {
+@media (max-width: 480px) {
+    #navigation-panel {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1px;
+    }
+
+    #navigation-panel div {
+        width: 25px;
+        height: 25px;
+        font-size: 0.6em;
+    }
+
+    .nav-btn, .finish-btn {
+        font-size: 0.8em;
+        padding: 6px 12px;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    .navigation-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .zoomable-image {
+        max-height: 120px;
+    }
+
+    .image-modal-content {
+        max-width: 98%;
+        max-height: 80vh;
+    }
+
+    .image-modal-content img {
+        max-height: 80vh;
+    }
+}
+
+/* Ochiq savollar uchun input maydoni */
+.open-answer {
+    margin-top: 10px;
+}
+
+.open-answer-input {
     width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.open-answer-input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Jadval uchun umumiy style */
+.summary-table {
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto; /* Gorizontal scrollni faollashtirish */
+    display: block; /* Jadvalni blok sifatida ko‘rsatish */
+}
+
+.summary-table table {
+    width: 100%;
+    min-width: 600px; /* Minimal kenglikni saqlash */
     border-collapse: collapse;
     text-align: center;
 }
 
-.results-table th, .results-table td {
+.summary-table th, .summary-table td {
     padding: 10px;
     border: 1px solid #ddd;
+    font-size: 14px;
+    white-space: normal;
+    word-wrap: break-word;
 }
 
-.results-table th {
-    background-color: #007bff;
+.summary-table th {
+    background-color: #1e3c72;
     color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-.results-table tr:nth-child(even) {
+.summary-table tr:nth-child(even) {
     background-color: #f9f9f9;
+}
+
+/* Responsivlik uchun Media Query’lar */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        overflow-x: auto; /* Gorizontal scrollni faollashtirish */
+    }
+
+    .questions {
+        margin-right: 0;
+        margin-bottom: 20px;
+        overflow-x: auto; /* Gorizontal scrollni faollashtirish */
+    }
+
+    .results-table, .summary-table {
+        max-height: 250px;
+        overflow-x: auto;
+    }
+
+    .results-table th, .results-table td,
+    .summary-table th, .summary-table td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .results-table table, .summary-table table {
+        min-width: 500px; /* Kichik ekranlarda minimal kenglik */
+    }
+}
+
+@media (max-width: 480px) {
+    .results-table, .summary-table {
+        max-height: 200px;
+        overflow-x: auto;
+    }
+
+    .results-table th, .results-table td,
+    .summary-table th, .summary-table td {
+        font-size: 10px;
+        padding: 6px;
+    }
+
+    .results-table table, .summary-table table {
+        min-width: 400px; /* Juda kichik ekranlarda minimal kenglik */
+    }
+}
+
+@media (max-width: 375px) {
+    .results-table, .summary-table {
+        max-height: 150px; /* Juda kichik ekranlarda balandlikni yanada kamaytirish */
+        overflow-x: auto;
+    }
+
+    .results-table th, .results-table td,
+    .summary-table th, .summary-table td {
+        font-size: 8px; /* Matn o‘lchamini yanada kichraytirish */
+        padding: 4px; /* Padding’ni yanada kamaytirish */
+    }
+
+    .results-table table, .summary-table table {
+        min-width: 375px; /* 300px dan kichik ekranlarda minimal kenglik */
+    }
+}
+
+/* Taymer */
+.timer {
+    margin: 10px 0;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #dc3545;
+    text-align: center;
+}
+
+/* Kutish Animatsiyasi */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Feedback Modal Stillari */
+.feedback-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+}
+
+.feedback-modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.feedback-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.feedback-close-btn:hover {
+    color: #ff0000;
+}
+
+.feedback-list {
+    margin-top: 20px;
+}
+
+.feedback-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+/* Markdown Elementlari uchun Stillar */
+.feedback-item h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.feedback-item p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 5px 0;
+}
+
+.feedback-item strong {
+    color: #000;
+    font-weight: 600;
+}
+
+.feedback-item ul,
+.feedback-item ol {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.feedback-item li {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 5px;
+}
+
+.feedback-item li strong {
+    color: #007bff;
+}
+
+/* Kod bloklari uchun stillar */
+.feedback-item pre,
+.feedback-item code {
+    background: #f4f4f4;
+    border-radius: 4px;
+    padding: 2px 5px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #d63384;
+}
+
+.feedback-item pre {
+    padding: 10px;
+    overflow-x: auto;
+}
+
+/* Alohida elementlar uchun stillar */
+.feedback-item hr {
+    border: 0;
+    border-top: 1px solid #e0e0e0;
+    margin: 10px 0;
+}
+
+.feedback-item a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.feedback-item a:hover {
+    text-decoration: underline;
 }
