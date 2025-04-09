@@ -1,86 +1,167 @@
-// Ma'lumotlar bazasi (JSON formatida)
-const data = {
-    math: {
-        5: [
-            { title: "Natural sonlar", video: "https://www.youtube.com/embed/abc123", description: "Natural sonlar haqida tushuncha.", quiz: ["Savol 1?", "Savol 2?"] },
-            { title: "Kasrlar", video: "https://www.youtube.com/embed/def456", description: "Kasrlar haqida tushuncha.", quiz: ["Savol 1?", "Savol 2?"] }
-        ],
-        6: [
-            {
-                title: "Algebra asoslari",
-                video: "https://www.youtube.com/embed/ghi789",
-                description: "Algebra matematikaning muhim tarmoqlaridan biri bo'lib, u sonlar va ular ustida bajariladigan amallarni o'rganadi. Algebraik ifodalar, tenglamalar, funksiyalar va grafiklar algebra kursining asosiy tushunchalarini tashkil etadi. Algebra yordamida biz noma'lum miqdorlarni topish, murakkab masalalarni yechish va real hayotdagi muammolarni matematik usullar bilan modellashtirish imkonini olamiz. Algebraik tenglamalar orqali fizika, iqtisodiyot va boshqa sohalardagi muammolarni ham yechish mumkin. Shuningdek, algebra dasturlash va kompyuter fanlarida ham keng qo'llaniladi.",
-                quiz: ["Savol 1?", "Savol 2?"]
-            }        ]
-    },
-    physics: {
-        7: [
-            { title: "Mexanika", video: "https://www.youtube.com/embed/jkl012", description: "Mexanika haqida tushuncha.", quiz: ["Savol 1?", "Savol 2?"] }
-        ]
-    }
-};
-
 // DOM elementlari
-const subjectButtons = document.querySelectorAll('.subject-btn');
-const gradeButtons = document.querySelectorAll('.grade-btn');
+const subjectButtonsContainer = document.querySelector('.subjects .buttons-row');
+const gradeButtonsContainer = document.querySelector('.grades .buttons-row');
 const topicsList = document.getElementById('topics');
 const topicTitle = document.getElementById('topic-title');
 const videoContainer = document.getElementById('video-container');
 const description = document.getElementById('description');
-const quizButton = document.getElementById('quiz-button');
+const actionButtons = document.querySelector('.action-buttons');
 
-let selectedSubject = null;
-let selectedGrade = null;
+let selectedSubjectId = null;
+let selectedGradeId = null;
 
-// Fan tanlash
-subjectButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        // Oldingi tanlangan fanni yoqish
-        subjectButtons.forEach(btn => btn.classList.remove('selected'));
-        button.classList.add('selected');
-        selectedSubject = button.dataset.subject;
-        updateTopics();
-    });
-});
+// API so'rovlar uchun umumiy funksiya
+async function apiFetch(url, options = {}) {
+    const token = localStorage.getItem('access_token'); // Token'ni localStorage'dan olish
+    if (!token) {
+        alert('Tizimga kirish talab qilinadi!');
+        window.location.href = 'login.html'; // Login sahifasiga yo‘naltirish
+        throw new Error('Token mavjud emas');
+    }
 
-// Sinf tanlash
-gradeButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        // Oldingi tanlangan sinfni yoqish
-        gradeButtons.forEach(btn => btn.classList.remove('selected'));
-        button.classList.add('selected');
-        selectedGrade = button.dataset.grade;
-        updateTopics();
-    });
-});
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // Har doim token qo'shiladi
+        ...options.headers,
+    };
+    const response = await fetch(url, { ...options, headers });
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ detail: 'Noma’lum xato' }));
+        console.error('API xatosi:', errorData);
+        throw new Error(errorData.detail || `Xato: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+}
 
-// Mavzularni yangilash
-function updateTopics() {
-    if (!selectedSubject || !selectedGrade) {
+// Fanlarni API'dan yuklash
+async function loadSubjects() {
+    try {
+        const subjects = await apiFetch('http://localhost:8000/courses/subjects/');
+        subjectButtonsContainer.innerHTML = '';
+        if (Array.isArray(subjects)) {
+            subjects.forEach(subject => {
+                const button = document.createElement('button');
+                button.classList.add('subject-btn');
+                button.dataset.subjectId = subject.id;
+                button.textContent = subject.name;
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.subject-btn').forEach(btn => btn.classList.remove('selected'));
+                    button.classList.add('selected');
+                    selectedSubjectId = subject.id;
+                    updateTopics();
+                });
+                subjectButtonsContainer.appendChild(button);
+            });
+        } else {
+            throw new Error('Fanlar ro‘yxati noto‘g‘ri formatda');
+        }
+    } catch (error) {
+        alert('Fanlarni yuklashda xato yuz berdi: ' + error.message);
+    }
+}
+
+// Sinflarni API'dan yuklash
+async function loadGrades() {
+    try {
+        const grades = await apiFetch('http://localhost:8000/courses/classes/');
+        gradeButtonsContainer.innerHTML = '';
+        if (Array.isArray(grades)) {
+            grades.forEach(grade => {
+                const button = document.createElement('button');
+                button.classList.add('grade-btn');
+                button.dataset.gradeId = grade.id;
+                button.textContent = grade.name;
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.grade-btn').forEach(btn => btn.classList.remove('selected'));
+                    button.classList.add('selected');
+                    selectedGradeId = grade.id;
+                    updateTopics();
+                });
+                gradeButtonsContainer.appendChild(button);
+            });
+        } else {
+            throw new Error('Sinflar ro‘yxati noto‘g‘ri formatda');
+        }
+    } catch (error) {
+        alert('Sinflarni yuklashda xato yuz berdi: ' + error.message);
+    }
+}
+
+// Mavzularni API'dan yuklash
+async function updateTopics() {
+    if (!selectedSubjectId || !selectedGradeId) {
         topicsList.innerHTML = '';
         return;
     }
 
-    const topics = data[selectedSubject][selectedGrade] || [];
-    topicsList.innerHTML = '';
-
-    topics.forEach((topic, index) => {
-        const li = document.createElement('li');
-        li.textContent = topic.title;
-        li.addEventListener('click', () => showTopicContent(topic));
-        topicsList.appendChild(li);
-    });
+    try {
+        const topics = await apiFetch(`http://127.0.0.1:8000/teachers/materials/${selectedGradeId}/${selectedSubjectId}/`);
+        topicsList.innerHTML = '';
+        if (Array.isArray(topics)) {
+            topics.forEach(topic => {
+                const li = document.createElement('li');
+                li.textContent = topic.topic;
+                li.addEventListener('click', () => showTopicContent(topic));
+                topicsList.appendChild(li);
+            });
+        } else {
+            throw new Error('Mavzular ro‘yxati noto‘g‘ri formatda');
+        }
+    } catch (error) {
+        alert('Mavzularni yuklashda xato yuz berdi: ' + error.message);
+    }
 }
 
 // Mavzu kontentini ko'rsatish
 function showTopicContent(topic) {
     topicTitle.textContent = topic.title;
-    videoContainer.innerHTML = `<iframe src="${topic.video}" frameborder="0" allowfullscreen></iframe>`;
-    description.textContent = topic.description;
 
-    // Test tugmasini ko'rsatish
-    quizButton.style.display = 'block';
-    quizButton.onclick = () => {
-        window.location.href = 'test/test-solution.html';
+    let videoId = '';
+    if (topic.video_link) {
+        const url = new URL(topic.video_link);
+        if (url.pathname.includes('/shorts/')) {
+            videoId = url.pathname.split('/shorts/')[1];
+        } else if (url.pathname.includes('/watch')) {
+            videoId = url.searchParams.get('v');
+        } else {
+            videoId = url.pathname.split('/')[1];
+        }
+        videoContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    } else {
+        videoContainer.innerHTML = '<p>Video mavjud emas.</p>';
+    }
+
+    description.textContent = topic.description || '';
+    actionButtons.style.display = 'block';
+
+    document.getElementById('test-button').onclick = () => {
+        if (topic.test_file) {
+            window.open(topic.test_file, '_blank');
+        } else {
+            alert('Test fayl mavjud emas.');
+        }
+    };
+
+    document.getElementById('lecture-button').onclick = () => {
+        if (topic.lecture_file) {
+            window.open(topic.lecture_file, '_blank');
+        } else {
+            alert('Maruza matni mavjud emas.');
+        }
+    };
+
+    document.getElementById('presentation-button').onclick = () => {
+        if (topic.presentation_file) {
+            window.open(topic.presentation_file, '_blank');
+        } else {
+            alert('Taqdimot mavjud emas.');
+        }
     };
 }
+
+// Dastlabki yuklash
+window.onload = () => {
+    loadSubjects();
+    loadGrades();
+};

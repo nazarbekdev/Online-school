@@ -1,105 +1,52 @@
-// $(document).ready(function(){
-    
-//     (function($) {
-//         "use strict";
+// DOM elementlari
+const contactForm = document.getElementById('contactForm');
+const nameInput = document.getElementById('name');
+const emailInput = document.getElementById('email');
+const phoneInput = document.getElementById('phone');
+const subjectInput = document.getElementById('subject');
+const messageInput = document.getElementById('message');
 
-    
-//     jQuery.validator.addMethod('answercheck', function (value, element) {
-//         return this.optional(element) || /^\bcat\b$/.test(value)
-//     }, "type the correct answer -_-");
+// Elementlar mavjudligini tekshirish
+if (!contactForm || !nameInput || !emailInput || !phoneInput || !subjectInput || !messageInput) {
+    console.error('Forma elementlari topilmadi');
+    alert('Forma elementlari topilmadi. Iltimos, HTML-ni tekshiring.');
+} else {
+    // Formani yuborish hodisasi
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); // Standart yuborishni to'xtatish
 
-//     // validate contactForm form
-//     $(function() {
-//         $('#contactForm').validate({
-//             rules: {
-//                 name: {
-//                     required: true,
-//                     minlength: 2
-//                 },
-//                 subject: {
-//                     required: true,
-//                     minlength: 4
-//                 },
-//                 number: {
-//                     required: true,
-//                     minlength: 5
-//                 },
-//                 email: {
-//                     required: true,
-//                     email: true
-//                 },
-//                 message: {
-//                     required: true,
-//                     minlength: 20
-//                 }
-//             },
-//             messages: {
-//                 name: {
-//                     required: "come on, you have a name, don't you?",
-//                     minlength: "your name must consist of at least 2 characters"
-//                 },
-//                 subject: {
-//                     required: "come on, you have a subject, don't you?",
-//                     minlength: "your subject must consist of at least 4 characters"
-//                 },
-//                 number: {
-//                     required: "come on, you have a number, don't you?",
-//                     minlength: "your Number must consist of at least 5 characters"
-//                 },
-//                 email: {
-//                     required: "no email, no message"
-//                 },
-//                 message: {
-//                     required: "um...yea, you have to write something to send this form.",
-//                     minlength: "thats all? really?"
-//                 }
-//             },
-//             submitHandler: function(form) {
-//                 $(form).ajaxSubmit({
-//                     type:"POST",
-//                     data: $(form).serialize(),
-//                     url:"contact_process.php",
-//                     success: function() {
-//                         $('#contactForm :input').attr('disabled', 'disabled');
-//                         $('#contactForm').fadeTo( "slow", 1, function() {
-//                             $(this).find(':input').attr('disabled', 'disabled');
-//                             $(this).find('label').css('cursor','default');
-//                             $('#success').fadeIn()
-//                             $('.modal').modal('hide');
-// 		                	$('#success').modal('show');
-//                         })
-//                     },
-//                     error: function() {
-//                         $('#contactForm').fadeTo( "slow", 1, function() {
-//                             $('#error').fadeIn()
-//                             $('.modal').modal('hide');
-// 		                	$('#error').modal('show');
-//                         })
-//                     }
-//                 })
-//             }
-//         })
-//     })
-        
-//  })(jQuery)
-// })
-document.getElementById('contactForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    let name = document.getElementById('name').value;
-    let email = document.getElementById('email').value;
-    let message = document.getElementById('message').value;
-    
-    fetch('https://your-api.com/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message })
-    })
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('responseMessage').textContent = 'Xabaringiz muvaffaqiyatli yuborildi!';
-    })
-    .catch(error => {
-        document.getElementById('responseMessage').textContent = 'Xabar yuborishda xatolik yuz berdi.';
+        // Form ma'lumotlarini yig'ish
+        const formData = {
+            name: nameInput.value,
+            email: emailInput.value,
+            phone: phoneInput.value,
+            subject: subjectInput.value,
+            message: messageInput.value
+        };
+
+        try {
+            const response = await fetch('http://localhost:8000/contacts/contact-request/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+            if (response.status === 201) {
+                alert('So‘rov muvaffaqiyatli yuborildi!');
+                contactForm.reset(); // Formani tozalash
+            } else if (response.status === 401) {
+                alert('Autentifikatsiya xatosi: Iltimos, tizimga kiring.');
+            } else if (response.status === 400) {
+                alert('Forma ma’lumotlarida xato: ' + JSON.stringify(result));
+            } else {
+                alert('Xatolik yuz berdi: ' + response.statusText);
+            }
+        } catch (error) {
+            console.error('So‘rov yuborishda xato:', error);
+            alert('Internet ulanmadi yoki server xatosi yuz berdi: ' + error.message);
+        }
     });
-});
+}
