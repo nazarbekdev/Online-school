@@ -92,15 +92,21 @@ body {
     margin-bottom: 20px;
 }
 
-#quiz-button {
-    padding: 10px;
-    background-color: #28a745;
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Yashil rang, o'zgartirish mumkin */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-#quiz-button:hover {
-    background-color: #218838;
+.action-btn:hover {
+    background-color: #45a049;
 }

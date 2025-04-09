@@ -15,7 +15,7 @@
     background-color: #3160e4;
     background-image: url('img/login.jpg');
     column-gap: 30px;
-  }
+}
 .form {
   position: absolute;
   max-width: 430px;
@@ -33,6 +33,18 @@
   pointer-events: auto;
 }
 .forms.show-signup .form.login {
+  opacity: 0;
+  pointer-events: none;
+}
+.form.password-reset {
+  opacity: 0;
+  pointer-events: none;
+}
+.forms.show-password-reset .form.password-reset {
+  opacity: 1;
+  pointer-events: auto;
+}
+.forms.show-password-reset .form.login {
   opacity: 0;
   pointer-events: none;
 }
@@ -126,34 +138,46 @@ form {
     display: flex;
     align-items: center;
     gap: 15px;
-  }
-  
-  .gender-options {
+}
+.gender-options {
     display: flex;
     gap: 20px;
-  }
-  
-  .gender-options label {
+}
+.gender-options label {
     display: flex;
     align-items: center;
     gap: 5px;
     font-size: 16px;
     cursor: pointer;
-  }
-  
-  .gender-options input {
+}
+.gender-options input {
     accent-color: #0171d3; /* Radiobutton rangini o‘zgartirish */
     width: 16px;
     height: 16px;
-  }
-  
-.media-options a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+#telegram-step {
+    margin-top: 20px;
+}
+#telegram-step p {
+    font-size: 14px;
+    color: #232836;
+    margin-bottom: 10px;
+}
+#telegram-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0088cc;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+#telegram-link:hover {
+    background-color: #006699;
 }
 @media screen and (max-width: 400px) {
-  .form {
-    padding: 20px 10px;
-  }
+    .form {
+        padding: 20px 10px;
+    }
 }

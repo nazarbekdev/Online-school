@@ -1,0 +1,486 @@
+/* Chat sahifasi dizayni */
+.chat-container {
+    width: 100%;
+    max-width: 700px;
+    background: #ffffff;
+    border-radius: 2rem;
+    border: 3px solid #5b21b6;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    margin: 2rem auto;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chat-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    border-color: #7c3aed;
+}
+
+/* Chat header’da sanani ko‘rsatish */
+.chat-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(90deg, #5b21b6, #7c3aed);
+    color: #fff;
+    padding: 1rem 1.5rem;
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    position: relative;
+}
+
+.chat-date {
+    opacity: 0;
+    transform: scale(0.95);
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.chat-header-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.chat-header h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    background: #34c759;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(52, 199, 89, 0.6);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Typing animatsiyasi */
+.typing-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #5b21b6;
+    border-radius: 50%;
+    animation: typing 1s infinite;
+    margin: 0 2px;
+}
+
+.typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 20% { transform: translateY(0); }
+    40% { transform: translateY(-5px); }
+    60%, 100% { transform: translateY(0); }
+}
+
+.chat-body {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    background: linear-gradient(180deg, #f9fafb, #f3f4f6);
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"%3E%3Cg fill="%23e5e7eb" fill-opacity="0.2"%3E%3Ccircle cx="3" cy="3" r="1"/%3E%3Ccircle cx="3" cy="17" r="1"/%3E%3Ccircle cx="17" cy="3" r="1"/%3E%3Ccircle cx="17" cy="17" r="1"/%3E%3C/g%3E%3C/svg%3E');
+    background-size: 20px 20px;
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db #f3f4f6;
+}
+
+.chat-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-body::-webkit-scrollbar-track {
+    background: #f3f4f6;
+}
+
+.chat-body::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.chat-body::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+.chat-message {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chat-message.user {
+    justify-content: flex-end;
+}
+
+.chat-message.bot {
+    justify-content: flex-start;
+}
+
+.chat-message .message-content {
+    max-width: 70%;
+    padding: 0.8rem 1.2rem;
+    border-radius: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    position: relative;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.chat-message .message-content:hover {
+    transform: scale(1.02);
+}
+
+.chat-message.user .message-content {
+    background: linear-gradient(135deg, #5b21b6, #7c3aed);
+    color: #fff;
+    border-bottom-right-radius: 0.3rem;
+}
+
+.chat-message.bot .message-content {
+    background: #ffffff;
+    color: #1e293b;
+    border-bottom-left-radius: 0.3rem;
+    border: 1px solid #e5e7eb;
+}
+
+.chat-message .message-timestamp {
+    font-size: 0.7rem;
+    color: #6b7280;
+    margin-top: 0.2rem;
+    display: block;
+    text-align: right;
+}
+
+.chat-message.bot .message-timestamp {
+    text-align: left;
+}
+
+.chat-footer {
+    padding: 1rem 1.5rem;
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#user-input {
+    flex: 1;
+    padding: 0.8rem 1.2rem;
+    border: 1px solid #d1d5db;
+    border-radius: 2rem;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: #f9fafb;
+}
+
+#user-input:focus {
+    border-color: #5b21b6;
+    box-shadow: 0 0 0 3px rgba(91, 33, 182, 0.1);
+}
+
+#send-btn {
+    padding: 0.8rem;
+    background: linear-gradient(135deg, #5b21b6, #7c3aed);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+#send-btn:hover {
+    background: linear-gradient(135deg, #4c1d95, #6d28d9);
+    transform: scale(1.1);
+}
+
+#send-btn svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* Responsivlik */
+@media (max-width: 480px) {
+    .chat-container {
+        height: calc(100vh - 60px); /* Navbar balandligini hisobga olamiz */
+        margin: 0;
+        border-radius: 20px;
+        border: 3px solid #5b21b6;
+    }
+
+    .chat-header {
+        border-radius: 0;
+        padding: 0.75rem 1rem;
+    }
+
+    .chat-header h2 {
+        font-size: 1.1rem;
+    }
+
+    .status-indicator {
+        width: 10px;
+        height: 10px;
+    }
+
+    .chat-body {
+        padding: 1rem;
+    }
+
+    .chat-message .message-content {
+        max-width: 85%;
+        font-size: 0.9rem;
+        padding: 0.7rem 1rem;
+    }
+
+    .chat-message .message-timestamp {
+        font-size: 0.65rem;
+    }
+
+    .chat-footer {
+        border-radius: 0;
+        padding: 0.75rem 1rem;
+    }
+
+    #user-input {
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+        border-radius: 1.5rem;
+    }
+
+    #send-btn {
+        padding: 0.7rem;
+    }
+
+    #send-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* 400px dan kichik ekranlar uchun qo‘shimcha responsivlik */
+@media (max-width: 450px) {
+    .chat-container {
+        height: calc(100vh - 50px); /* Navbar balandligi kichik ekranlarda kamayadi */
+        margin: 0 20px; /* Ikki yon tomondan 10px bo‘sh joy */
+        border-radius: 15px;
+        border: 2px solid #5b21b6; /* Romka qalinligi biroz kichraytirildi */
+        box-shadow: none; /* Kichik ekranlarda soya olib tashlanadi */
+    }
+
+    .chat-header {
+        padding: 0.6rem 0.6rem;
+    }
+
+    .chat-header h2 {
+        font-size: 1rem;
+    }
+
+    .status-indicator {
+        width: 8px;
+        height: 8px;
+    }
+
+    .chat-body {
+        padding: 0.8rem;
+    }
+
+    .chat-message {
+        margin-bottom: 1rem;
+    }
+
+    .chat-message .message-content {
+        max-width: 90%; /* Xabarlar yanada kengroq bo‘ladi */
+        font-size: 0.85rem;
+        padding: 0.6rem 0.9rem;
+        border-radius: 0.8rem;
+    }
+
+    .chat-message .message-timestamp {
+        font-size: 0.6rem;
+    }
+
+    .chat-footer {
+        padding: 0.6rem 0.8rem;
+        gap: 0.6rem;
+    }
+
+    #user-input {
+        padding: 0.6rem 0.9rem;
+        font-size: 0.85rem;
+        border-radius: 1.2rem;
+    }
+
+    #send-btn {
+        padding: 0.6rem;
+    }
+
+    #send-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+
+
+/* Markdown elementlari uchun uslublar */
+.chat-message .message-content {
+    line-height: 1.6;
+    font-size: 0.95rem;
+    color: #1e293b;
+}
+
+/* Sarlavhalar */
+.chat-message .message-content h1,
+.chat-message .message-content h2,
+.chat-message .message-content h3 {
+    margin: 0.5rem 0;
+    font-weight: 600;
+    color: #5b21b6;
+}
+
+.chat-message .message-content h1 {
+    font-size: 1.3rem;
+}
+
+.chat-message .message-content h2 {
+    font-size: 1.2rem;
+}
+
+.chat-message .message-content h3 {
+    font-size: 1.1rem;
+}
+
+/* Qalin yozuv */
+.chat-message .message-content strong {
+    font-weight: 700;
+    color: #4c1d95;
+}
+
+/* Ro‘yxatlar */
+.chat-message .message-content ul,
+.chat-message .message-content ol {
+    padding-left: 1.5rem;
+    margin: 0.5rem 0;
+}
+
+.chat-message .message-content li {
+    margin-bottom: 0.3rem;
+    position: relative;
+}
+
+.chat-message .message-content ul li::before {
+    content: "•";
+    color: #5b21b6;
+    position: absolute;
+    left: -1rem;
+}
+
+/* Paragraflar */
+.chat-message .message-content p {
+    margin: 0.5rem 0;
+}
+
+/* Kod bloklari */
+.chat-message .message-content code {
+    background: #f1f5f9;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.3rem;
+    font-family: 'Courier New', Courier, monospace;
+    color: #d97706;
+}
+
+/* Blokli iqtiboslar */
+.chat-message .message-content blockquote {
+    border-left: 4px solid #5b21b6;
+    padding-left: 1rem;
+    margin: 0.5rem 0;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Havolalar */
+.chat-message .message-content a {
+    color: #5b21b6;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.chat-message .message-content a:hover {
+    color: #7c3aed;
+}
+
+
+
+/* Sana uchun uslublar */
+.date-divider {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.date-divider span {
+    background: #ffffff;
+    padding: 0.3rem 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.date-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e5e7eb;
+    z-index: -1;
+}
