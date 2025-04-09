@@ -9,7 +9,7 @@ window.utils.refreshAccessToken = async function () {
     }
 
     try {
-        const response = await fetch('http://localhost:8000/api/token/refresh/', {
+        const response = await fetch(`${config.BASE_URL}/api/token/refresh/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -46,16 +46,13 @@ window.utils.apiFetch = async function (url, options = {}) {
         ...options,
     };
 
-    console.log('defaultOptions:', defaultOptions);
     let response = await fetch(url, defaultOptions);
-    console.log('response:', response);
 
     if (response.status === 401) {
         try {
             token = await window.utils.refreshAccessToken();
             defaultOptions.headers['Authorization'] = `Bearer ${token}`;
             response = await fetch(url, defaultOptions);
-            console.log('Yangi token bilan qayta so‘rov:', response);
         } catch (error) {
             throw error;
         }
@@ -102,7 +99,6 @@ window.utils.apiFetchWithFile = async function (url, formData) {
 
 window.utils = window.utils || {};
 window.utils.logout = function () {
-    console.log("Logout funksiyasi ishga tushdi"); // Bu konsolda ko‘rinishi kerak
     const isConfirmed = confirm("Chiqmoqchimisiz?");
     if (isConfirmed) {
         localStorage.removeItem('access_token');

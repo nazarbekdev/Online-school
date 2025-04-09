@@ -56,7 +56,7 @@ function openSubmitModal(materialId) {
     if (modal) {
         // Materialni topish uchun materials ro'yxatini ishlatamiz
         loadAssignments().then(() => {
-            const materialsResponse = apiFetch("http://127.0.0.1:8000/teachers/materials/");
+            const materialsResponse = apiFetch(`${config.BASE_URL}/teachers/materials/`);
             materialsResponse.then(response => response.json()).then(materials => {
                 const material = materials.find(m => m.id === parseInt(materialId));
                 if (material && material.deadline) {
@@ -111,7 +111,7 @@ async function submitAssignment(event) {
     formData.append("file", file);
 
     try {
-        const response = await apiFetchWithFile("http://127.0.0.1:8000/students/submit-assignment/", formData);
+        const response = await apiFetchWithFile(`${config.BASE_URL}/students/submit-assignment/`, formData);
         const data = await response.json();
         if (response.ok) {
             alert("Vazifa muvaffaqiyatli jo‘natildi!");
@@ -120,8 +120,7 @@ async function submitAssignment(event) {
             throw new Error(data.error || "Vazifani jo‘natishda xato yuz berdi.");
         }
     } catch (error) {
-        console.error("Vazifani jo‘natishda xato:", error);
-        alert(`Xatolik: ${error.message}`);
+        alert(`Xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring!`);
     }
 }
 
@@ -174,7 +173,7 @@ async function loadAssignments() {
             throw new Error("Foydalanuvchi ID topilmadi. Iltimos, tizimga qayta kiring.");
         }
 
-        const subjectsResponse = await apiFetch(`http://127.0.0.1:8000/courses/student-subject/${studentId}/`);
+        const subjectsResponse = await apiFetch(`${config.BASE_URL}/courses/student-subject/${studentId}/`);
         const studentSubjects = await subjectsResponse.json();
         if (!studentSubjects.length) {
             throw new Error("Tanlangan fanlar topilmadi.");
@@ -184,7 +183,7 @@ async function loadAssignments() {
         const classNumber = studentSubjects[0].class_number;
 
         // Barcha fanlar ro'yxatini olish
-        const allSubjectsResponse = await apiFetch("http://127.0.0.1:8000/courses/subjects/");
+        const allSubjectsResponse = await apiFetch(`${config.BASE_URL}/courses/subjects/`);
         const allSubjects = await allSubjectsResponse.json();
 
         // Fanlar ro'yxatidan ID va nomni olish
@@ -193,7 +192,7 @@ async function loadAssignments() {
             subjectNames[subject.id] = subject.name || `Fan ${subject.id}`; 
         });
 
-        const materialsResponse = await apiFetch("http://127.0.0.1:8000/teachers/materials/");
+        const materialsResponse = await apiFetch(`${config.BASE_URL}/teachers/materials/`);
         const materials = await materialsResponse.json();
 
         const filteredMaterials = materials.filter(material =>

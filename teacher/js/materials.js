@@ -57,7 +57,7 @@ window.toggleDeadlineField = function() {
 async function loadClassesAndSubjects() {
     try {
         // Teacherga biriktirilgan sinf va fanlarni olish
-        const teacherResponse = await window.utils.apiFetch('http://127.0.0.1:8000/teachers/profile/');
+        const teacherResponse = await window.utils.apiFetch(`${config.BASE_URL}/teachers/profile/`);
         const teacherData = await teacherResponse.json();
         if (!teacherResponse.ok) {
             throw new Error('O‘qituvchi ma’lumotlari yuklanmadi: ' + (teacherData.error || teacherResponse.statusText));
@@ -65,21 +65,21 @@ async function loadClassesAndSubjects() {
         const teacherId = teacherData.id;
 
         // Sinf va fanlarni olish
-        const expertiseResponse = await window.utils.apiFetch(`http://127.0.0.1:8000/courses/teacher-expertise/${teacherId}/`);
+        const expertiseResponse = await window.utils.apiFetch(`${config.BASE_URL}/courses/teacher-expertise/${teacherId}/`);
         const expertiseData = await expertiseResponse.json();
         if (!expertiseResponse.ok) {
             throw new Error('Sinflar ma’lumotlari yuklanmadi: ' + (expertiseData.error || expertiseResponse.statusText));
         }
 
         // Fan nomlarini olish
-        const subjectsResponse = await window.utils.apiFetch('http://127.0.0.1:8000/courses/subjects/');
+        const subjectsResponse = await window.utils.apiFetch(`${config.BASE_URL}/courses/subjects/`);
         const subjectsData = await subjectsResponse.json();
         if (!subjectsResponse.ok) {
             throw new Error('Fanlar yuklanmadi: ' + (subjectsData.error || subjectsResponse.statusText));
         }
 
         // Test turlarini olish
-        const testTypesResponse = await window.utils.apiFetch('http://127.0.0.1:8000/students/test-types/');
+        const testTypesResponse = await window.utils.apiFetch(`${config.BASE_URL}/students/test-types/`);
         const testTypesData = await testTypesResponse.json();
         if (!testTypesResponse.ok) {
             throw new Error('Test turlari yuklanmadi: ' + (testTypesData.error || testTypesResponse.statusText));
@@ -162,7 +162,7 @@ window.uploadMaterial = async function() {
 
     try {
         // Teacherga biriktirilgan ma’lumotlarni olish
-        const teacherResponse = await window.utils.apiFetch('http://127.0.0.1:8000/teachers/profile/');
+        const teacherResponse = await window.utils.apiFetch(`${config.BASE_URL}/teachers/profile/`);
         const teacherData = await teacherResponse.json();
         if (!teacherResponse.ok) {
             throw new Error('O‘qituvchi ma’lumotlari yuklanmadi');
@@ -185,7 +185,7 @@ window.uploadMaterial = async function() {
         if (deadlineInput && taskSelect === 'Sinf') formData.append('deadline', deadlineInput);
 
         const response = await window.utils.apiFetchWithFile(
-            'http://127.0.0.1:8000/teachers/materials/',
+            `${config.BASE_URL}/teachers/materials/`,
             formData,
             'POST'
         );
@@ -212,12 +212,6 @@ window.uploadTest = async function() {
     const quarterSelect = document.getElementById('quarterSelect').value;
     const testFile = document.getElementById('testFile1').files[0];
 
-    console.log('Test turi:', testTypeSelect);
-    console.log('Tanlangan sinf:', classSelect);
-    console.log('Fan:', subjectSelect);
-    console.log('Mavzu:', topicInput);
-    console.log('Fayl', testFile)
-
     // Validatsiya
     if (!testTypeSelect || !subjectSelect || !testFile) {
         alert('Iltimos, barcha majburiy maydonlarni to‘ldiring!');
@@ -231,7 +225,7 @@ window.uploadTest = async function() {
 
     try {
         // Teacherga biriktirilgan ma’lumotlarni olish
-        const teacherResponse = await window.utils.apiFetch('http://127.0.0.1:8000/teachers/profile/');
+        const teacherResponse = await window.utils.apiFetch(`${config.BASE_URL}/teachers/profile/`);
         const teacherData = await teacherResponse.json();
         if (!teacherResponse.ok) {
             throw new Error('O‘qituvchi ma’lumotlari yuklanmadi');
@@ -239,7 +233,7 @@ window.uploadTest = async function() {
         const teacherId = teacherData.id;
 
         // Test turi ID sini olish
-        const testTypesResponse = await window.utils.apiFetch('http://127.0.0.1:8000/students/test-types/');
+        const testTypesResponse = await window.utils.apiFetch(`${config.BASE_URL}/students/test-types/`);
         const testTypesData = await testTypesResponse.json();
         if (!testTypesResponse.ok) {
             throw new Error('Test turlari yuklanmadi');
@@ -284,7 +278,7 @@ window.uploadTest = async function() {
 // Yuklangan materiallar va testlarni yuklash
 async function loadMaterialsAndTests() {
     try {
-        const teacherResponse = await window.utils.apiFetch('http://127.0.0.1:8000/teachers/profile/');
+        const teacherResponse = await window.utils.apiFetch(`${config.BASE_URL}/teachers/profile/`);
         const teacherData = await teacherResponse.json();
         if (!teacherResponse.ok) {
             throw new Error('O‘qituvchi ma’lumotlari yuklanmadi');
@@ -292,21 +286,21 @@ async function loadMaterialsAndTests() {
         const teacherId = teacherData.id;
 
         // Materiallarni yuklash
-        const materialsResponse = await window.utils.apiFetch(`http://127.0.0.1:8000/teachers/materials/details/${teacherId}/`);
+        const materialsResponse = await window.utils.apiFetch(`${config.BASE_URL}/teachers/materials/details/${teacherId}/`);
         const materialsData = await materialsResponse.json();
         if (!materialsResponse.ok) {
             throw new Error('Materiallar yuklanmadi');
         }
 
         // Testlarni yuklash
-        const testsResponse = await window.utils.apiFetch(`http://127.0.0.1:8000/teachers/tests/details/${teacherId}/`);
+        const testsResponse = await window.utils.apiFetch(`${config.BASE_URL}/teachers/tests/details/${teacherId}/`);
         const testsData = await testsResponse.json();
         if (!testsResponse.ok) {
             throw new Error('Testlar yuklanmadi');
         }
 
         // Fan nomlarini olish
-        const subjectsResponse = await window.utils.apiFetch('http://127.0.0.1:8000/courses/subjects/');
+        const subjectsResponse = await window.utils.apiFetch(`${config.BASE_URL}/courses/subjects/`);
         const subjectsData = await subjectsResponse.json();
         if (!subjectsResponse.ok) {
             throw new Error('Fanlar yuklanmadi');

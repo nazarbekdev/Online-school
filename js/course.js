@@ -37,7 +37,7 @@ async function apiFetch(url, options = {}) {
 // Fanlarni API'dan yuklash
 async function loadSubjects() {
     try {
-        const subjects = await apiFetch('http://localhost:8000/courses/subjects/');
+        const subjects = await apiFetch(`${config.BASE_URL}/courses/subjects/`);
         subjectButtonsContainer.innerHTML = '';
         if (Array.isArray(subjects)) {
             subjects.forEach(subject => {
@@ -56,15 +56,13 @@ async function loadSubjects() {
         } else {
             throw new Error('Fanlar ro‘yxati noto‘g‘ri formatda');
         }
-    } catch (error) {
-        alert('Fanlarni yuklashda xato yuz berdi: ' + error.message);
-    }
+    } catch (error) {}
 }
 
 // Sinflarni API'dan yuklash
 async function loadGrades() {
     try {
-        const grades = await apiFetch('http://localhost:8000/courses/classes/');
+        const grades = await apiFetch(`${config.BASE_URL}/courses/classes/`);
         gradeButtonsContainer.innerHTML = '';
         if (Array.isArray(grades)) {
             grades.forEach(grade => {
@@ -83,9 +81,7 @@ async function loadGrades() {
         } else {
             throw new Error('Sinflar ro‘yxati noto‘g‘ri formatda');
         }
-    } catch (error) {
-        alert('Sinflarni yuklashda xato yuz berdi: ' + error.message);
-    }
+    } catch (error) {}
 }
 
 // Mavzularni API'dan yuklash
@@ -96,7 +92,7 @@ async function updateTopics() {
     }
 
     try {
-        const topics = await apiFetch(`http://127.0.0.1:8000/teachers/materials/${selectedGradeId}/${selectedSubjectId}/`);
+        const topics = await apiFetch(`${config.BASE_URL}/teachers/materials/${selectedGradeId}/${selectedSubjectId}/`);
         topicsList.innerHTML = '';
         if (Array.isArray(topics)) {
             topics.forEach(topic => {

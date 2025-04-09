@@ -11,7 +11,7 @@ window.utils.refreshAccessToken = async function () {
     }
 
     try {
-        const response = await fetch('http://localhost:8000/api/token/refresh/', {
+        const response = await fetch(`${config.BASE_URL}/api/token/refresh/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -99,7 +99,6 @@ window.utils.apiFetchWithFile = async function(url, formData, method = 'PATCH') 
 // Tizimdan chiqish
 window.utils = window.utils || {};
 window.utils.logout = function () {
-    console.log("Logout funksiyasi ishga tushdi"); // Bu konsolda ko‘rinishi kerak
     const isConfirmed = confirm("Chiqmoqchimisiz?");
     if (isConfirmed) {
         localStorage.removeItem('access_token');
@@ -126,7 +125,7 @@ window.utils.initializeMenu = function() {
 // Teacher uchun xavfsizlik tekshiruvi (masalan, faqat o'qituvchilar uchun)
 window.utils.checkTeacherRole = async function() {
     try {
-        const response = await window.utils.apiFetch('http://127.0.0.1:8000/teachers/profile/');
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/teachers/profile/`);
         const data = await response.json();
         if (data.role !== 'teacher') {
             throw new Error('Faqat o‘qituvchilar uchun ruxsat berilgan!');

@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Sinflarni API'dan yuklash
   async function loadClasses() {
     try {
-      const response = await fetch("http://127.0.0.1:8000/courses/classes/", {
+      const response = await fetch(`${config.BASE_URL}/courses/classes/`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -87,14 +87,13 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     } catch (error) {
       console.error("Sinflarni yuklashda xato:", error);
-      alert("Sinflarni yuklashda xato yuz berdi: " + error.message);
     }
   }
 
   // Fanlarni API'dan yuklash (faqat o‘qituvchi uchun)
   async function loadSubjects() {
     try {
-      const response = await fetch("http://127.0.0.1:8000/courses/subjects/", {
+      const response = await fetch(`${config.BASE_URL}/courses/subjects/`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -112,7 +111,6 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     } catch (error) {
       console.error("Fanlarni yuklashda xato:", error);
-      alert("Fanlarni yuklashda xato yuz berdi: " + error.message);
     }
   }
 
@@ -129,7 +127,7 @@ document.getElementById("login-form").addEventListener("submit", async function(
   const password = document.getElementById("login-password").value;
 
   try {
-    const response = await fetch("http://localhost:8000/auth/login/", {
+    const response = await fetch(`${config.BASE_URL}/auth/login/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password })
@@ -138,7 +136,6 @@ document.getElementById("login-form").addEventListener("submit", async function(
     const data = await response.json();
     if (response.ok) {
       alert("Tizimga muvaffaqiyatli kirdingiz!");
-      console.log("Tokens:", data);
       localStorage.setItem("access_token", data.access);
       localStorage.setItem("refresh_token", data.refresh);
       localStorage.setItem("role", data.role);
@@ -148,8 +145,7 @@ document.getElementById("login-form").addEventListener("submit", async function(
       alert("Telefon raqam yoki parol noto\'g\'ri!");
     }
   } catch (error) {
-    console.error("Error during login:", error);
-    alert("An error occurred. Please try again.");
+    alert("Nimadur xato bo'ldi. Qaytadan urinib ko'ring!");
   }
 });
 
@@ -179,7 +175,7 @@ document.getElementById("register-form").addEventListener("submit", async functi
     const gender = document.querySelector('input[name="gender"]:checked')?.value;
 
     if (!region || !school || !classId || !gender) {
-      alert("All fields are required for students!");
+      alert("Barcha maydonlarni to'ldirish majburiy!");
       return;
     }
 
@@ -190,14 +186,14 @@ document.getElementById("register-form").addEventListener("submit", async functi
   } else if (role === "teacher") {
     const subject = document.getElementById("subject").value;
     if (!subject) {
-      alert("Subject is required for teachers!");
+      alert("Fan tanlash majburiy!");
       return;
     }
     registerData.subject = subject; // Fan ID'sini yuboramiz
   }
 
   try {
-    const response = await fetch("http://localhost:8000/auth/register/", {
+    const response = await fetch(`${config.BASE_URL}/auth/register/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(registerData)
@@ -205,14 +201,13 @@ document.getElementById("register-form").addEventListener("submit", async functi
 
     const data = await response.json();
     if (response.ok) {
-      alert("Registration successful! Please log in.");
+      alert("Ro'yxatdan o'tish muvaffaqiyatli!, Endi tizimga kiring!");
       forms.classList.toggle("show-signup"); // Back to login form
     } else {
-      alert("Registration failed: " + JSON.stringify(data));
+      alert("Ro'yxatdan o'tishda xatolik yuzaga keldi. Iltimos, qaytadan urinib ko'ring!");
     }
   } catch (error) {
-    console.error("Error during registration:", error);
-    alert("An error occurred. Please try again.");
+    alert("Nimadur xato bo'ldi. Iltimos, qaytadan urinib ko'ring!");
   }
 });
 
@@ -223,7 +218,7 @@ document.getElementById("password-reset-form").addEventListener("submit", async 
   const phoneNumber = document.getElementById("reset-phone-number").value;
 
   try {
-    const response = await fetch("http://localhost:8000/auth/password-reset/request/", {
+    const response = await fetch(`${config.BASE_URL}/auth/password-reset/request/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ phone_number: phoneNumber })
@@ -235,10 +230,9 @@ document.getElementById("password-reset-form").addEventListener("submit", async 
       document.getElementById("telegram-step").style.display = "block";
       document.getElementById("telegram-link").href = data.telegram_link;
     } else {
-      alert("Xato: " + JSON.stringify(data));
+      alert("Xatolik yuz berdi. Iltimos, qaytadan urining!");
     }
   } catch (error) {
-    console.error("Error during password reset request:", error);
     alert("Xato yuz berdi. Iltimos, qaytadan urining.");
   }
 });

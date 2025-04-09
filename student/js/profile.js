@@ -74,7 +74,7 @@ const studentId = localStorage.getItem("user_id");
 // Profilni yuklash
 async function loadProfile() {
     try {
-        const response = await window.utils.apiFetch('http://localhost:8000/students/profile/');
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/students/profile/`);
         const data = await response.json();
         if (response.ok) {
             document.getElementById('student-fullname').textContent = `${data.first_name} ${data.last_name}` || 'Noma’lum';
@@ -111,12 +111,12 @@ async function loadProfile() {
 // Student tanlagan fanlarini yuklash
 async function loadStudentSubjects() {
     try {
-        const response = await window.utils.apiFetch(`http://127.0.0.1:8000/courses/student-subject/${studentId}/`);
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/courses/student-subject/${studentId}/`);
         const studentSubjects = await response.json();
         const subjectsList = document.getElementById('student-subjects');
 
         if (response.ok && Array.isArray(studentSubjects) && studentSubjects.length > 0) {
-            const allSubjectsResponse = await window.utils.apiFetch('http://127.0.0.1:8000/courses/subjects/');
+            const allSubjectsResponse = await window.utils.apiFetch(`${config.BASE_URL}/courses/subjects/`);
             const allSubjects = await allSubjectsResponse.json();
 
             subjectsList.innerHTML = studentSubjects.map(studentSubject => {
@@ -140,7 +140,7 @@ async function loadStudentSubjects() {
 // Fanlar ro'yxatini tahrirlash uchun yuklash
 async function loadSubjectsForEdit() {
     try {
-        const response = await window.utils.apiFetch("http://127.0.0.1:8000/courses/subjects/");
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/courses/subjects/`);
         if (!response.ok) {
             throw new Error(`Fanlarni yuklashda xato: ${response.status}`);
         }
@@ -157,8 +157,7 @@ async function loadSubjectsForEdit() {
             subjectSelect.appendChild(option);
         });
     } catch (error) {
-        console.error("Fanlarni yuklashda xato:", error);
-        alert("Fanlarni yuklashda xato yuz berdi: " + error.message);
+        alert("Fanlarni yuklashda xato yuz berdi!");
     }
 }
 
@@ -180,14 +179,13 @@ window.cancelAddSubject = function () {
 // Yangi fan qo'shish
 window.saveSubject = async function () {
     const newSubjectId = document.getElementById("new-subject").value;
-    console.log("Selected Subject ID:", newSubjectId);
     if (!newSubjectId) {
         alert("Iltimos, fan tanlang!");
         return;
     }
 
     // Profil ma'lumotlaridan class_id ni olish
-    const profileResponse = await window.utils.apiFetch('http://localhost:8000/students/profile/');
+    const profileResponse = await window.utils.apiFetch(`${config.BASE_URL}/students/profile/`);
     const profileData = await profileResponse.json();
     const classId = profileData.class_id;
 
@@ -197,10 +195,7 @@ window.saveSubject = async function () {
     }
 
     try {
-        console.log("Student ID:", studentId);
-        console.log("New Subject ID:", newSubjectId);
-        console.log("Class ID:", classId);
-        const response = await window.utils.apiFetch("http://127.0.0.1:8000/courses/student-subject/", {
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/courses/student-subject/`, {
             method: "POST",
             body: JSON.stringify({
                 reyting: 0, // Default reyting
@@ -210,7 +205,6 @@ window.saveSubject = async function () {
             }),
         });
         const data = await response.json();
-        console.log("API Response:", data); // Debug uchun
         if (response.ok) {
             await loadStudentSubjects();
             document.getElementById("add-subject-form").classList.add("hidden");
@@ -220,14 +214,14 @@ window.saveSubject = async function () {
         }
     } catch (error) {
         console.error("Fanni qo'shishda xato:", error);
-        alert("Fanni qo'shishda xato yuz berdi: " + error.message);
+        alert("Fanni qo'shishda xato yuz berdi: ");
     }
 };
 
 window.saveRegion = async function() {
     const newRegion = document.getElementById('new-region-select').value;
     try {
-        const response = await window.utils.apiFetch('http://localhost:8000/students/profile/', {
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/students/profile/`, {
             method: 'PATCH',
             body: JSON.stringify({ region: newRegion }),
         });
@@ -239,7 +233,6 @@ window.saveRegion = async function() {
             throw new Error(data.error || 'Viloyatni yangilashda xato');
         }
     } catch (error) {
-        console.error('Viloyatni yangilashda xato:', error);
         alert('Viloyatni yangilashda xato yuz berdi.');
     }
 };
@@ -247,7 +240,7 @@ window.saveRegion = async function() {
 window.saveDistrict = async function() {
     const newDistrict = document.getElementById('new-district-select').value;
     try {
-        const response = await window.utils.apiFetch('http://localhost:8000/students/profile/', {
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/students/profile/`, {
             method: 'PATCH',
             body: JSON.stringify({ district: newDistrict }),
         });
@@ -259,7 +252,6 @@ window.saveDistrict = async function() {
             throw new Error(data.error || 'Tumanni yangilashda xato');
         }
     } catch (error) {
-        console.error('Tumanni yangilashda xato:', error);
         alert('Tumanni yangilashda xato yuz berdi.');
     }
 };
@@ -280,12 +272,9 @@ window.saveImage = async function() {
     if (fileInput.files && fileInput.files[0]) {
         const formData = new FormData();
         formData.append('image', fileInput.files[0]);
-        console.log('FormData:', formData);
         try {
-            const response = await window.utils.apiFetchWithFile('http://localhost:8000/students/profile/image/', formData);
-            console.log('Response:', response);
+            const response = await window.utils.apiFetchWithFile(`${config.BASE_URL}/students/profile/image/`, formData);
             const data = await response.json();
-            console.log('Response Data:', data);
             if (response.ok) {
                 const imageUrl = data.image && !data.image.startsWith('http')
                     ? `http://127.0.0.1:8000${data.image}`
@@ -296,7 +285,6 @@ window.saveImage = async function() {
                 throw new Error(data.error || 'Rasmni yangilashda xato');
             }
         } catch (error) {
-            console.error('Rasmni yangilashda xato:', error);
             alert('Rasmni yangilashda xato yuz berdi: ' + error.message);
         }
     } else {
@@ -309,7 +297,7 @@ window.saveFullname = async function() {
     const first_name = newFullname[0] || '';
     const last_name = newFullname[1] || '';
     try {
-        const response = await window.utils.apiFetch('http://localhost:8000/students/profile/', {
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/students/profile/`, {
             method: 'PATCH',
             body: JSON.stringify({ first_name, last_name }),
         });
@@ -321,7 +309,6 @@ window.saveFullname = async function() {
             throw new Error(data.error || 'Ismni yangilashda xato');
         }
     } catch (error) {
-        console.error('Ismni yangilashda xato:', error);
         alert('Ismni yangilashda xato yuz berdi.');
     }
 };
@@ -329,7 +316,7 @@ window.saveFullname = async function() {
 window.savePhone = async function() {
     const newPhone = document.getElementById('new-phone').value;
     try {
-        const response = await window.utils.apiFetch('http://localhost:8000/students/profile/', {
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/students/profile/`, {
             method: 'PATCH',
             body: JSON.stringify({ phone_number: newPhone }),
         });
@@ -341,7 +328,6 @@ window.savePhone = async function() {
             throw new Error(data.error || 'Telefonni yangilashda xato');
         }
     } catch (error) {
-        console.error('Telefonni yangilashda xato:', error);
         alert('Telefonni yangilashda xato yuz berdi.');
     }
 };
@@ -349,7 +335,7 @@ window.savePhone = async function() {
 window.saveEmail = async function() {
     const newEmail = document.getElementById('new-email').value;
     try {
-        const response = await window.utils.apiFetch('http://localhost:8000/students/profile/', {
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/students/profile/`, {
             method: 'PATCH',
             body: JSON.stringify({ email: newEmail }),
         });
@@ -369,7 +355,7 @@ window.saveEmail = async function() {
 window.saveSchool = async function() {
     const newSchool = document.getElementById('new-school').value;
     try {
-        const response = await window.utils.apiFetch('http://localhost:8000/students/profile/', {
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/students/profile/`, {
             method: 'PATCH',
             body: JSON.stringify({ school: newSchool }),
         });
@@ -381,7 +367,6 @@ window.saveSchool = async function() {
             throw new Error(data.error || 'Maktabni yangilashda xato');
         }
     } catch (error) {
-        console.error('Maktabni yangilashda xato:', error);
         alert('Maktabni yangilashda xato yuz berdi.');
     }
 };
@@ -393,7 +378,7 @@ window.saveClass = async function() {
         return;
     }
     try {
-        const response = await window.utils.apiFetch('http://localhost:8000/students/profile/', {
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/students/profile/`, {
             method: 'PATCH',
             body: JSON.stringify({ class_id: newClassId }),
         });
@@ -406,7 +391,6 @@ window.saveClass = async function() {
             throw new Error(data.error || 'Sinfni yangilashda xato');
         }
     } catch (error) {
-        console.error('Sinfni yangilashda xato:', error);
         alert('Sinfni yangilashda xato yuz berdi.');
     }
 };
@@ -418,5 +402,5 @@ window.onload = () => {
 
 // Xavfsizlik uchun utils mavjudligini tekshirish
 if (typeof window.utils === 'undefined' || typeof window.utils.apiFetch !== 'function') {
-    console.error('utils.js yuklanmadi yoki apiFetch funksiyasi topilmadi. Iltimos, HTML’da <script src="js/utils.js"></script> tartibini tekshiring.');
+    console.error('Xatolik yuz berdi...');
 }

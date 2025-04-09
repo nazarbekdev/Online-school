@@ -21,7 +21,7 @@ async function getStudentId() {
             throw new Error('Token topilmadi');
         }
 
-        const response = await fetch('http://127.0.0.1:8000/students/profile/', {
+        const response = await fetch(`${config.BASE_URL}/students/profile/`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -98,8 +98,8 @@ async function updateFormBasedOnTestType(testType) {
     document.getElementById('quarter-btn').textContent = 'Chorak tanlang';
 
     // API’dan fanlar va variantlarni olish
-    const subjects = await fetchData('http://127.0.0.1:8000/courses/subjects/');
-    const variants = await fetchData('http://127.0.0.1:8000/tests/variants/');
+    const subjects = await fetchData(`${config.BASE_URL}/courses/subjects/`);
+    const variants = await fetchData(`${config.BASE_URL}/tests/variants/`);
 
     // Test turiga qarab moslashuv
     if (testType === 'Mock') {
@@ -135,7 +135,7 @@ async function updateFormBasedOnTestType(testType) {
         quarterGroup.classList.remove('hidden');
 
         // Sinflar (API’dan olinadi)
-        const classes = await fetchData('http://127.0.0.1:8000/courses/classes/');
+        const classes = await fetchData(`${config.BASE_URL}/courses/classes/`);
         classOptions.innerHTML = classes
             .map(cls => `<div class="option" data-value="${cls.name}">${cls.name}</div>`)
             .join('');
@@ -200,10 +200,10 @@ async function startTest() {
     }
 
     // API’dan ID’larni olish
-    const testTypes = await fetchData('http://127.0.0.1:8000/students/test-types/', token);
-    const subjects = await fetchData('http://127.0.0.1:8000/courses/subjects/', token);
-    const variants = await fetchData('http://127.0.0.1:8000/tests/variants/', token);
-    const classes = await fetchData('http://127.0.0.1:8000/courses/classes/', token);
+    const testTypes = await fetchData(`${config.BASE_URL}/students/test-types/`, token);
+    const subjects = await fetchData(`${config.BASE_URL}/courses/subjects/`, token);
+    const variants = await fetchData(`${config.BASE_URL}/tests/variants/`, token);
+    const classes = await fetchData(`${config.BASE_URL}/courses/classes/`, token);
 
     // Tanlangan ma’lumotlarning ID’larini topish
     const testTypeId = testTypes.find(t => t.name === testType)?.id;
@@ -227,7 +227,7 @@ async function startTest() {
     // Mock va Fanga oid testlar uchun avvalgi natijalarni tekshirish
     if (testType !== 'DTM') {
         const studentId = await getStudentId();
-        const previousResultsResponse = await fetch(`http://127.0.0.1:8000/students/test-results/${studentId}/`, {
+        const previousResultsResponse = await fetch(`${config.BASE_URL}/students/test-results/${studentId}/`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -267,7 +267,7 @@ async function startTest() {
 // Sahifa yuklanganda ma’lumotlarni olish va dropdownlarni to‘ldirish
 document.addEventListener('DOMContentLoaded', async () => {
     // Test turlarini olish
-    const testTypes = await fetchData('http://127.0.0.1:8000/students/test-types/');
+    const testTypes = await fetchData(`${config.BASE_URL}/students/test-types/`);
     const testTypeOptions = document.getElementById('test-type-options');
     testTypeOptions.innerHTML = testTypes
         .map(testType => `<div class="option" data-value="${testType.name}">${testType.name}</div>`)

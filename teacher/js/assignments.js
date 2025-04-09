@@ -3,7 +3,7 @@
 // Fan nomlarini yuklash
 async function loadSubjects() {
     try {
-        const response = await window.utils.apiFetch('http://127.0.0.1:8000/courses/subjects/');
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/courses/subjects/`);
         const data = await response.json();
         if (response.ok) {
             return data;
@@ -19,7 +19,7 @@ async function loadSubjects() {
 // O‘quvchi profilini yuklash
 async function loadStudentProfile(studentId) {
     try {
-        const response = await window.utils.apiFetch(`http://127.0.0.1:8000/students/profile/${studentId}/`);
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/students/profile/${studentId}/`);
         const data = await response.json();
         if (response.ok) {
             return data;
@@ -35,7 +35,7 @@ async function loadStudentProfile(studentId) {
 // Material nomini va muddatini yuklash
 async function loadMaterialDetails(materialId) {
     try {
-        const response = await window.utils.apiFetch(`http://127.0.0.1:8000/teachers/materials/name/${materialId}/`);
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/teachers/materials/name/${materialId}/`);
         const data = await response.json();
         if (response.ok) {
             return data;
@@ -51,14 +51,14 @@ async function loadMaterialDetails(materialId) {
 // Teacherga biriktirilgan sinf va fanlarni yuklash
 async function loadTeacherExpertise() {
     try {
-        const teacherResponse = await window.utils.apiFetch('http://127.0.0.1:8000/teachers/profile/');
+        const teacherResponse = await window.utils.apiFetch(`${config.BASE_URL}/teachers/profile/`);
         const teacherData = await teacherResponse.json();
         if (!teacherResponse.ok) {
             throw new Error('O‘qituvchi ma’lumotlari yuklanmadi');
         }
         const teacherId = teacherData.id;
 
-        const expertiseResponse = await window.utils.apiFetch(`http://127.0.0.1:8000/courses/teacher-expertise/${teacherId}/`);
+        const expertiseResponse = await window.utils.apiFetch(`${config.BASE_URL}/courses/teacher-expertise/${teacherId}/`);
         const expertiseData = await expertiseResponse.json();
         if (!expertiseResponse.ok) {
             throw new Error('Sinflar ma’lumotlari yuklanmadi');
@@ -88,7 +88,7 @@ async function loadTeacherExpertise() {
 // Topshiriqlarni yuklash
 async function loadAssignments(classNumber, subjectId) {
     try {
-        const response = await window.utils.apiFetch(`http://127.0.0.1:8000/students/submit-assignment/mark/${classNumber}/${subjectId}/`);
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/students/submit-assignment/mark/${classNumber}/${subjectId}/`);
         const data = await response.json();
         if (response.ok) {
             return data;
@@ -179,7 +179,7 @@ window.submitGrade = async function() {
         const formData = new FormData();
         formData.append('grade', grade);
         const response = await window.utils.apiFetchWithFile(
-            `http://127.0.0.1:8000/students/submit-assignment/mark/${currentAssignmentId}/`,
+            `${config.BASE_URL}/students/submit-assignment/mark/${currentAssignmentId}/`,
             formData,
             'PATCH'
         );

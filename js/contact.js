@@ -25,7 +25,7 @@ if (!contactForm || !nameInput || !emailInput || !phoneInput || !subjectInput ||
         };
 
         try {
-            const response = await fetch('http://localhost:8000/contacts/contact-request/', {
+            const response = await fetch(`${config.BASE_URL}/contacts/contact-request/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

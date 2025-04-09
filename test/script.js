@@ -21,7 +21,7 @@ async function fetchQuestions() {
             return;
         }
 
-        const testTypesResponse = await fetch('http://127.0.0.1:8000/students/test-types/', {
+        const testTypesResponse = await fetch(`${config.BASE_URL}/students/test-types/`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -54,7 +54,7 @@ async function fetchQuestions() {
             queryParams.append('quarter', testParams.quarter);
         }
 
-        const response = await fetch(`http://127.0.0.1:8000/tests/questions/filter/?${queryParams}`, {
+        const response = await fetch(`${config.BASE_URL}/tests/questions/filter/?${queryParams}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -78,7 +78,7 @@ async function fetchQuestions() {
         startTimer();
     } catch (error) {
         console.error('Savollarni olishda xato:', error);
-        alert('Savollarni yuklashda xato yuz berdi: ' + error.message);
+        alert('Savollar mavjud emas!');
     }
 }
 
@@ -90,7 +90,7 @@ async function getStudentId() {
             throw new Error('Token topilmadi');
         }
 
-        const response = await fetch('http://127.0.0.1:8000/students/profile/', {
+        const response = await fetch(`${config.BASE_URL}/students/profile/`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -263,7 +263,6 @@ function displayQuestion(index) {
 
     if (window.MathJax) {
         MathJax.typesetPromise().then(() => {
-            console.log('Formulalar ko‘rsatildi');
         }).catch(err => console.error('MathJax xatosi:', err));
     }
 
@@ -382,7 +381,7 @@ async function finishTest() {
 
     try {
         // Test natijalarini saqlash
-        const response = await fetch('http://127.0.0.1:8000/students/test-results/', {
+        const response = await fetch(`${config.BASE_URL}/students/test-results/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -408,7 +407,6 @@ async function finishTest() {
         }
 
         const responseData = await response.json();
-        console.log('Natijalar saqlandi:', responseData);
 
         // Modal oynani ko‘rsatish (faqat natijalar jadvali)
         const modal = document.getElementById('result-modal');
@@ -513,7 +511,7 @@ document.getElementById('feedback-button').addEventListener('click', async () =>
             throw new Error('Token topilmadi');
         }
 
-        const feedbackResponse = await fetch('http://127.0.0.1:8000/students/feedback/', {
+        const feedbackResponse = await fetch(`${config.BASE_URL}/students/feedback/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -554,6 +552,7 @@ function displayFeedback(feedback) {
                     </div>
                 `).join('')}
             </div>
+        </div>
         </div>
     `;
     document.body.appendChild(feedbackModal);

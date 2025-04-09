@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     async function fetchData() {
         try {
             // 1. Barcha foydalanuvchilarni olish
-            const allUsersResponse = await fetch('http://localhost:8000/auth/all/', {
+            const allUsersResponse = await fetch(`${config.BASE_URL}/auth/all/`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const allUsersData = await allUsersResponse.json();
 
             // 2. Offline studentlarni olish
-            const offlineResponse = await fetch('http://localhost:8000/courses/offline-student/', {
+            const offlineResponse = await fetch(`${config.BASE_URL}/courses/offline-student/`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

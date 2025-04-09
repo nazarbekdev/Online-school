@@ -3,7 +3,7 @@
 // Fan nomlarini yuklash
 async function loadSubjects() {
     try {
-        const response = await window.utils.apiFetch('http://127.0.0.1:8000/courses/subjects/');
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/courses/subjects/`);
         const data = await response.json();
         if (response.ok) {
             return data;
@@ -19,7 +19,7 @@ async function loadSubjects() {
 // Test turlari nomlarini yuklash
 async function loadTestTypes() {
     try {
-        const response = await window.utils.apiFetch('http://127.0.0.1:8000/students/test-types/');
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/students/test-types/`);
         const data = await response.json();
         if (response.ok) {
             return data;
@@ -35,7 +35,7 @@ async function loadTestTypes() {
 // O‘quvchi profilini yuklash
 async function loadStudentProfile(studentId) {
     try {
-        const response = await window.utils.apiFetch(`http://127.0.0.1:8000/students/profile/${studentId}/`);
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/students/profile/${studentId}/`);
         const data = await response.json();
         if (response.ok) {
             return data;
@@ -51,7 +51,7 @@ async function loadStudentProfile(studentId) {
 // Test natijalarini yuklash va o‘rtacha hisoblash
 async function loadTestResults(studentId) {
     try {
-        const response = await window.utils.apiFetch(`http://127.0.0.1:8000/students/test-results/${studentId}/`);
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/students/test-results/${studentId}/`);
         const data = await response.json();
         if (response.ok) {
             return data;
@@ -111,7 +111,7 @@ function calculateAverageTestResults(testResults, testTypes) {
 // Bajargan fayllarni yuklash
 async function loadSubmissions(studentId) {
     try {
-        const response = await window.utils.apiFetch(`http://127.0.0.1:8000/students/submit-assignment/${studentId}/`);
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/students/submit-assignment/${studentId}/`);
         const data = await response.json();
         if (response.ok) {
             // submitted_at bo‘yicha tartiblash (eng yangisidan eng eskisiga)
@@ -128,7 +128,7 @@ async function loadSubmissions(studentId) {
 // Sinfga tegishli o‘quvchilarni yuklash
 async function loadStudentsForClass(classNumber, subjectId) {
     try {
-        const response = await window.utils.apiFetch(`http://127.0.0.1:8000/courses/student-subject/${classNumber}/${subjectId}/`);
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/courses/student-subject/${classNumber}/${subjectId}/`);
         const studentsData = await response.json();
         if (response.ok) {
             return studentsData;
@@ -144,14 +144,14 @@ async function loadStudentsForClass(classNumber, subjectId) {
 // Sinflarni yuklash va ko‘rsatish
 async function loadClasses() {
     try {
-        const teacherResponse = await window.utils.apiFetch('http://127.0.0.1:8000/teachers/profile/');
+        const teacherResponse = await window.utils.apiFetch(`${config.BASE_URL}/teachers/profile/`);
         const teacherData = await teacherResponse.json();
         if (!teacherResponse.ok) {
             throw new Error('O‘qituvchi ma’lumotlari yuklanmadi');
         }
         const teacherId = teacherData.id;
 
-        const expertiseResponse = await window.utils.apiFetch(`http://127.0.0.1:8000/courses/teacher-expertise/${teacherId}/`);
+        const expertiseResponse = await window.utils.apiFetch(`${config.BASE_URL}/courses/teacher-expertise/${teacherId}/`);
         const expertiseData = await expertiseResponse.json();
         if (!expertiseResponse.ok) {
             throw new Error('Sinflar ma’lumotlari yuklanmadi');
@@ -207,7 +207,7 @@ async function showStudents(classNumber, subjectId) {
         const averageTestResults = calculateAverageTestResults(testResults.filter(r => r.subject === subjectId), testTypes);
 
         // Reytingni olish
-        const ratingResponse = await window.utils.apiFetch(`http://127.0.0.1:8000/students/reyting/${student.student}/`);
+        const ratingResponse = await window.utils.apiFetch(`${config.BASE_URL}/students/reyting/${student.student}/`);
         const ratingData = await ratingResponse.json();
         const subjectRating = ratingData.ratings[subjectId] || 'Hozircha aniqlanmagan';
 
@@ -253,7 +253,7 @@ async function showStudentDetails(studentId, classNumber, subjectId) {
     const averageTestResults = calculateAverageTestResults(testResults.filter(r => r.subject === subjectId), testTypes);
 
     // Reytingni olish
-    const ratingResponse = await window.utils.apiFetch(`http://127.0.0.1:8000/students/reyting/${studentId}/`);
+    const ratingResponse = await window.utils.apiFetch(`${config.BASE_URL}/students/reyting/${studentId}/`);
     const ratingData = await ratingResponse.json();
     const subjectRating = ratingData.ratings[subjectId] || 'Hozircha aniqlanmagan';
 

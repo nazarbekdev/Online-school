@@ -26,14 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // Chat tarixini yuklash
         async function loadChatHistory() {
             try {
-                const response = await fetch('http://localhost:8000/chats/api/chat/history/', {
+                const response = await fetch(`${config.BASE_URL}/chats/api/chat/history/`, {
                     headers: {
                         'Authorization': `Bearer ${accessToken}`,
                     },
                 });
 
                 if (response.status === 401) {
-                    const refreshResponse = await fetch('http://localhost:8000/api/token/refresh/', {
+                    const refreshResponse = await fetch(`${config.BASE_URL}/api/token/refresh/`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const typingIndicator = showTypingIndicator();
 
             try {
-                const response = await fetch('http://localhost:8000/chats/api/chat/', {
+                const response = await fetch(`${config.BASE_URL}/chats/api/chat/`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 typingIndicator.remove();
 
                 if (response.status === 401) {
-                    const refreshResponse = await fetch('http://localhost:8000/api/token/refresh/', {
+                    const refreshResponse = await fetch(`${config.BASE_URL}/api/token/refresh/`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

@@ -12,14 +12,14 @@ async function loadTestResults() {
 
         // Test turlari va fanlarni olish
         const [testTypesResponse, subjectsResponse] = await Promise.all([
-            window.utils.apiFetch("http://127.0.0.1:8000/students/test-types/"),
-            window.utils.apiFetch("http://127.0.0.1:8000/courses/subjects/")
+            window.utils.apiFetch(`${config.BASE_URL}/students/test-types/`),
+            window.utils.apiFetch(`${config.BASE_URL}/courses/subjects/`)
         ]);
         cachedTestTypes = await testTypesResponse.json();
         cachedSubjects = await subjectsResponse.json();
 
         // Test natijalarini olish
-        const testResultsResponse = await window.utils.apiFetch(`http://127.0.0.1:8000/students/test-results/${studentId}/`);
+        const testResultsResponse = await window.utils.apiFetch(`${config.BASE_URL}/students/test-results/${studentId}/`);
         const testResults = await testResultsResponse.json();
 
         // Test turlari bo‘yicha filtrlash

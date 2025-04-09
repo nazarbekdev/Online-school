@@ -1,14 +1,12 @@
-// profile.js
-
 async function loadSubjects() {
-    const response = await window.utils.apiFetch('http://127.0.0.1:8000/courses/subjects/');
+    const response = await window.utils.apiFetch(`${config.BASE_URL}/courses/subjects/`);
     return await response.json();
 }
 
 // Profilni yuklash
 async function loadProfile() {
     try {
-        const response = await window.utils.apiFetch('http://127.0.0.1:8000/teachers/profile/');
+        const response = await window.utils.apiFetch(`${config.BASE_URL}/teachers/profile/`);
         const data = await response.json();
         if (response.ok) {
             document.getElementById('teacher-fullname').textContent = `${data.first_name} ${data.last_name}`;
@@ -22,7 +20,7 @@ async function loadProfile() {
 
             // Mutaxassisliklarni yuklash
             const teacherId = data.id;
-            const expertiseResponse = await window.utils.apiFetch(`http://127.0.0.1:8000/courses/teacher-expertise/${teacherId}/`);
+            const expertiseResponse = await window.utils.apiFetch(`${config.BASE_URL}/courses/teacher-expertise/${teacherId}/`);
             const expertiseData = await expertiseResponse.json();
             if (expertiseResponse.ok) {
                 // Subject ID larni olish va takrorlanishni oldini olish
@@ -74,7 +72,7 @@ window.saveFullname = async function() {
         const formData = new FormData();
         formData.append('first_name', first_name);
         formData.append('last_name', last_name);
-        const response = await window.utils.apiFetchWithFile('http://127.0.0.1:8000/teachers/profile/', formData, 'PATCH');
+        const response = await window.utils.apiFetchWithFile(`${config.BASE_URL}/teachers/profile/`, formData, 'PATCH');
         const data = await response.json();
         if (response.ok) {
             document.getElementById('teacher-fullname').textContent = `${data.first_name} ${data.last_name}`;
@@ -94,7 +92,7 @@ window.savePhone = async function() {
     try {
         const formData = new FormData();
         formData.append('phone_number', newPhone);
-        const response = await window.utils.apiFetchWithFile('http://127.0.0.1:8000/teachers/profile/', formData, 'PATCH');
+        const response = await window.utils.apiFetchWithFile(`${config.BASE_URL}/teachers/profile/`, formData, 'PATCH');
         const data = await response.json();
         if (response.ok) {
             document.getElementById('teacher-phone').textContent = data.phone_number;
@@ -115,7 +113,7 @@ window.saveImage = async function() {
         const formData = new FormData();
         formData.append('image', fileInput.files[0]);
         try {
-            const response = await window.utils.apiFetchWithFile('http://127.0.0.1:8000/teachers/profile/', formData, 'PATCH');
+            const response = await window.utils.apiFetchWithFile(`${config.BASE_URL}/teachers/profile/`, formData, 'PATCH');
             const data = await response.json();
             if (response.ok) {
                 document.getElementById('teacher-image').src = data.image ? data.image : 'Unknown.jpeg';

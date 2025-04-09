@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Kategoriyalarni yuklash
     async function loadCategories() {
         try {
-            const response = await fetch('http://localhost:8000/news/categories/');
+            const response = await fetch(`${config.BASE_URL}/news/categories/`);
             if (!response.ok) {
                 throw new Error(`HTTP xatosi: ${response.status} - ${response.statusText}`);
             }
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Yangiliklarni yuklash
     async function loadNews() {
         try {
-            let url = 'http://localhost:8000/news/news/';
+            let url = `${config.BASE_URL}/news/news/`;
             const params = new URLSearchParams();
             if (selectedCategoryId) {
                 params.append('category_id', selectedCategoryId);
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mashhur yangiliklarni yuklash
     async function loadPopularNews() {
         try {
-            const response = await fetch('http://localhost:8000/news/popular-news/');
+            const response = await fetch(`${config.BASE_URL}/news/popular-news/`);
             if (!response.ok) {
                 throw new Error(`HTTP xatosi: ${response.status} - ${response.statusText}`);
             }
