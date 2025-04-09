@@ -13,6 +13,7 @@
         <h2>Teacher Dashboard</h2>
         <button class="menu-toggle">☰</button>
         <ul class="nav-menu">
+            <li><a href="../index.html">Bosh sahifa</a></li>
             <li><a href="profile.html">Profile</a></li>
             <li><a href="classes.html">Mening sinflarim</a></li>
             <li><a href="materials.html">Dars materiallari</a></li>
@@ -56,6 +57,8 @@
                 <input type="file" id="lectureFile" required>
                 <label for="presentationFile">Taqdimot fayli (ixtiyoriy):</label>
                 <input type="file" id="presentationFile">
+                <label for="testFile">Test fayli (ixtiyoriy):</label>
+                <input type="file" id="testFile">
                 <label for="videoLink">Video havolasi (ixtiyoriy):</label>
                 <input type="url" id="videoLink" placeholder="YouTube havolasi">
                 <label for="deadlineInput" id="deadlineLabel" class="hidden">Muddat belgilash (ixtiyoriy):</label>
@@ -69,11 +72,30 @@
             <div class="modal-form-content">
                 <span class="close-btn" onclick="toggleTestForm()">×</span>
                 <h3>Test qo‘shish</h3>
-                <label for="testClassSelect">Sinfni tanlang:</label>
-                <select id="testClassSelect" required>
-                    <option value="">Sinf tanlang</option>
+                <label for="testTypeSelect">Test turini tanlang:</label>
+                <select id="testTypeSelect" onchange="toggleTestFields()" required>
+                    <option value="">Test turini tanlang</option>
                     <!-- Dinamik tarzda to‘ldiriladi -->
                 </select>
+
+                <!-- Fanga oid testlar uchun maydonlar -->
+                <div id="fangaOidFields" class="hidden">
+                    <label for="testClassSelect">Sinfni tanlang:</label>
+                    <select id="testClassSelect">
+                        <option value="">Sinf tanlang</option>
+                        <!-- Dinamik tarzda to‘ldiriladi -->
+                    </select>
+                    <label for="quarterSelect">Chorakni tanlang:</label>
+                    <select id="quarterSelect">
+                        <option value="">Chorak tanlang</option>
+                        <option value="I chorak">I chorak</option>
+                        <option value="II chorak">II chorak</option>
+                        <option value="III chorak">III chorak</option>
+                        <option value="IV chorak">IV chorak</option>
+                    </select>
+                </div>
+
+                <!-- Umumiy maydonlar (fan va fayl) -->
                 <label for="testSubjectSelect">Fan tanlang:</label>
                 <select id="testSubjectSelect" required>
                     <option value="">Fan tanlang</option>
@@ -81,16 +103,8 @@
                 </select>
                 <label for="testTopicInput">Mavzu:</label>
                 <input type="text" id="testTopicInput" placeholder="Mavzuni kiriting" required>
-                <label for="quarterSelect">Chorakni tanlang:</label>
-                <select id="quarterSelect" required>
-                    <option value="">Chorak tanlang</option>
-                    <option value="I chorak">I chorak</option>
-                    <option value="II chorak">II chorak</option>
-                    <option value="III chorak">III chorak</option>
-                    <option value="IV chorak">IV chorak</option>
-                </select>
-                <label for="testFile">Test fayli yuklash (Word, Excel yoki PDF):</label>
-                <input type="file" id="testFile" accept=".doc,.docx,.xls,.xlsx,.pdf" required>
+                <label for="testFile">Test fayli yuklash (Excel fayl):</label>
+                <input type="file" id="testFile1" accept=".doc,.docx,.xls,.xlsx,.pdf" required>
                 <button class="submit-btn" onclick="uploadTest()">Yuklash</button>
             </div>
         </div>

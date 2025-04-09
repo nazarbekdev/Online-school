@@ -97,10 +97,17 @@ window.utils.apiFetchWithFile = async function(url, formData, method = 'PATCH') 
 };
 
 // Tizimdan chiqish
-window.utils.logout = function() {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    window.location.href = '../index.html'; // Asosiy login sahifasiga qaytish
+window.utils = window.utils || {};
+window.utils.logout = function () {
+    console.log("Logout funksiyasi ishga tushdi"); // Bu konsolda ko‘rinishi kerak
+    const isConfirmed = confirm("Chiqmoqchimisiz?");
+    if (isConfirmed) {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        window.location.href = '../index.html';
+    } else {
+        console.log("Chiqish bekor qilindi");
+    }
 };
 
 // Navbar menyusini boshqarish

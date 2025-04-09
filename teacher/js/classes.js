@@ -48,7 +48,7 @@ async function loadStudentProfile(studentId) {
     }
 }
 
-// Test natijalarini yuklash
+// Test natijalarini yuklash va o‘rtacha hisoblash
 async function loadTestResults(studentId) {
     try {
         const response = await window.utils.apiFetch(`http://127.0.0.1:8000/students/test-results/${studentId}/`);
@@ -62,6 +62,50 @@ async function loadTestResults(studentId) {
         console.error('Test natijalari yuklashda xato:', error);
         return [];
     }
+}
+
+// Test natijalarini test turi bo‘yicha o‘rtacha hisoblash (score formatida)
+function calculateAverageTestResults(testResults, testTypes) {
+    const averages = {};
+
+    // Har bir test turi bo‘yicha o‘rtacha hisoblash
+    testTypes.forEach(type => {
+        // Shu test turiga tegishli natijalarni filtrlab olish
+        const resultsForType = testResults.filter(result => result.test_type === type.id);
+
+        if (resultsForType.length > 0) {
+            let totalEarnedScore = 0;
+            let totalPossibleScore = 0;
+            let count = 0;
+
+            resultsForType.forEach(result => {
+                // score maydoni "yig'gan bali/umumiy bal" formatida
+                const [earnedScore, totalScore] = result.score.split('/').map(parseFloat);
+                if (totalScore > 0) {
+                    totalEarnedScore += earnedScore;
+                    totalPossibleScore += totalScore;
+                    count++;
+                }
+            });
+
+            // O‘rtacha score’ni hisoblash
+            if (count > 0) {
+                const averageEarned = totalEarnedScore / count;
+                const averageTotal = totalPossibleScore / count;
+                averages[type.id] = {
+                    earned: averageEarned.toFixed(1),
+                    total: averageTotal.toFixed(1),
+                    percentage: (averageTotal > 0) ? (averageEarned / averageTotal) * 100 : 0 // Grafik uchun foiz
+                };
+            } else {
+                averages[type.id] = { earned: 0, total: 0, percentage: 0 };
+            }
+        } else {
+            averages[type.id] = { earned: 0, total: 0, percentage: 0 }; // Agar natija bo‘lmasa, 0 qaytariladi
+        }
+    });
+
+    return averages;
 }
 
 // Bajargan fayllarni yuklash
@@ -149,17 +193,23 @@ async function showStudents(classNumber, subjectId) {
     const studentsTableBody = document.getElementById('students-table-body');
     const studentClassTitle = document.getElementById('student-class-title');
     const subjects = await loadSubjects();
+    const testTypes = await loadTestTypes();
+
     studentClassTitle.textContent = `${classNumber}-sinf | ${subjects.find(s => s.id === subjectId)?.name || 'Noma’lum'} o‘quvchilari`;
     studentsSection.classList.remove('hidden');
 
     const studentsData = await loadStudentsForClass(classNumber, subjectId);
-    const testTypes = await loadTestTypes();
-
     studentsTableBody.innerHTML = '';
 
     for (const student of studentsData) {
         const studentProfile = await loadStudentProfile(student.student);
         const testResults = await loadTestResults(student.student);
+        const averageTestResults = calculateAverageTestResults(testResults.filter(r => r.subject === subjectId), testTypes);
+
+        // Reytingni olish
+        const ratingResponse = await window.utils.apiFetch(`http://127.0.0.1:8000/students/reyting/${student.student}/`);
+        const ratingData = await ratingResponse.json();
+        const subjectRating = ratingData.ratings[subjectId] || 'Hozircha aniqlanmagan';
 
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -168,12 +218,20 @@ async function showStudents(classNumber, subjectId) {
                     ${studentProfile?.first_name || 'Noma’lum'} ${studentProfile?.last_name || 'Noma’lum'}
                 </a>
             </td>
-            <td>Hozircha aniqlanmagan</td>
+            <td>⭐️ ${subjectRating}</td>
             <td>
                 ${testTypes.map(type => {
-                    const result = testResults.find(r => r.test_type === type.id && r.subject === subjectId);
-                    return result ? `${type.name}: ${result.score}` : `${type.name}: Noma’lum`;
-                }).join(', ')}
+                    const result = averageTestResults[type.id] || { earned: 0, total: 0, percentage: 0 };
+                    return `
+                        <div class="test-result-item">
+                            <span>${type.name}:</span>
+                            <span>${result.earned}/${result.total}</span>
+                        </div>
+                        <div class="test-result-bar">
+                            <div style="width: ${result.percentage}%"></div>
+                        </div>
+                    `;
+                }).join('')}
             </td>
         `;
         studentsTableBody.appendChild(row);
@@ -191,27 +249,33 @@ async function showStudentDetails(studentId, classNumber, subjectId) {
     const submissions = await loadSubmissions(studentId);
     const testTypes = await loadTestTypes();
 
+    // Test natijalarini o‘rtacha hisoblash
+    const averageTestResults = calculateAverageTestResults(testResults.filter(r => r.subject === subjectId), testTypes);
+
+    // Reytingni olish
+    const ratingResponse = await window.utils.apiFetch(`http://127.0.0.1:8000/students/reyting/${studentId}/`);
+    const ratingData = await ratingResponse.json();
+    const subjectRating = ratingData.ratings[subjectId] || 'Hozircha aniqlanmagan';
+
     studentDetailTitle.textContent = `${studentProfile?.first_name || 'Noma’lum'} ${studentProfile?.last_name || 'Noma’lum'} - Ma’lumotlar`;
     studentDetailContent.innerHTML = `
         <p><strong>Sinf:</strong> ${classNumber}-sinf</p>
         <div class="test-results">
-            <strong>Test natijalari:</strong>
+            <strong>Test natijalari (o‘rtacha score):</strong>
             ${testTypes.map(type => {
-                const result = testResults.find(r => r.test_type === type.id && r.subject === subjectId);
-                const score = result ? parseFloat(result.score) : 0;
-                const percentage = Math.min((score / 189) * 100, 100); // Maksimal ball 189 deb faraz qilindi
+                const result = averageTestResults[type.id] || { earned: 0, total: 0, percentage: 0 };
                 return `
                     <div class="test-result-item">
                         <span>${type.name}:</span>
-                        <span>${result ? result.score : 'Noma’lum'}</span>
+                        <span>${result.earned}/${result.total}</span>
                     </div>
                     <div class="test-result-bar">
-                        <div style="width: ${percentage}%"></div>
+                        <div style="width: ${result.percentage}%"></div>
                     </div>
                 `;
             }).join('')}
         </div>
-        <p><strong>Reyting:</strong> Hozircha aniqlanmagan</p>
+        <p><strong>Reyting:</strong> ⭐️ ${subjectRating}</p>
         <div class="files-list">
             <h4>Darsga oid fayllar:</h4>
             ${submissions.length > 0 ? submissions.map(submission => `

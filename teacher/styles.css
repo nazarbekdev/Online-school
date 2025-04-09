@@ -738,6 +738,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    position: relative;
 }
 
 .modal-form:not(.hidden) .modal-form-content {
@@ -833,6 +834,9 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     padding: 1.5rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .material-card:hover,
@@ -879,6 +883,10 @@ body {
 .material-card .file-links a:hover,
 .test-card .file-links a:hover {
     background: #2563eb;
+}
+
+.hidden {
+    display: none;
 }
 
 /* Responsivlik */

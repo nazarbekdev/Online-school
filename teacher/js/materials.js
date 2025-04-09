@@ -6,7 +6,36 @@ window.toggleMaterialForm = function() {
 
 window.toggleTestForm = function() {
     const testForm = document.getElementById('test-form');
+    const testTypeSelect = document.getElementById('testTypeSelect');
     testForm.classList.toggle('hidden');
+
+    // Forma ochilganda test turini bo‘sh qilish va maydonlarni yashirish
+    if (!testForm.classList.contains('hidden')) {
+        testTypeSelect.value = ''; // Test turini bo‘sh qilish
+        toggleTestFields(); // Maydonlarni yangilash
+    }
+};
+
+// Test turiga qarab maydonlarni ko‘rsatish/yashirish
+window.toggleTestFields = function() {
+    const testTypeSelect = document.getElementById('testTypeSelect');
+    const fangaOidFields = document.getElementById('fangaOidFields');
+    const testClassSelect = document.getElementById('testClassSelect');
+    const quarterSelect = document.getElementById('quarterSelect');
+
+    // Agar test turi tanlanmagan bo‘lsa yoki Mock/DTM bo‘lsa, yashirish
+    if (!testTypeSelect.value || testTypeSelect.value === 'Mock' || testTypeSelect.value === 'DTM') {
+        fangaOidFields.classList.add('hidden');
+        testClassSelect.removeAttribute('required');
+        quarterSelect.removeAttribute('required');
+        testClassSelect.value = ''; // Sinfni tozalash
+        quarterSelect.value = ''; // Chorakni tozalash
+    } else if (testTypeSelect.value === 'Fanga oid') {
+        // Fanga oid testlar uchun sinf va chorak maydonlarini ko‘rsatish
+        fangaOidFields.classList.remove('hidden');
+        testClassSelect.setAttribute('required', 'required');
+        quarterSelect.setAttribute('required', 'required');
+    }
 };
 
 // Muddat bo‘limini ko‘rsatish/yashirish
@@ -24,28 +53,36 @@ window.toggleDeadlineField = function() {
     }
 };
 
-// Sinf va fanlarni yuklash
+// Sinf, fan va test turlarini yuklash
 async function loadClassesAndSubjects() {
     try {
         // Teacherga biriktirilgan sinf va fanlarni olish
         const teacherResponse = await window.utils.apiFetch('http://127.0.0.1:8000/teachers/profile/');
         const teacherData = await teacherResponse.json();
         if (!teacherResponse.ok) {
-            throw new Error('O‘qituvchi ma’lumotlari yuklanmadi');
+            throw new Error('O‘qituvchi ma’lumotlari yuklanmadi: ' + (teacherData.error || teacherResponse.statusText));
         }
         const teacherId = teacherData.id;
 
+        // Sinf va fanlarni olish
         const expertiseResponse = await window.utils.apiFetch(`http://127.0.0.1:8000/courses/teacher-expertise/${teacherId}/`);
         const expertiseData = await expertiseResponse.json();
         if (!expertiseResponse.ok) {
-            throw new Error('Sinflar ma’lumotlari yuklanmadi');
+            throw new Error('Sinflar ma’lumotlari yuklanmadi: ' + (expertiseData.error || expertiseResponse.statusText));
         }
 
         // Fan nomlarini olish
         const subjectsResponse = await window.utils.apiFetch('http://127.0.0.1:8000/courses/subjects/');
         const subjectsData = await subjectsResponse.json();
         if (!subjectsResponse.ok) {
-            throw new Error('Fanlar yuklanmadi');
+            throw new Error('Fanlar yuklanmadi: ' + (subjectsData.error || subjectsResponse.statusText));
+        }
+
+        // Test turlarini olish
+        const testTypesResponse = await window.utils.apiFetch('http://127.0.0.1:8000/students/test-types/');
+        const testTypesData = await testTypesResponse.json();
+        if (!testTypesResponse.ok) {
+            throw new Error('Test turlari yuklanmadi: ' + (testTypesData.error || testTypesResponse.statusText));
         }
 
         // Sinf va fanlarni duplicate larsiz olish
@@ -53,6 +90,7 @@ async function loadClassesAndSubjects() {
         const subjectSelect = document.getElementById('subjectSelect');
         const testClassSelect = document.getElementById('testClassSelect');
         const testSubjectSelect = document.getElementById('testSubjectSelect');
+        const testTypeSelect = document.getElementById('testTypeSelect');
 
         const classes = [...new Set(expertiseData.map(item => item.class_number))].sort((a, b) => a - b);
         const subjects = expertiseData.map(item => ({
@@ -80,9 +118,17 @@ async function loadClassesAndSubjects() {
             const testOption = option.cloneNode(true);
             testSubjectSelect.appendChild(testOption);
         });
+
+        // Test turlari ro‘yxatini to‘ldirish
+        testTypesData.forEach(testType => {
+            const option = document.createElement('option');
+            option.value = testType.name;
+            option.textContent = testType.name;
+            testTypeSelect.appendChild(option);
+        });
     } catch (error) {
-        console.error('Sinf va fanlarni yuklashda xato:', error);
-        alert('Sinf va fanlarni yuklashda xato yuz berdi: ' + error.message);
+        console.error('Sinf, fan va test turlarini yuklashda xato:', error);
+        alert('Sinf, fan va test turlarini yuklashda xato yuz berdi: ' + error.message);
     }
 }
 
@@ -94,6 +140,7 @@ window.uploadMaterial = async function() {
     const topicInput = document.getElementById('topicInput').value;
     const lectureFile = document.getElementById('lectureFile').files[0];
     const presentationFile = document.getElementById('presentationFile').files[0];
+    const testFile = document.getElementById('testFile').files[0]; // Yangi test faylini olish
     const videoLink = document.getElementById('videoLink').value;
     const deadlineInput = document.getElementById('deadlineInput').value;
 
@@ -122,15 +169,18 @@ window.uploadMaterial = async function() {
         }
         const teacherId = teacherData.id;
 
+        const classId = classSelect;
+
         // FormData ni tayyorlash
         const formData = new FormData();
-        formData.append('teacher', teacherId); // teacher_id ni qo‘shish
-        formData.append('class_number', classSelect);
+        formData.append('teacher', teacherId);
+        formData.append('class_number', classId);
         formData.append('subject', subjectSelect);
         formData.append('task_type', taskSelect);
         formData.append('topic', topicInput);
         formData.append('lecture_file', lectureFile);
         if (presentationFile) formData.append('presentation_file', presentationFile);
+        if (testFile) formData.append('test_file', testFile); // Test faylini qo‘shish
         if (videoLink) formData.append('video_link', videoLink);
         if (deadlineInput && taskSelect === 'Sinf') formData.append('deadline', deadlineInput);
 
@@ -155,19 +205,32 @@ window.uploadMaterial = async function() {
 
 // Test yuklash
 window.uploadTest = async function() {
+    const testTypeSelect = document.getElementById('testTypeSelect').value;
     const classSelect = document.getElementById('testClassSelect').value;
     const subjectSelect = document.getElementById('testSubjectSelect').value;
     const topicInput = document.getElementById('testTopicInput').value;
     const quarterSelect = document.getElementById('quarterSelect').value;
-    const testFile = document.getElementById('testFile').files[0];
+    const testFile = document.getElementById('testFile1').files[0];
+
+    console.log('Test turi:', testTypeSelect);
+    console.log('Tanlangan sinf:', classSelect);
+    console.log('Fan:', subjectSelect);
+    console.log('Mavzu:', topicInput);
+    console.log('Fayl', testFile)
 
     // Validatsiya
-    if (!classSelect || !subjectSelect || !topicInput || !quarterSelect || !testFile) {
+    if (!testTypeSelect || !subjectSelect || !testFile) {
         alert('Iltimos, barcha majburiy maydonlarni to‘ldiring!');
         return;
     }
 
+    if (testTypeSelect === 'Fanga oid' && (!classSelect || !quarterSelect)) {
+        alert('Fanga oid testlar uchun sinf va chorakni tanlash majburiy!');
+        return;
+    }
+
     try {
+        // Teacherga biriktirilgan ma’lumotlarni olish
         const teacherResponse = await window.utils.apiFetch('http://127.0.0.1:8000/teachers/profile/');
         const teacherData = await teacherResponse.json();
         if (!teacherResponse.ok) {
@@ -175,13 +238,29 @@ window.uploadTest = async function() {
         }
         const teacherId = teacherData.id;
 
+        // Test turi ID sini olish
+        const testTypesResponse = await window.utils.apiFetch('http://127.0.0.1:8000/students/test-types/');
+        const testTypesData = await testTypesResponse.json();
+        if (!testTypesResponse.ok) {
+            throw new Error('Test turlari yuklanmadi');
+        }
+        const testType = testTypesData.find(type => type.name === testTypeSelect);
+        if (!testType) {
+            throw new Error('Tanlangan test turi topilmadi');}
+
+
         const formData = new FormData();
-        formData.append('class_number', classSelect);
+        formData.append('test_type', testType.id);
         formData.append('subject', subjectSelect);
         formData.append('topic', topicInput);
-        formData.append('quarter', quarterSelect);
         formData.append('test_file', testFile);
         formData.append('teacher', teacherId);
+
+        // Fanga oid testlar uchun qo‘shimcha maydonlar
+        if (testTypeSelect === 'Fanga oid') {
+            formData.append('class_number', classSelect); // Sinf ID sini yuboramiz
+            formData.append('quarter', quarterSelect);
+        }
 
         const response = await window.utils.apiFetchWithFile(
             'http://127.0.0.1:8000/teachers/tests/',
@@ -247,6 +326,7 @@ async function loadMaterialsAndTests() {
                 <div class="file-links">
                     <a href="${material.lecture_file}" target="_blank">Ma’ruza fayli</a>
                     ${material.presentation_file ? `<a href="${material.presentation_file}" target="_blank">Taqdimot fayli</a>` : ''}
+                    ${material.test_file ? `<a href="${material.test_file}" target="_blank">Test fayli</a>` : ''}
                 </div>
             `;
             materialList.appendChild(card);
@@ -260,9 +340,9 @@ async function loadMaterialsAndTests() {
             const card = document.createElement('div');
             card.className = 'test-card';
             card.innerHTML = `
-                <h5>${test.class_number}-sinf | ${subjectName}</h5>
+                <h5>${test.class_number ? test.class_number : 'Umumiy'}-sinf | ${subjectName}</h5>
                 <p><strong>Mavzu:</strong> ${test.topic}</p>
-                <p><strong>Chorak:</strong> ${test.quarter}</p>
+                <p><strong>Chorak:</strong> ${test.quarter || 'Umumiy'}</p>
                 <p><strong>Yaratilgan vaqt:</strong> ${new Date(test.created_at).toLocaleString()}</p>
                 <div class="file-links">
                     <a href="${test.test_file}" target="_blank">Test fayli</a>
