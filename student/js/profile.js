@@ -1,7 +1,7 @@
 // Viloyat va tumanlarni yuklash
 async function loadRegionsAndDistricts() {
     try {
-        const response = await fetch('/regions.json'); // regions.json faylini yuklash
+        const response = await fetch('/uzbekistan-regions.json'); // uzbekistan-regions.json faylini yuklash
         const data = await response.json();
         const regions = data.regions;
 
@@ -22,7 +22,7 @@ async function loadRegionsAndDistricts() {
         regions.forEach(region => {
             const option = document.createElement('option');
             option.value = region.name;
-            option.textContent = region.name.charAt(0).toUpperCase() + region.name.slice(1);
+            option.textContent = region.name;
             regionSelect.appendChild(option);
         });
 
@@ -33,13 +33,13 @@ async function loadRegionsAndDistricts() {
             defaultOption.value = '';
             defaultOption.textContent = 'Tumanni tanlang';
             districtSelect.appendChild(defaultOption);
-        
+
             if (selectedRegion) {
                 const selectedRegionData = regions.find(r => r.name === selectedRegion);
                 selectedRegionData.districts.forEach(district => {
                     const option = document.createElement('option');
                     option.value = district;
-                    option.textContent = district.charAt(0).toUpperCase() + district.slice(1);
+                    option.textContent = district;
                     districtSelect.appendChild(option);
                 });
                 districtSelect.value = ''; // Tuman qiymatini reset qilish
@@ -53,11 +53,16 @@ async function loadRegionsAndDistricts() {
         districtEditForm.querySelector('input').replaceWith(districtSelect);
 
         // Joriy qiymatlarni o'rnatish
-        const currentRegion = document.getElementById('student-region').textContent;
-        const currentDistrict = document.getElementById('student-district').textContent;
-        regionSelect.value = currentRegion.toLowerCase();
-        regionSelect.dispatchEvent(new Event('change')); // Tumanlarni yangilash uchun
-        districtSelect.value = currentDistrict.toLowerCase();
+        const currentRegion = document.getElementById('student-region').textContent.trim();
+        const currentDistrict = document.getElementById('student-district').textContent.trim();
+
+        // uzbekistan-regions.json dagi viloyatlar bilan mosligini tekshirish
+        const matchedRegion = regions.find(r => r.name === currentRegion);
+        if (matchedRegion) {
+            regionSelect.value = matchedRegion.name;
+            regionSelect.dispatchEvent(new Event('change')); // Tumanlarni yangilash uchun
+            districtSelect.value = currentDistrict; // Tuman qiymatini o'rnatish
+        }
     } catch (error) {
         console.error('Viloyat va tumanlarni yuklashda xato:', error);
     }

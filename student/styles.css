@@ -246,25 +246,25 @@ body {
 .profile-card button {
     background: none;
     border: none;
-    color: white; /* Icon rangini oq qilib ko‘rsatish */
+    color: white;
     cursor: pointer;
-    padding: 5px 10px; /* Icon atrofida biroz joy qoldirish */
+    padding: 5px 10px;
     transition: transform 0.3s ease, color 0.3s ease;
-    display: flex; /* Flex bilan icon’ni markazlash */
+    display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 10px; /* Kartochka ichida pastga joylashtirish */
-    width: 100%; /* Tugmani kartochka kengligiga moslash */
+    margin-top: 10px;
+    width: 100%;
 }
 
 .profile-card button:hover {
     transform: scale(1.2);
-    color: #ffd700; /* Qalamcha rangini o‘zgartirish uchun */
+    color: #ffd700;
 }
 
 .profile-card button i {
-    font-size: 16px; /* Icon o‘lchamini sozlash */
-    display: inline-block; /* Icon’ni majburan ko‘rsatish */
+    font-size: 16px;
+    display: inline-block;
 }
 
 /* Responsiv dizayn uchun qalamcha tugmasi */
