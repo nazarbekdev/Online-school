@@ -257,7 +257,7 @@ window.uploadTest = async function() {
         }
 
         const response = await window.utils.apiFetchWithFile(
-            'http://127.0.0.1:8000/teachers/tests/',
+            `${config.BASE_URL}/teachers/tests/`,
             formData,
             'POST'
         );

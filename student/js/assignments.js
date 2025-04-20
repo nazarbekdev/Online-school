@@ -17,19 +17,91 @@ async function apiFetch(url, options = {}) {
 
 // Fayl jo‘natish uchun API funksiyasi
 async function apiFetchWithFile(url, formData) {
-    const token = localStorage.getItem("access_token");
-    const response = await fetch(url, {
-        method: "POST",
-        headers: {
-            Authorization: token ? `Bearer ${token}` : "",
-        },
-        body: formData,
-    });
-    if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`API so'rovda xato: ${response.status} - ${errorText}`);
+    let token = localStorage.getItem("access_token");
+
+    // Token mavjudligini tekshirish
+    if (!token) {
+        throw new Error("Token topilmadi. Iltimos, tizimga qayta kiring.");
     }
-    return response;
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: formData,
+        });
+
+        if (response.status === 401) {
+            // Token muddati o‘tgan bo‘lsa, yangilashga urinamiz
+            try {
+                token = await refreshAccessToken();
+                // Yangi token bilan qayta so‘rov jo‘natish
+                const retryResponse = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: formData,
+                });
+
+                if (!retryResponse.ok) {
+                    const errorText = await retryResponse.text();
+                    throw new Error(`API so'rovda xato: ${retryResponse.status} - ${errorText}`);
+                }
+
+                return retryResponse;
+            } catch (refreshError) {
+                console.error("Tokenni yangilashda xato:", refreshError);
+                throw new Error("Tizimga qayta kirish kerak!");
+            }
+        }
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`API so'rovda xato: ${response.status} - ${errorText}`);
+        }
+
+        return response;
+    } catch (error) {
+        console.error("apiFetchWithFile xatosi:", error);
+        throw error;
+    }
+}
+
+// Tokenni yangilash funksiyasi
+async function refreshAccessToken() {
+    const refreshToken = localStorage.getItem('refresh_token');
+    if (!refreshToken) {
+        throw new Error('Refresh token mavjud emas. Iltimos, qayta kiring.');
+    }
+
+    try {
+        const response = await fetch(`${config.BASE_URL}/api/token/refresh/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ refresh: refreshToken }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Refresh token yaroqsiz yoki muddati tugagan.');
+        }
+
+        const data = await response.json();
+        const newAccessToken = data.access;
+        localStorage.setItem('access_token', newAccessToken);
+        return newAccessToken;
+    } catch (error) {
+        console.error('Tokenni yangilashda xato:', error);
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        alert('Tizimga qayta kiring!');
+        window.location.href = '../index.html';
+        throw error;
+    }
 }
 
 // Menyu funksiyasi
